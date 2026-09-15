@@ -13,17 +13,17 @@ export function TransactionTable({ chain, transactions }: { chain: string; trans
 
   return (
     <>
-      <div className="overflow-x-auto rounded-lg bg-surface-1">
+      <div className="overflow-x-auto w-full bg-surface-1">
         <table className="w-full text-left">
           <thead>
-            <tr className="border-b border-border-c bg-surface-2 text-xs uppercase tracking-wide text-text-tertiary">
-              <th className="px-3 py-2 font-medium">Time</th>
-              <th className="px-3 py-2 font-medium">Direction</th>
-              <th className="px-3 py-2 font-medium">From</th>
-              <th className="px-3 py-2 font-medium">To</th>
-              <th className="px-3 py-2 font-medium">Asset</th>
-              <th className="px-3 py-2 font-medium">Amount</th>
-              <th className="px-3 py-2 font-medium">Tx Hash</th>
+            <tr className="border-b border-border-c bg-surface-2 text-xs uppercase tracking-wide text-text-secondary">
+              <th className="px-4 py-3 font-semibold">Time</th>
+              <th className="px-4 py-3 font-semibold">Direction</th>
+              <th className="px-4 py-3 font-semibold">From</th>
+              <th className="px-4 py-3 font-semibold">To</th>
+              <th className="px-4 py-3 font-semibold">Asset</th>
+              <th className="px-4 py-3 font-semibold">Amount</th>
+              <th className="px-4 py-3 font-semibold">Tx Hash</th>
             </tr>
           </thead>
           <tbody>

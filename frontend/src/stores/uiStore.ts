@@ -7,22 +7,33 @@ interface Toast {
 }
 
 const THEME_STORAGE_KEY = 'crypto-fraud-platform.theme'
-type Theme = 'dark' | 'light' | 'blue'
-const THEME_ORDER: Theme[] = ['dark', 'light', 'blue']
+type Theme = 'dark' | 'light'
 
 function readStoredTheme(): Theme {
   const stored = localStorage.getItem(THEME_STORAGE_KEY)
-  return stored === 'light' || stored === 'blue' ? stored : 'dark'
+  if (stored === 'dark') return 'dark'
+  if (stored === 'light') return 'light'
+  
+  // Default to system preference if no stored value
+  if (typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    return 'dark'
+  }
+  return 'light'
 }
 
 function applyTheme(theme: Theme) {
-  document.documentElement.classList.toggle('light', theme === 'light')
-  document.documentElement.classList.toggle('blue', theme === 'blue')
+  if (typeof document !== 'undefined') {
+    document.documentElement.setAttribute('data-theme', theme)
+    // Optional: Keep classes if required elsewhere, but data-theme is primary
+    document.documentElement.classList.toggle('dark', theme === 'dark')
+    document.documentElement.classList.toggle('light', theme === 'light')
+  }
 }
 
 interface UiState {
   theme: Theme
-  cycleTheme: () => void
+  toggleTheme: () => void
+  setTheme: (theme: Theme) => void
   sidebarCollapsed: boolean
   toggleSidebar: () => void
   currentCaseId: string | null
@@ -40,12 +51,16 @@ applyTheme(initialTheme)
 
 export const useUiStore = create<UiState>((set, get) => ({
   theme: initialTheme,
-  cycleTheme: () => {
-    const currentIndex = THEME_ORDER.indexOf(get().theme)
-    const next = THEME_ORDER[(currentIndex + 1) % THEME_ORDER.length]
+  toggleTheme: () => {
+    const next = get().theme === 'light' ? 'dark' : 'light'
     localStorage.setItem(THEME_STORAGE_KEY, next)
     applyTheme(next)
     set({ theme: next })
+  },
+  setTheme: (theme) => {
+    localStorage.setItem(THEME_STORAGE_KEY, theme)
+    applyTheme(theme)
+    set({ theme })
   },
   sidebarCollapsed: false,
   toggleSidebar: () => set((s) => ({ sidebarCollapsed: !s.sidebarCollapsed })),

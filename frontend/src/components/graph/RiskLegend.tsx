@@ -1,17 +1,17 @@
 const ITEMS: { label: string; color: string }[] = [
-  { label: 'Suspect / seed wallet (bordered)', color: '#60a5fa' },
-  { label: 'High risk', color: '#dc2626' },
-  { label: 'Medium risk', color: '#d97706' },
-  { label: 'Low risk / verified', color: '#16a34a' },
-  { label: 'Unknown', color: '#6b7280' },
+  { label: 'Suspect / seed target', color: '#F57C00' },
+  { label: 'High risk', color: '#D14343' },
+  { label: 'Medium risk', color: '#D89A10' },
+  { label: 'Low risk / verified', color: '#1F8A4D' },
+  { label: 'Unknown', color: '#102A4C' },
 ]
 
 export function RiskLegend() {
   return (
-    <div className="space-y-1.5 text-xs text-text-secondary">
+    <div className="space-y-2 text-xs font-medium text-text-primary">
       {ITEMS.map((item) => (
-        <div key={item.label} className="flex items-center gap-2">
-          <span className="h-2.5 w-2.5 rounded-full shrink-0" style={{ backgroundColor: item.color }} />
+        <div key={item.label} className="flex items-center gap-2.5">
+          <span className="h-3 w-3 rounded-full shrink-0 shadow-sm" style={{ backgroundColor: item.color }} />
           {item.label}
         </div>
       ))}

@@ -1,5 +1,5 @@
 import { Link, useParams } from 'react-router-dom'
-import { useInvestigationFindings, useInvestigationStatus } from '@/hooks/useInvestigation'
+import { useInvestigationFindings, useInvestigationStatus, useAllInvestigations } from '@/hooks/useInvestigation'
 import { LoadingState } from '@/components/common/LoadingState'
 import { ErrorState } from '@/components/common/ErrorState'
 import { EmptyState } from '@/components/common/EmptyState'
@@ -13,6 +13,9 @@ export function InvestigationFindingsPage() {
   const status = useInvestigationStatus(investigationId)
   const isComplete = status.data?.status === 'completed'
   const findings = useInvestigationFindings(investigationId, isComplete)
+
+  const allInvestigations = useAllInvestigations()
+  const chain = allInvestigations.data?.find(i => i.investigation_id === investigationId)?.chain ?? 'ethereum'
 
   if (status.isLoading) return <LoadingState />
   if (status.isError) return <ErrorState message="Could not load investigation." />
@@ -29,23 +32,23 @@ export function InvestigationFindingsPage() {
   }
 
   return (
-    <div className="space-y-6 max-w-3xl">
-      <div className="flex items-center justify-between">
+    <div className="space-y-6 max-w-4xl">
+      <div className="flex items-center justify-between border-b border-border-c pb-3">
         <div>
           <BackButton fallback="/explorer" />
-          <h1 className="text-lg font-semibold text-text-primary mt-1">Investigation Findings</h1>
-          <p className="text-xs text-text-tertiary font-mono">{investigationId}</p>
+          <h1 className="text-xl font-bold text-text-primary mt-2">Investigation Findings</h1>
+          <p className="text-xs text-text-secondary font-mono mt-1">Trace ID: {investigationId}</p>
         </div>
-        <div className="flex gap-2">
+        <div className="flex gap-3">
           <Link
             to={`/investigations/${investigationId}/graph`}
-            className="text-xs px-3 py-1.5 rounded-md bg-surface-2 text-text-primary hover:brightness-125"
+            className="text-sm font-medium px-4 py-2 rounded-md bg-surface-1 text-text-primary border border-border-strong hover:bg-surface-2 transition-colors shadow-sm"
           >
             Open in Graph
           </Link>
           <Link
             to={`/reports/new?investigation_id=${investigationId}`}
-            className="text-xs px-3 py-1.5 rounded-md bg-btn-bg text-btn-fg hover:bg-accent-strong"
+            className="text-sm font-medium px-4 py-2 rounded-md bg-saffron text-white hover:bg-accent-strong transition-colors shadow-sm"
           >
             Generate Report
           </Link>
@@ -57,23 +60,27 @@ export function InvestigationFindingsPage() {
         <EmptyState title="No findings surfaced" description="The traced graph did not match any known risk patterns." />
       )}
 
-      <div className="space-y-3">
+      <div className="space-y-4">
         {findings.data?.findings.map((f) => (
-          <div key={f.id} className="rounded-lg bg-surface-1 p-4 space-y-2">
-            <div className="flex items-center justify-between">
+          <div key={f.id} className="rounded-lg bg-surface-1 p-5 space-y-4 border border-border-c shadow-sm hover:border-red-soft transition-colors">
+            <div className="flex items-center justify-between border-b border-border-c pb-3">
               <RiskBadge level={f.severity} />
               <ConfidenceBadge value={f.confidence} />
             </div>
-            <p className="text-sm text-text-primary">{f.description}</p>
-            <div className="flex items-center justify-between text-xs text-text-tertiary">
-              <span>
-                Wallet: <AddressDisplay chain="ethereum" address={f.wallet} />
+            <p className="text-sm font-medium text-text-primary leading-relaxed">{f.description}</p>
+            <div className="flex items-center justify-between text-sm text-text-secondary pt-2">
+              <span className="flex items-center gap-2">
+                <span className="font-semibold">Wallet:</span>
+                <AddressDisplay chain={chain} address={f.wallet} />
               </span>
-              <Link to={`/investigations/${investigationId}/graph`} className="text-accent hover:underline underline-offset-2">
+              <Link to={`/investigations/${investigationId}/graph`} className="text-saffron hover:underline underline-offset-2 font-medium">
                 Open in Graph →
               </Link>
             </div>
-            <p className="text-xs text-text-tertiary">Evidence: {f.evidence}</p>
+            <div className="bg-bg-app rounded-md p-3 border border-border-c">
+              <p className="text-[10px] font-bold uppercase tracking-widest text-text-secondary mb-1">Evidence</p>
+              <p className="text-xs text-text-primary font-mono">{f.evidence}</p>
+            </div>
           </div>
         ))}
       </div>

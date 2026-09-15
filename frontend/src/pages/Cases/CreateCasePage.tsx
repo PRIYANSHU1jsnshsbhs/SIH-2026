@@ -18,49 +18,55 @@ export function CreateCasePage() {
   }
 
   return (
-    <div className="max-w-lg space-y-6">
-      <BackButton fallback="/cases" />
-      <h1 className="text-lg font-semibold text-text-primary">New Case</h1>
-      <form onSubmit={handleSubmit} className="space-y-4 rounded-lg bg-surface-1 p-6">
+    <div className="max-w-2xl space-y-6">
+      <div className="flex flex-col gap-1">
+        <BackButton fallback="/cases" />
+        <h1 className="text-2xl font-bold text-text-primary mt-2">New Case Initialization</h1>
+        <p className="text-sm text-text-secondary">Open a new file to group related targets and investigations.</p>
+      </div>
+
+      <form onSubmit={handleSubmit} className="space-y-5 rounded-lg bg-surface-1 p-6 border border-border-c shadow-sm">
         <div>
-          <label className="block text-xs uppercase tracking-wide text-text-tertiary mb-1.5">Title</label>
+          <label className="block text-[10px] font-bold uppercase tracking-widest text-text-secondary mb-1.5">Case Title</label>
           <input
             required
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            className="w-full rounded-md bg-surface-2 px-3 py-2 text-sm text-text-primary"
+            className="w-full rounded-md bg-bg-app border border-border-c px-4 py-2 text-sm text-text-primary focus:ring-1 focus:ring-saffron focus:border-saffron transition-colors placeholder:text-text-tertiary"
             placeholder="Crypto Fraud Case 2026-0xx"
           />
         </div>
         <div>
-          <label className="block text-xs uppercase tracking-wide text-text-tertiary mb-1.5">Description</label>
+          <label className="block text-[10px] font-bold uppercase tracking-widest text-text-secondary mb-1.5">Description</label>
           <textarea
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-            rows={3}
-            className="w-full rounded-md bg-surface-2 px-3 py-2 text-sm text-text-primary"
+            rows={4}
+            className="w-full rounded-md bg-bg-app border border-border-c px-4 py-2 text-sm text-text-primary focus:ring-1 focus:ring-saffron focus:border-saffron transition-colors placeholder:text-text-tertiary resize-none"
             placeholder="Brief context from the complaint — details can be added later."
           />
         </div>
         <div>
-          <label className="block text-xs uppercase tracking-wide text-text-tertiary mb-1.5">Priority</label>
+          <label className="block text-[10px] font-bold uppercase tracking-widest text-text-secondary mb-1.5">Priority</label>
           <select
             value={priority}
             onChange={(e) => setPriority(e.target.value as CasePriority)}
-            className="w-full rounded-md bg-surface-2 px-3 py-2 text-sm text-text-primary"
+            className="w-full rounded-md bg-bg-app border border-border-c px-4 py-2 text-sm text-text-primary focus:ring-1 focus:ring-saffron focus:border-saffron transition-colors"
           >
-            <option value="high">High</option>
-            <option value="medium">Medium</option>
-            <option value="low">Low</option>
+            <option value="high">High - Urgent Action Required</option>
+            <option value="medium">Medium - Standard Review</option>
+            <option value="low">Low - Informational Only</option>
           </select>
         </div>
-        <button
-          type="submit"
-          disabled={createCase.isPending}
-          className="rounded-md bg-btn-bg px-4 py-2 text-sm font-medium text-btn-fg hover:bg-accent-strong disabled:opacity-50"
-        >
-          {createCase.isPending ? 'Creating…' : 'Create Case'}
-        </button>
+        <div className="pt-2">
+          <button
+            type="submit"
+            disabled={createCase.isPending}
+            className="w-full rounded-md bg-saffron px-4 py-2.5 text-sm font-medium text-white hover:bg-accent-strong disabled:opacity-50 transition-colors shadow-sm"
+          >
+            {createCase.isPending ? 'Initializing…' : 'Create Case'}
+          </button>
+        </div>
       </form>
     </div>
   )

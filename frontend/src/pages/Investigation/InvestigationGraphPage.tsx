@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
-import { useInvestigationGraph, useInvestigationStatus } from '@/hooks/useInvestigation'
+import { useInvestigationGraph, useInvestigationStatus, useAllInvestigations } from '@/hooks/useInvestigation'
 import { LoadingState } from '@/components/common/LoadingState'
 import { ErrorState } from '@/components/common/ErrorState'
 import { GraphCanvas } from '@/components/graph/GraphCanvas'
@@ -43,7 +43,8 @@ export function InvestigationGraphPage() {
     )
   }, [graph.data, filteredNodes, filters.minValue])
 
-  const chain = 'ethereum'
+  const allInvestigations = useAllInvestigations()
+  const chain = allInvestigations.data?.find(i => i.investigation_id === investigationId)?.chain ?? 'ethereum'
 
   if (status.isLoading) return <LoadingState />
   if (status.isError) return <ErrorState message="Could not load investigation." />
@@ -61,30 +62,30 @@ export function InvestigationGraphPage() {
 
   return (
     <div className="flex h-[calc(100vh-8rem)] flex-col gap-4">
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between border-b border-border-c pb-3">
         <div>
           <BackButton fallback="/explorer" />
-          <h1 className="text-lg font-semibold text-text-primary mt-1">Investigation Graph</h1>
-          <p className="text-xs text-text-tertiary font-mono">{investigationId}</p>
+          <h1 className="text-xl font-bold text-text-primary mt-2">Investigation Graph</h1>
+          <p className="text-xs text-text-secondary font-mono mt-1">Trace ID: {investigationId}</p>
         </div>
         <Link
           to={`/investigations/${investigationId}/findings`}
-          className="text-xs px-3 py-1.5 rounded-md bg-btn-bg text-btn-fg hover:bg-accent-strong"
+          className="text-sm font-medium px-4 py-2 rounded-md bg-saffron text-white hover:bg-accent-strong shadow-sm transition-colors"
         >
           View Findings →
         </Link>
       </div>
 
-      <div className="flex flex-1 gap-4 overflow-hidden">
-        <aside className="w-56 shrink-0 space-y-6 overflow-y-auto rounded-lg bg-surface-1 p-4">
+      <div className="flex flex-1 gap-4 overflow-y-auto lg:overflow-hidden flex-col lg:flex-row">
+        <aside className="w-full lg:w-64 shrink-0 space-y-6 overflow-y-auto rounded-lg bg-surface-1 p-5 border border-border-c shadow-sm">
           <GraphFilters filters={filters} onChange={setFilters} />
-          <div className="pt-3 border-t border-border-c">
-            <p className="text-xs uppercase tracking-wide text-text-tertiary mb-2">Legend</p>
+          <div className="pt-4 border-t border-border-c">
+            <p className="text-[10px] uppercase font-bold tracking-widest text-text-secondary mb-3">Legend</p>
             <RiskLegend />
           </div>
         </aside>
 
-        <div className="flex-1 rounded-lg bg-surface-1 overflow-hidden">
+        <div className="flex-1 rounded-lg bg-surface-1 overflow-hidden min-h-[400px] lg:min-h-0 border border-border-c shadow-sm relative">
           {graph.isLoading ? (
             <LoadingState label="Loading graph…" />
           ) : (
@@ -104,33 +105,33 @@ export function InvestigationGraphPage() {
         </div>
 
         {(selectedNode || filters.showCrossChainOverlay || filters.showFundFlowOverlay) && (
-          <aside className="w-72 shrink-0 space-y-4 overflow-y-auto rounded-lg bg-surface-1 p-4">
+          <aside className="w-full lg:w-80 shrink-0 space-y-5 overflow-y-auto rounded-lg bg-surface-1 p-5 border border-border-c shadow-sm">
             {selectedNode && <NodeDetailsPanel chain={chain} node={selectedNode} onClose={() => setSelectedNode(null)} />}
 
             {filters.showCrossChainOverlay && (
-              <div className="pt-3 border-t border-border-c first:border-0 first:pt-0">
-                <p className="text-xs uppercase tracking-wide text-text-tertiary mb-1.5">Cross-chain</p>
-                <p className="text-sm text-text-secondary">
+              <div className="pt-4 border-t border-border-c first:border-0 first:pt-0">
+                <p className="text-[10px] uppercase font-bold tracking-widest text-text-secondary mb-2">Cross-chain</p>
+                <p className="text-sm text-text-primary leading-relaxed">
                   No cross-chain bridge events observed for this investigation — all traced activity stayed on{' '}
-                  {chain}.
+                  <span className="font-semibold capitalize">{chain}</span>.
                 </p>
               </div>
             )}
 
             {filters.showFundFlowOverlay && graph.data && (
-              <div className="pt-3 border-t border-border-c">
-                <p className="text-xs uppercase tracking-wide text-text-tertiary mb-1.5">
-                  Fund-flow (estimated attribution)
+              <div className="pt-4 border-t border-border-c">
+                <p className="text-[10px] uppercase font-bold tracking-widest text-text-secondary mb-2">
+                  Fund-flow summary
                 </p>
-                <div className="space-y-2 text-sm text-text-secondary">
-                  <p>Two layering paths converge on the same exchange deposit address:</p>
-                  <ul className="list-disc pl-4 space-y-1">
-                    <li>Burner A → Mixer → Exchange (≈ 2.39 ETH)</li>
-                    <li>Burner B → Exchange direct (≈ 2.38 ETH)</li>
+                <div className="space-y-3 text-sm text-text-primary">
+                  <p className="font-medium">Observed nodes in current trace:</p>
+                  <ul className="list-disc pl-5 space-y-1 text-text-secondary marker:text-saffron">
+                    <li>Wallets: <span className="font-semibold text-text-primary">{graph.data.nodes.filter(n => n.type === 'wallet').length}</span></li>
+                    <li>Entities/VASPs: <span className="font-semibold text-text-primary">{graph.data.nodes.filter(n => n.type !== 'wallet').length}</span></li>
+                    <li>Transactions: <span className="font-semibold text-text-primary">{graph.data.edges.length}</span></li>
                   </ul>
-                  <p className="text-xs text-text-tertiary">
-                    Estimated attribution, not confirmed ownership — based on proportional tracing from the seed
-                    wallet.
+                  <p className="text-xs text-text-tertiary border-t border-border-c pt-3 mt-3">
+                    Fund-flow path available in graph visualization.
                   </p>
                 </div>
               </div>

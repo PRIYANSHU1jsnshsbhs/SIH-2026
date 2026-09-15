@@ -26,11 +26,11 @@ export function AddressDisplay({
   }
 
   const inner = (
-    <span className="inline-flex items-center gap-1.5 font-mono text-sm" title={address}>
+    <span className="inline-flex items-center gap-1.5 font-mono text-sm font-semibold" title={address}>
       {shorten(address)}
       <button
         onClick={copy}
-        className="text-text-tertiary hover:text-text-primary text-xs"
+        className="text-text-tertiary hover:text-text-primary text-xs ml-1"
         aria-label="Copy address"
       >
         {copied ? '✓' : '⧉'}
@@ -41,7 +41,7 @@ export function AddressDisplay({
   if (!link) return inner
 
   return (
-    <Link to={`/wallets/${chain}/${address}`} className="text-text-primary hover:underline">
+    <Link to={`/wallets/${chain}/${address}`} className="text-text-primary hover:text-saffron transition-colors">
       {inner}
     </Link>
   )

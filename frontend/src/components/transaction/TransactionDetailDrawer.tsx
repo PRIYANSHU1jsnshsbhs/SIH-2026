@@ -23,32 +23,44 @@ export function TransactionDetailDrawer({
 
   return (
     <div className="fixed inset-y-0 right-0 z-40 w-full max-w-md border-l border-border-c bg-surface-0 shadow-2xl overflow-y-auto">
-      <div className="flex items-center justify-between border-b border-border-c px-5 py-3">
-        <h2 className="text-sm font-semibold text-text-primary">Transaction Details</h2>
-        <button onClick={onClose} className="text-text-tertiary hover:text-text-primary text-lg leading-none">
-          ×
+      <div className="flex items-center justify-between border-b border-border-c px-6 py-4 bg-bg-app">
+        <h2 className="text-lg font-bold text-text-primary">Transaction Profile</h2>
+        <button onClick={onClose} className="text-text-tertiary hover:text-text-primary text-2xl leading-none transition-colors">
+          &times;
         </button>
       </div>
-      <div className="p-5 space-y-4">
+      <div className="p-6 space-y-5">
         {query.isLoading && <LoadingState />}
         {query.isError && <ErrorState message="Could not load transaction." />}
         {query.data && (
           <>
-            <Field label="Hash">
-              <span className="font-mono text-xs break-all">{query.data.tx_hash}</span>
+            <Field label="Tx Hash">
+              <span className="font-mono text-sm font-medium text-text-primary break-all">{query.data.tx_hash}</span>
             </Field>
-            <Field label="Timestamp">{new Date(query.data.timestamp).toLocaleString()}</Field>
-            <Field label="From">
-              <AddressDisplay chain={chain} address={query.data.from} />
+            <Field label="Timestamp">
+              <span className="font-mono text-sm text-text-primary">{new Date(query.data.timestamp).toLocaleString()}</span>
             </Field>
-            <Field label="To">
-              <AddressDisplay chain={chain} address={query.data.to} />
+            <Field label="Originating Wallet (From)">
+              <div className="bg-surface-1 p-3 rounded-md border border-border-c">
+                <AddressDisplay chain={chain} address={query.data.from} />
+              </div>
             </Field>
-            <Field label="Amount">
-              {query.data.amount} {query.data.asset}
+            <Field label="Destination Wallet (To)">
+              <div className="bg-surface-1 p-3 rounded-md border border-border-c">
+                <AddressDisplay chain={chain} address={query.data.to} />
+              </div>
             </Field>
-            <Field label="Block">{query.data.block_number}</Field>
-            <Field label="Status">{query.data.status}</Field>
+            <Field label="Transferred Amount">
+              <span className="text-lg font-bold text-text-primary">{query.data.amount} <span className="text-sm font-medium text-text-secondary">{query.data.asset}</span></span>
+            </Field>
+            <div className="grid grid-cols-2 gap-4">
+              <Field label="Block">
+                <span className="font-mono text-sm text-text-primary">{query.data.block_number}</span>
+              </Field>
+              <Field label="Status">
+                <span className="text-sm font-bold uppercase tracking-widest text-green">{query.data.status}</span>
+              </Field>
+            </div>
           </>
         )}
       </div>
@@ -59,8 +71,8 @@ export function TransactionDetailDrawer({
 function Field({ label, children }: { label: string; children: React.ReactNode }) {
   return (
     <div>
-      <p className="text-xs uppercase tracking-wide text-text-tertiary mb-1">{label}</p>
-      <div className="text-sm text-text-primary">{children}</div>
+      <p className="text-[10px] font-bold uppercase tracking-widest text-text-secondary mb-1.5">{label}</p>
+      <div>{children}</div>
     </div>
   )
 }

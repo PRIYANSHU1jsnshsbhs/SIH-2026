@@ -22,17 +22,17 @@ export function InvestigationProgressPage() {
   if (status.isError || !status.data) return <ErrorState message="Could not load investigation status." />
 
   return (
-    <div className="max-w-lg space-y-6">
-      <BackButton fallback="/cases" />
-      <div>
-        <h1 className="text-lg font-semibold text-text-primary">Investigation Running</h1>
-        <p className="text-xs text-text-tertiary font-mono">{investigationId}</p>
+    <div className="max-w-xl space-y-6">
+      <div className="flex flex-col gap-1">
+        <BackButton fallback="/cases" />
+        <h1 className="text-2xl font-bold text-text-primary mt-2">Investigation Progress</h1>
+        <p className="text-sm text-text-secondary font-mono mt-1">Trace ID: {investigationId}</p>
       </div>
-      <div className="rounded-lg bg-surface-1 p-6">
+      <div className="rounded-lg bg-surface-1 p-8 border border-border-c shadow-sm">
         <InvestigationProgress status={status.data} />
       </div>
       {status.data.status === 'completed' && (
-        <p className="text-sm text-text-secondary">Completed — opening the investigation graph…</p>
+        <p className="text-sm font-medium text-text-secondary text-center">Completed — opening the investigation graph…</p>
       )}
     </div>
   )

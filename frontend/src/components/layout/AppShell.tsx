@@ -26,11 +26,11 @@ export function AppShell() {
   }, [canUseConsole, consoleOpen, setConsoleOpen])
 
   return (
-    <div className="flex h-screen flex-col bg-surface-0 text-text-primary">
+    <div className="flex h-screen flex-col bg-bg-app text-text-primary">
       <TopBar />
       <div className="flex flex-1 overflow-hidden">
         <Sidebar />
-        <main className="flex-1 overflow-y-auto bg-surface-0">
+        <main className="flex-1 overflow-y-auto bg-bg-app">
           <div className="mx-auto max-w-7xl p-6">
             <Outlet />
           </div>

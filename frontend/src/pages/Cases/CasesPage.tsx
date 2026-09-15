@@ -6,9 +6,9 @@ import { EmptyState } from '@/components/common/EmptyState'
 import clsx from 'clsx'
 
 const PRIORITY_STYLE: Record<string, string> = {
-  high: 'text-red-400',
-  medium: 'text-amber-400',
-  low: 'text-text-secondary',
+  high: 'text-red',
+  medium: 'text-saffron',
+  low: 'text-green',
 }
 
 export function CasesPage() {
@@ -19,24 +19,24 @@ export function CasesPage() {
 
   return (
     <div className="space-y-6">
-      <div className="flex items-center justify-between">
-        <h1 className="text-lg font-semibold text-text-primary">Cases</h1>
-        <Link to="/cases/new" className="text-xs px-3 py-1.5 rounded-md bg-btn-bg text-btn-fg hover:bg-accent-strong">
+      <div className="flex items-center justify-between border-b border-border-c pb-3">
+        <h1 className="text-2xl font-bold text-text-primary">Cases Directory</h1>
+        <Link to="/cases/new" className="text-sm font-medium px-4 py-2 rounded-md bg-saffron text-white hover:bg-accent-strong shadow-sm transition-colors">
           + New Case
         </Link>
       </div>
 
-      <div className="flex flex-wrap gap-3">
+      <div className="flex flex-wrap gap-4 bg-surface-1 p-3 rounded-lg border border-border-c shadow-sm">
         <input
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           placeholder="Search title or case ID…"
-          className="rounded-md bg-surface-2 px-3 py-1.5 text-sm text-text-primary min-w-[220px]"
+          className="rounded-md bg-bg-app border border-border-c px-4 py-2 text-sm text-text-primary focus:ring-1 focus:ring-saffron focus:border-saffron transition-colors min-w-[280px] placeholder:text-text-tertiary"
         />
         <select
           value={status}
           onChange={(e) => setStatus(e.target.value)}
-          className="rounded-md bg-surface-2 px-3 py-1.5 text-sm text-text-primary"
+          className="rounded-md bg-bg-app border border-border-c px-4 py-2 text-sm text-text-primary focus:ring-1 focus:ring-saffron focus:border-saffron transition-colors"
         >
           <option value="">All statuses</option>
           <option value="open">Open</option>
@@ -46,7 +46,7 @@ export function CasesPage() {
         <select
           value={priority}
           onChange={(e) => setPriority(e.target.value)}
-          className="rounded-md bg-surface-2 px-3 py-1.5 text-sm text-text-primary"
+          className="rounded-md bg-bg-app border border-border-c px-4 py-2 text-sm text-text-primary focus:ring-1 focus:ring-saffron focus:border-saffron transition-colors"
         >
           <option value="">All priorities</option>
           <option value="high">High</option>
@@ -60,33 +60,37 @@ export function CasesPage() {
         <EmptyState title="No cases match these filters" description="Try clearing search or filters." />
       )}
       {cases.data && cases.data.cases.length > 0 && (
-        <div className="overflow-x-auto rounded-lg bg-surface-1">
+        <div className="overflow-x-auto rounded-lg bg-surface-1 border border-border-c shadow-sm">
           <table className="w-full text-left text-sm">
             <thead>
-              <tr className="border-b border-border-strong bg-surface-2 text-xs uppercase text-text-tertiary">
-                <th className="px-3 py-2 font-medium">Case ID</th>
-                <th className="px-3 py-2 font-medium">Title</th>
-                <th className="px-3 py-2 font-medium">Priority</th>
-                <th className="px-3 py-2 font-medium">Status</th>
-                <th className="px-3 py-2 font-medium">Wallets</th>
-                <th className="px-3 py-2 font-medium">Last Activity</th>
-                <th className="px-3 py-2 font-medium">Created</th>
+              <tr className="border-b border-border-c bg-surface-2 text-xs uppercase text-text-secondary tracking-wide">
+                <th className="px-4 py-3 font-semibold">Case ID</th>
+                <th className="px-4 py-3 font-semibold">Title</th>
+                <th className="px-4 py-3 font-semibold">Priority</th>
+                <th className="px-4 py-3 font-semibold">Status</th>
+                <th className="px-4 py-3 font-semibold">Wallets</th>
+                <th className="px-4 py-3 font-semibold">Last Activity</th>
+                <th className="px-4 py-3 font-semibold">Created</th>
               </tr>
             </thead>
             <tbody>
               {cases.data.cases.map((c) => (
-                <tr key={c.case_id} className="border-b border-border-strong/15 hover:bg-surface-1/40">
-                  <td className="px-3 py-2 font-mono text-xs text-text-tertiary">{c.case_id}</td>
-                  <td className="px-3 py-2">
-                    <Link to={`/cases/${c.case_id}`} className="text-accent hover:underline underline-offset-2">
+                <tr key={c.case_id} className="border-b border-border-c last:border-0 hover:bg-bg-app transition-colors">
+                  <td className="px-4 py-3 font-mono text-xs text-text-secondary">{c.case_id}</td>
+                  <td className="px-4 py-3">
+                    <Link to={`/cases/${c.case_id}`} className="font-semibold text-text-primary hover:text-saffron">
                       {c.title}
                     </Link>
                   </td>
-                  <td className={clsx('px-3 py-2 capitalize font-medium', PRIORITY_STYLE[c.priority])}>{c.priority}</td>
-                  <td className="px-3 py-2 capitalize text-text-secondary">{c.status.replace('_', ' ')}</td>
-                  <td className="px-3 py-2 text-text-primary">{c.wallets_count}</td>
-                  <td className="px-3 py-2 text-xs text-text-tertiary">{new Date(c.updated_at).toLocaleDateString()}</td>
-                  <td className="px-3 py-2 text-xs text-text-tertiary">{new Date(c.created_at).toLocaleDateString()}</td>
+                  <td className="px-4 py-3">
+                    <span className={clsx('text-[10px] tracking-wider uppercase font-bold', PRIORITY_STYLE[c.priority])}>
+                      {c.priority}
+                    </span>
+                  </td>
+                  <td className="px-4 py-3 capitalize text-text-secondary font-medium">{c.status.replace('_', ' ')}</td>
+                  <td className="px-4 py-3 text-text-primary font-medium">{c.wallets_count}</td>
+                  <td className="px-4 py-3 text-xs text-text-secondary">{new Date(c.updated_at).toLocaleDateString()}</td>
+                  <td className="px-4 py-3 text-xs text-text-secondary">{new Date(c.created_at).toLocaleDateString()}</td>
                 </tr>
               ))}
             </tbody>

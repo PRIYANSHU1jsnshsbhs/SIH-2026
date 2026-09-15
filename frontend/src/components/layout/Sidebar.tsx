@@ -22,8 +22,8 @@ function NavItem({ to, label, icon, collapsed }: { to: string; label: string; ic
           // keeps its own transition since that's declared on itself, not here.
           'relative flex items-center gap-3 rounded-md px-3 py-2 text-sm transition-none hover:py-2.5',
           isActive
-            ? 'bg-accent/10 text-accent font-medium py-2.5'
-            : 'text-text-secondary hover:bg-surface-2 hover:text-text-primary',
+            ? 'bg-navy-800 text-saffron font-medium py-2.5'
+            : 'text-text-secondary hover:bg-navy-800 hover:text-text-inverse',
         )
       }
     >
@@ -53,16 +53,14 @@ export function Sidebar() {
   if (role === 'devops') navItems.push({ to: '/devops', label: 'DevOps', icon: '◆' })
 
   return (
-    <aside className={clsx('flex shrink-0 flex-col bg-surface-1 transition-all', collapsed ? 'w-16' : 'w-56')}>
+    <aside className={clsx('flex shrink-0 flex-col bg-navy-900 text-text-inverse transition-all border-r border-navy-800', collapsed ? 'w-16' : 'w-56')}>
       <nav className="flex flex-col gap-1 p-3">
         {navItems.map((item) => (
           <NavItem key={item.to} {...item} collapsed={collapsed} />
         ))}
       </nav>
 
-      {/* Bottom-pinned, in this fixed order: Contact always leads (topmost of
-          this block), Backend slots in for dev, Terminal Commands is always last. */}
-      <nav className="mt-auto flex flex-col gap-1 border-t border-border-c p-3">
+      <nav className="mt-auto flex flex-col gap-1 border-t border-navy-800 p-3">
         <NavItem to="/contact" label="Contact" icon="✉" collapsed={collapsed} />
         {role === 'devops' && <NavItem to="/backend" label="Backend" icon="▧" collapsed={collapsed} />}
         <NavItem to="/terminal-commands" label="Terminal Commands" icon=">_" collapsed={collapsed} />
