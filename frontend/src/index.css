@@ -1,0 +1,308 @@
+@import "tailwindcss";
+
+/*
+ * Token indirection: components use `bg-surface-0`, `text-text-primary`,
+ * `bg-accent`, etc. The values those resolve to flip when `.light` is
+ * present on <html> — no `dark:`/`light:` variants needed elsewhere.
+ *
+ * IMPORTANT: Tailwind v4 only generates utility classes (bg-*, text-*,
+ * border-*) for custom colors declared inside this `@theme` block — it does
+ * NOT scan plain `:root`/`.light`/`.blue` custom properties. The raw,
+ * per-theme values live in `:root`/`html.light`/`html.blue` below; this
+ * block just registers their NAMES with Tailwind via `var()` indirection,
+ * so the browser resolves the actual color at paint time.
+ *
+ * Accent = the original blue-600/blue-500 pair used throughout the first
+ * version of this UI, routed through a variable so the light/dark toggle
+ * can still swap it for a readable equivalent on a white page.
+ */
+@theme {
+  --font-sans: "Inter", system-ui, "Segoe UI", Roboto, sans-serif;
+  --font-mono: ui-monospace, "SFMono-Regular", Consolas, monospace;
+
+  --color-surface-0: var(--surface-0);
+  --color-surface-1: var(--surface-1);
+  --color-surface-2: var(--surface-2);
+  --color-surface-3: var(--surface-3);
+  --color-border-c: var(--border-c);
+  --color-border-strong: var(--border-strong);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-tertiary: var(--text-tertiary);
+  --color-accent: var(--accent);
+  --color-accent-strong: var(--accent-strong);
+  --color-accent-fg: var(--accent-fg);
+  --color-btn-bg: var(--accent);
+  --color-btn-fg: var(--accent-fg);
+}
+
+:root {
+  --surface-0: #0a0b0f;
+  --surface-1: #12141b;
+  --surface-2: #191c25;
+  --surface-3: #252a37;
+  --border-c: #363b45;
+  --border-strong: #4a505c;
+  --text-primary: #e8eaee;
+  --text-secondary: #99a1b0;
+  --text-tertiary: #666f80;
+  --accent: #2563eb;
+  --accent-strong: #3b82f6;
+  --accent-fg: #ffffff;
+  /* The investigation graph canvas is intentionally always-dark (node/edge
+     colors are hardcoded for readability regardless of app theme). In the
+     dark theme specifically that's identical to --surface-0, so the canvas
+     visually fuses with the page; nudge it a little lighter here only. */
+  --graph-bg: #15171f;
+}
+
+html.light {
+  --surface-0: #e9ebef;
+  --surface-1: #ffffff;
+  --surface-2: #f1f2f5;
+  --surface-3: #e3e5e9;
+  --border-c: #d7dae0;
+  --border-strong: #c3c8d0;
+  --text-primary: #24262b;
+  --text-secondary: #5b6270;
+  --text-tertiary: #7a8291;
+  --accent: #2563eb;
+  --accent-strong: #1d4ed8;
+  --accent-fg: #ffffff;
+  --graph-bg: #0a0b0f;
+}
+
+html.blue {
+  --surface-0: #181f29;
+  --surface-1: #252e3d;
+  --surface-2: #2f3a4c;
+  --surface-3: #3a4759;
+  --border-c: #202836;
+  --border-strong: #29323f;
+  --text-primary: #e8ecf3;
+  --text-secondary: #96a3b8;
+  --text-tertiary: #647289;
+  --accent: #2563eb;
+  --accent-strong: #3b82f6;
+  --accent-fg: #ffffff;
+  --graph-bg: #0a0b0f;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+/*
+ * Smooth theme switching: fade every color-related property instead of
+ * snapping instantly when .light/.blue is toggled on <html>. Lives in
+ * @layer base so component-specific transition utilities (which Tailwind
+ * puts in the utilities layer) still win over this where they're set.
+ */
+@layer base {
+  *,
+  *::before,
+  *::after {
+    transition-property: background-color, border-color, color, fill, stroke, box-shadow;
+    transition-duration: 400ms;
+    transition-timing-function: ease;
+  }
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  background: var(--surface-0);
+  color: var(--text-primary);
+  color-scheme: dark;
+}
+
+html.light body {
+  color-scheme: light;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border-radius: 6px;
+}
+
+input,
+select,
+textarea {
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 25%, transparent);
+}
+
+/*
+ * Risk/entity badges default to a dark chip (readable on dark and blue
+ * surfaces). On light theme that same chip reads as dull/muddy against a
+ * white page, so give light theme its own vibrant, high-contrast version.
+ */
+html.light .badge-high {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+html.light .badge-medium {
+  background: #fef3c7;
+  color: #b45309;
+}
+
+html.light .badge-low {
+  background: #dcfce7;
+  color: #15803d;
+}
+
+html.light .badge-entity {
+  background: #d1fae5;
+  color: #047857;
+}
+
+/*
+ * Landing page motion: a one-shot entrance (fade-up) plus two slow ambient
+ * loops (a ~4s breathing glow, a ~6s dash crawling along the network motif's
+ * edges to suggest a trace in progress). All slow and singular, not a busy
+ * page — and all disabled outright for reduced-motion.
+ */
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes glow-breathe {
+  0%,
+  100% {
+    opacity: 0.5;
+  }
+  50% {
+    opacity: 1;
+  }
+}
+
+@keyframes trace-dash {
+  to {
+    stroke-dashoffset: -32;
+  }
+}
+
+.animate-fade-up {
+  animation: fade-up 0.6s ease-out both;
+}
+
+.animate-glow-breathe {
+  animation: glow-breathe 4s ease-in-out infinite;
+}
+
+.animate-trace-dash {
+  animation: trace-dash 6s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-up,
+  .animate-glow-breathe,
+  .animate-trace-dash {
+    animation: none;
+  }
+}
+
+/*
+ * Styles for report section bodyHtml fragments (raw HTML from
+ * reportRenderer.ts, injected via dangerouslySetInnerHTML on the in-app
+ * report view). The same fragments are also dropped into a fully standalone
+ * document with their own inline <style> for the downloaded file — these
+ * theme-token-based rules are only for the in-app view, so it follows
+ * dark/light/blue like everything else instead of the print-oriented look.
+ */
+.report-content section {
+  margin-top: 1.5rem;
+}
+.report-content section:first-child {
+  margin-top: 0;
+}
+.report-content h2 {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 0.75rem;
+  padding-bottom: 0.375rem;
+  border-bottom: 1px solid var(--border-c);
+}
+.report-content table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8rem;
+}
+.report-content th {
+  text-align: left;
+  color: var(--text-tertiary);
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  padding: 0.4rem 0.5rem;
+  border-bottom: 1px solid var(--border-c);
+}
+.report-content td {
+  padding: 0.4rem 0.5rem;
+  border-bottom: 1px solid var(--border-c);
+  color: var(--text-secondary);
+}
+.report-content .mono {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+.report-content .muted {
+  color: var(--text-tertiary);
+  font-size: 0.8rem;
+}
+.report-content .finding {
+  padding: 0.6rem 0;
+  border-bottom: 1px solid var(--border-c);
+}
+.report-content .finding:last-child {
+  border-bottom: none;
+}
+.report-content .finding-title {
+  margin: 0 0 0.25rem;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+.report-content .risk-high {
+  color: #f87171;
+  font-weight: 700;
+}
+.report-content .risk-medium {
+  color: #fbbf24;
+  font-weight: 700;
+}
+.report-content .risk-low {
+  color: #4ade80;
+  font-weight: 700;
+}
+.report-content .risk-unknown {
+  color: var(--text-tertiary);
+  font-weight: 700;
+}

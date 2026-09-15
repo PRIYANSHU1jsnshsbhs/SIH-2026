@@ -1,0 +1,43 @@
+/**
+ * Every endpoint documented in Backend_API_Specification.md, base URL
+ * `/api/v1`. Reference only — this frontend talks to the equivalent mock
+ * functions in `src/api/*.ts`, not real HTTP, until a backend exists.
+ */
+export const API_ENDPOINTS: { method: string; path: string }[] = [
+  { method: 'POST', path: '/auth/login' },
+  { method: 'GET', path: '/auth/me' },
+  { method: 'POST', path: '/cases' },
+  { method: 'GET', path: '/cases' },
+  { method: 'GET', path: '/cases/{case_id}' },
+  { method: 'PATCH', path: '/cases/{case_id}' },
+  { method: 'POST', path: '/cases/{case_id}/wallets' },
+  { method: 'GET', path: '/wallets/{chain}/{address}' },
+  { method: 'GET', path: '/wallets/search' },
+  { method: 'GET', path: '/wallets/{chain}/{address}/statistics' },
+  { method: 'GET', path: '/wallets/{chain}/{address}/transactions' },
+  { method: 'GET', path: '/transactions/{chain}/{tx_hash}' },
+  { method: 'GET', path: '/wallets/{chain}/{address}/token-transfers' },
+  { method: 'POST', path: '/investigations' },
+  { method: 'GET', path: '/investigations/{investigation_id}' },
+  { method: 'GET', path: '/investigations/{investigation_id}/findings' },
+  { method: 'GET', path: '/investigations/{investigation_id}/graph' },
+  { method: 'GET', path: '/wallets/{chain}/{address}/neighbors' },
+  { method: 'GET', path: '/graph/path' },
+  { method: 'GET', path: '/entities/address/{chain}/{address}' },
+  { method: 'GET', path: '/entities/search' },
+  { method: 'GET', path: '/entities/{entity_id}' },
+  { method: 'POST', path: '/risk/wallet' },
+  { method: 'GET', path: '/risk/wallet/{chain}/{address}/features' },
+  { method: 'POST', path: '/risk/transaction' },
+  { method: 'GET', path: '/wallets/{chain}/{address}/cross-chain' },
+  { method: 'POST', path: '/cross-chain/trace' },
+  { method: 'POST', path: '/investigations/{investigation_id}/fund-flow' },
+  { method: 'POST', path: '/reports' },
+  { method: 'GET', path: '/reports/{report_id}' },
+  { method: 'GET', path: '/reports/{report_id}/download' },
+  { method: 'GET', path: '/health' },
+  { method: 'GET', path: '/system/status' },
+  { method: 'POST', path: '/internal/indexer/start' },
+  { method: 'GET', path: '/internal/indexer/{chain}/status' },
+  { method: 'POST', path: '/internal/indexer/reprocess' },
+]

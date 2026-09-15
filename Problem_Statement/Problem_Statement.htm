@@ -1,0 +1,3537 @@
+<!DOCTYPE html>
+<html><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+        
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <meta name="description" content="">
+        <meta name="csrf-token" content="Bc0csLQo50URH6FTxrpGFnQLM0A6FfKBUbOxx692">
+        <meta name="author" content="">
+        <title>Smart India Hackathon</title>
+        <link rel="icon" href="https://www.sih.gov.in/img/favicon-sih.png" type="image/png" sizes="16x16">
+        <!-- CSS-->
+               
+        <link href="Problem_Statement_files/bootstrap_FGKP.css" rel="stylesheet" type="text/css">
+        <link href="Problem_Statement_files/dataTables.bootstrap4.min_FGKP.css" rel="stylesheet" type="text/css">
+        
+        <link href="Problem_Statement_files/mobile-menu_FGKP.css" rel="stylesheet" type="text/css">
+        <link href="Problem_Statement_files/bootstrap_002_FGKP.css" rel="stylesheet" type="text/css">
+        <!-- <link href="/css/bootstrap-select.css" rel="stylesheet" type="text/css"> -->
+        <link href="Problem_Statement_files/font-awesome_FGKP.css" rel="stylesheet" type="text/css">
+        <link href="Problem_Statement_files/slick-test_FGKP.css" rel="stylesheet" type="text/css">
+        <link href="Problem_Statement_files/style_new_test_FGKP.css" rel="stylesheet" type="text/css">
+        <link href="Problem_Statement_files/responsiveTest_FGKP.css" rel="stylesheet" type="text/css">
+        <!-- <link href="/css/animate.css" rel="stylesheet" type="text/css"> -->
+        <link href="Problem_Statement_files/bs_leftnavi_FGKP.css" rel="stylesheet" type="text/css">
+        <link href="Problem_Statement_files/font-awesome.min_FGKP.css" rel="stylesheet">
+        <link rel="stylesheet" href="Problem_Statement_files/jquery.dataTables.min_FGKP.css"> 
+        <link href="Problem_Statement_files/css2_FGKP.css" rel="stylesheet">       
+        <!-- JS-->
+        <script src="Problem_Statement_files/jquery-3.0.0.min_FGKP.js" type="text/javascript"></script>
+        <!-- <link href="/dataTable/css/jquery.dataTables.css" rel="stylesheet" />
+        <script src="http://cdn.datatables.net/1.10.2/js/jquery.dataTables.min.js"></script> -->
+        <!-- <script src="/lib/bootstrap-3.3.7/js/bootstrap.min.js" type="text/javascript"></script> -->
+        <script type="text/javascript" src="Problem_Statement_files/typeahead_FGKP.js"></script>  
+        <script src="Problem_Statement_files/jquery.dataTables.min_FGKP.js"></script>
+          <!-- Global site tag (gtag.js) - Google Analytics -->
+        <script async="" src="Problem_Statement_files/google-analytics_analytics_FGKP.js"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'G-2SFBJN4W5W');
+        </script>		
+
+         </head>
+<body class="">
+  <div class="d-none d-sm-block">
+    <div class="header bg-light py-2">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-6 col-md-4 col-lg-6">
+            <nav class=""><a class="navbar-brand" href="https://sih.gov.in/"><span><img src="Problem_Statement_files/SIH2026-logo_FGKP.png" class="img-responsive"></span></a></nav>
+          </div>
+          <div class="col-6 col-md-8 col-lg-6 text-right">
+            <nav class="navbar navbar-expand-md topNavbar navbar-fixed">
+              <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                  <a class="nav-link alumniButTop" href="https://alumni.mic.gov.in/" target="_blank">MIC Alumni</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link alumniButTop alumnilogin" href="https://www.sih.gov.in/signin" style="padding:0px 15px 4px 15px !important;display: flex;justify-content: center;align-items: center;">
+                    SIH Login 
+                    <img style="height:25px;width:25px;margin: 6px 0px 0 5px;border-radius: 25px;" src="Problem_Statement_files/login_FGKP.png" alt=""></a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+			  </div>
+		  </div>
+	  </div>
+        
+   <nav class="navbar navbar-expand-lg navbar-fixed" id="main_navbar">
+    <div class="mx-auto d-flex" id="hamburger-outer">
+      <a class="navbar-brand sihlogo" href="#" style="display: block;"><img src="Problem_Statement_files/SIH-Logo_FGKP.png" alt="image"></a>
+            <button id="hamburger-menu" class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="https://sih.gov.in/">Home<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            About SIH
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <!-- <li class="nav-item dropdown">
+                                    <a class="dropdown-item dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown"
+                                        aria-haspopup="true" aria-expanded="false">
+                                        SIH 2024
+                                    </a>
+                                    <ul class="dropdown-menu submenu" aria-labelledby="navbarDropdown1">
+                                        <li><a class="dropdown-item" href="/sih2024">About SIH</a></li>
+                                        <li><a class="dropdown-item" href="/sih2024#sih-process-flow">SIH Process Flow</a></li>
+                                        <li><a class="dropdown-item" href="/SIH_Themes">SIH Themes</a></li> 
+                                        <li><a class="dropdown-item" href="/implementationTeam">Implementation Team</a></li>                                                 
+                                    </ul>
+                                </li> -->
+                                <!-- <li><a class="dropdown-item" href="/sih2024">About SIH</a></li> -->
+                                <li><a class="dropdown-item" href="https://www.sih.gov.in/#process-timeline">SIH Process Flow</a></li>
+                                <li><a class="dropdown-item" href="https://www.sih.gov.in/#sihthemes">SIH Themes</a></li>
+                                <li><a class="dropdown-item" href="https://www.sih.gov.in/implementationTeam">Implementation Team</a></li>
+                                <li class="nav-item dropdown">
+                                    <a class="dropdown-item dropdown-toggle pastedition" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        SIH Past Editions
+                                    </a>
+                                    <ul class="dropdown-menu submenu" aria-labelledby="navbarDropdown1">
+                                        <li><a class="dropdown-item" href="https://www.sih.gov.in/sih2017">SIH 2017</a></li>
+                                        <li><a class="dropdown-item" href="https://www.sih.gov.in/sih2018Software">SIH 2018 Software</a></li>
+                                        <li><a class="dropdown-item" href="https://www.sih.gov.in/sih2018Hardware">SIH 2018 Hardware</a></li> 
+                                        <li><a class="dropdown-item" href="https://www.sih.gov.in/sih2019">SIH 2019 Software</a></li> 
+                                        <li><a class="dropdown-item" href="https://www.sih.gov.in/sih2019Hard">SIH 2019 Hardware</a></li> 
+                                        <li><a class="dropdown-item" href="https://www.sih.gov.in/sih2020Software">SIH 2020 Software</a></li>
+                                        <li><a class="dropdown-item" href="https://www.sih.gov.in/sih2020Hardware">SIH 2020 Hardware</a></li>
+                                        <li><a class="dropdown-item" href="https://www.sih.gov.in/sih2022s">SIH 2022</a></li>
+                                        <li><a class="dropdown-item" href="https://www.sih.gov.in/sih2023s">SIH 2023</a></li>
+                                        <li><a class="dropdown-item" href="https://www.sih.gov.in/sih2024">SIH 2024</a></li>
+                                        <li><a class="dropdown-item" href="https://www.sih.gov.in/sih2025">SIH 2025</a></li>          
+                                    </ul>
+                                </li>
+
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Guidelines
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                          <!-- <li><a class="dropdown-item" href="/letters/2026/SIH2026-Guidelines-College-SPOC-updated.pdf" target="_blank">For Institutes/Universities</a></li> -->
+                          <li><a class="dropdown-item" href="https://www.sih.gov.in/letters/2026/SIH%202026%20Guidelines.pdf" target="_blank">For Institutes/Universities</a></li>
+                          <li><a class="dropdown-item" href="https://www.sih.gov.in/letters/2026/SIH2026-IDEA-Presentation-Format.pptx" target="_blank">Idea PPT</a></li>
+                          <!-- <li><a class="dropdown-item" href="/letters/Internal-Hackathon-Process-flow-chart-final.png" target="_blank">Internal Hackathon Process</a></li> -->
+                          <!-- <li><a class="dropdown-item" href="/letters/SIH-Process-flow-chart-final.pdf" target="_blank">Hackathon Timeline</a></li> -->
+                          <!-- <li><a class="dropdown-item" href="/letters/nc_internal_hackathon_guidelines.zip">NC Internal Hackathon Guidelines</a></li> -->
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <!-- <a class="nav-link" href="/sih2026PS">Problem Statements</a> -->
+                         <a class="nav-link" href="https://www.sih.gov.in/sih2026PS">Problem Statements</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://www.sih.gov.in/know-your-spoc">Know Your SPOC</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://www.sih.gov.in/projectImplementation">Project Implementation</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://www.sih.gov.in/faqs">FAQs</a>
+                    </li>
+                    <!-- <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                            FAQs
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                          <li><a class="dropdown-item" href="/faqs#college-spoc">For Institutes/Universities SPOC</a></li>
+                          <li><a class="dropdown-item" href="/faqs#team">For Team</a></li>
+                        </ul>
+                    </li> -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://www.sih.gov.in/contactUs">Contact us</a>
+                    </li> 
+                    
+                    <li class="nav-item-mobile" id="scrollnav" style="display: block;">
+                      <a class="nav-link-mobile onScrollButton" href="https://www.sih.gov.in/signin" style="">
+                        SIH Login <img src="Problem_Statement_files/login_FGKP.png" alt=""> 
+                      </a>
+                    </li>
+
+
+
+                </ul>
+            </div>
+    </div>
+        
+    </nav>
+</div>
+<!-- Desktop Menu End  -->
+
+<!-- Mobile Menu Start  -->
+<div class="d-block d-sm-none">
+<header class="nav-top">
+	<a class="navbar-brand" href="https://www.sih.gov.in/"><span><img src="Problem_Statement_files/SIH-Logo_FGKP.png" class="img-responsive"></span></a>
+	<span class="hamburger material-icons" id="ham">menu</span>
+</header>
+
+<nav class="nav-drill">
+  <ul class="nav-items nav-level-1">
+    <li class="nav-item-mobile nav-expand">
+			<a class="nav-link-mobile nav-expand-link" href="#">
+				About SIH
+			</a>
+			<ul class="nav-items nav-expand-content"><li class="nav-link-mobile">
+	<a class="nav-link-mobile nav-back-link" href="#">
+		Back
+	</a>
+</li>
+				<!-- <li class="nav-item-mobile nav-expand">
+					<a class="nav-link-mobile nav-expand-link" href="#">
+						SIH 2024
+					</a>
+        </li> -->
+        <li class="nav-item-mobile">
+            <a class="nav-link-mobile" href="https://www.sih.gov.in/#process-timeline">
+                SIH Process Flow
+            </a>
+          </li>
+          <li class="nav-item-mobile">
+            
+            <a class="nav-link-mobile" href="https://www.sih.gov.in/#sihthemes">
+                SIH Themes
+            </a>
+          </li>
+          <!-- <li class="nav-item-mobile">
+            <a class="nav-link-mobile" href="https://www.sih.gov.in/sih2024PS">
+                Problem Statements
+            </a>
+          </li> -->
+          <li class="nav-item-mobile">
+            <a class="nav-link-mobile" href="https://www.sih.gov.in/know-your-spoc">
+                Know your SPOC
+            </a>
+          </li>
+
+        <!-- <li>
+					<ul class="nav-items nav-expand-content">
+						<li class="nav-item-mobile">
+							<a class="nav-link-mobile" href="https://www.sih.gov.in/sih2024">
+								 About SIH
+							</a>
+						</li>
+						<li class="nav-item-mobile">
+							<a class="nav-link-mobile" href="https://www.sih.gov.in/sih2024#sih-process-flow">
+								 SIH Process Flow
+							</a>
+						</li>
+						<li class="nav-item-mobile">
+							
+							<a class="nav-link-mobile" href="https://www.sih.gov.in/SIH_Themes">
+								 SIH Themes
+							</a>
+						</li>
+						<li class="nav-item-mobile">
+              <a class="nav-link-mobile" href="https://www.sih.gov.in/sih2024PS">
+								 Problem Statements
+							</a>
+						</li>
+					</ul>
+				</li> -->
+				<li class="nav-item-mobile nav-expand">
+					<a class="nav-link-mobile nav-expand-link" href="#">
+						Past Editions
+					</a>
+					<ul class="nav-items nav-expand-content"><li class="nav-link-mobile">
+	<a class="nav-link-mobile nav-back-link" href="#">
+		Back
+	</a>
+</li>
+						<li class="nav-item-mobile">
+							<a class="nav-link-mobile" href="https://www.sih.gov.in/sih2017">
+								  SIH 2017
+							</a>
+						</li>
+						<li class="nav-item-mobile">
+							<a class="nav-link-mobile" href="https://www.sih.gov.in/sih2018Software">
+								  SIH 2018 Software
+							</a>
+						</li>
+						<li class="nav-item-mobile">
+							<a class="nav-link-mobile" href="https://www.sih.gov.in/sih2018Hardware">
+								 SIH 2018 Hardware
+							</a>
+						</li>
+						<li class="nav-item-mobile">
+							<a class="nav-link-mobile" href="https://www.sih.gov.in/sih2019">
+								  SIH 2019 Software
+							</a>
+						</li>
+						<li class="nav-item-mobile">
+							<a class="nav-link-mobile" href="https://www.sih.gov.in/sih2019Hard">
+								  SIH 2019 Hardware
+							</a>
+						</li>
+						<li class="nav-item-mobile">
+							<a class="nav-link-mobile" href="https://www.sih.gov.in/sih2020Software">
+								  SIH 2020 Software
+							</a>
+						</li>
+						<li class="nav-item-mobile">
+							<a class="nav-link-mobile" href="https://www.sih.gov.in/sih2020Hardware">
+								  SIH 2020 Hardware
+							</a>
+						</li>
+            <li class="nav-item-mobile">
+							<a class="nav-link-mobile" href="https://www.sih.gov.in/sih2022s">
+								  SIH 2022
+							</a>
+						</li>
+            <li class="nav-item-mobile">
+							<a class="nav-link-mobile" href="https://www.sih.gov.in/sih2023s">
+								  SIH 2023
+							</a>
+						</li>
+            <li class="nav-item-mobile">
+							<a class="nav-link-mobile" href="https://www.sih.gov.in/sih2024">
+								  SIH 2024
+							</a>
+						</li>
+					</ul>
+				</li>
+				
+			</ul>
+		</li>  
+    <li class="nav-item-mobile nav-expand">
+			<a class="nav-link-mobile nav-expand-link" href="#">
+				Guidelines
+			</a>
+      
+			<ul class="nav-items nav-expand-content"><li class="nav-link-mobile">
+	<a class="nav-link-mobile nav-back-link" href="#">
+		Back
+	</a>
+</li>
+					
+            <li class="nav-item-mobile">
+							<a class="nav-link-mobile" href="https://www.sih.gov.in/letters/Guidelines-how-to-apply-college.pdf">
+                How to apply as Institute SPOC
+							</a>
+						</li>
+            <li class="nav-item-mobile">
+							<a class="nav-link-mobile" href="https://www.sih.gov.in/letters/SIH2025-Guidelines-College-SPOC-updated.pdf">
+                Guidelines for Institutes/Universities
+							</a>
+						</li>
+						<li class="nav-item-mobile">
+							<a class="nav-link-mobile" href="https://www.sih.gov.in/letters/SIH2025-IDEA-Presentation-Format.pptx">
+								 Idea Presentation template PPT
+							</a>
+						</li>						
+            <!-- <a class="nav-link-mobile" href="/letters/nc_internal_hackathon_guidelines.zip">
+                  Internal Hackathon
+            </a> -->
+								
+			</ul>
+		</li>
+    <li class="nav-item-mobile">
+			<a class="nav-link-mobile" href="https://www.sih.gov.in/sih2026PS">
+				Problem Statements
+			</a>
+		</li> 
+    <li class="nav-item-mobile">
+			<a class="nav-link-mobile" href="https://www.sih.gov.in/know-your-spoc">
+				Know your SPOC
+			</a>
+		</li>
+    <li class="nav-item-mobile">
+			<a class="nav-link-mobile" href="https://www.sih.gov.in/projectImplementation">
+				Project Implementation
+			</a>
+		</li>
+    <li class="nav-item-mobile">
+			<a class="nav-link-mobile" href="https://www.sih.gov.in/faqs">
+				FAQs
+			</a>
+		</li>
+    <!-- <li class="nav-item-mobile nav-expand">
+					<a class="nav-link-mobile nav-expand-link" href="#">
+						FAQs
+					</a>
+					<ul class="nav-items nav-expand-content">
+						<li class="nav-item-mobile">
+							<a class="nav-link-mobile" href="https://www.sih.gov.in/faqs#college-spoc">
+								   For Institute SPOC
+							</a>
+						</li>
+						<li class="nav-item-mobile">
+							<a class="nav-link-mobile" href="https://www.sih.gov.in/faqs#team">
+								   For Team
+							</a>
+						</li>
+					</ul>
+			</li> -->
+
+    <li class="nav-item-mobile">
+			<a class="nav-link-mobile" href="https://www.sih.gov.in/contactUs">
+				Contact us
+			</a>
+		</li>
+		
+    <!-- <li class="nav-item-mobile nav-expand">
+			<a class="nav-link-mobile nav-expand-link" href="#">
+				Support
+			</a>
+			<ul class="nav-items nav-expand-content">
+				<li class="nav-item-mobile nav-expand">
+					<a class="nav-link-mobile nav-expand-link" href="#">
+						FAQs
+					</a>
+					<ul class="nav-items nav-expand-content">
+						<li class="nav-item-mobile">
+							<a class="nav-link-mobile" href="https://www.sih.gov.in/faqs#college-spoc">
+								   For Institute SPOC
+							</a>
+						</li>
+						<li class="nav-item-mobile">
+							<a class="nav-link-mobile" href="https://www.sih.gov.in/faqs#team">
+								   For Team
+							</a>
+						</li>
+					</ul>
+				</li>
+				<li class="nav-item-mobile nav-expand">
+					<a class="nav-link-mobile nav-expand-link" href="#">
+						Reach Us
+					</a>
+					<ul class="nav-items nav-expand-content">
+						<li class="nav-item-mobile">
+							<a class="nav-link-mobile" href="https://www.sih.gov.in/contactUs">
+								    Contact us
+							</a>
+						</li>
+					</ul>
+				</li>
+			</ul>
+		</li> -->
+
+		<li class="nav-item-mobile">
+			<a class="nav-link-mobile" href="https://www.sih.gov.in/signin">
+				<img src="Problem_Statement_files/login_FGKP.png" alt=""> Login/Register 
+			</a>
+		</li>
+  </ul>
+
+</nav>
+</div>
+
+
+        
+
+<link rel="stylesheet" type="text/css" href="Problem_Statement_files/jquery.dataTables_FGKP.css">
+
+<div id="demo" class="carousel slide carouselPadding" data-ride="carousel"> 
+  <!-- The slideshow -->
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img class="img-fluid" src="Problem_Statement_files/problem-statement-bg_FGKP.png" alt="Slide One" style="height: 260px;object-fit: cover;"> 
+      <div class="carousel-caption">
+        <h3 class="prob-statement">Problem Statements</h3>
+        <!-- <p class="contact-us-para">Solutions</p> -->
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--<section class="psBox1">
+    <div class="container">
+        <div class="row">
+				<div class="col-md-12">
+					<h2>PROBLEM STATEMENTS</h2>
+				</div>
+        </div>
+    </div>
+</section> -->
+
+<section class="total-statement totstat">
+    <!-- <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="statement-box">
+                    <div class="row">
+                        <div class="col-md-6 d-flex justify-content-center align-item-center">
+                            <div class="outer-total-statements">
+                                <h3>Total Statements</h3>
+                                <p>As per available data</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6 ">
+                            <div class="row mb-5">
+                                <div class="col-md-6">
+                                    <div class="hard">
+                                        <h3>57</h3>
+                                        <p>Hardware</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="soft">
+                                        <h3>176</h3>
+                                        <p>Software</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row mt-5">
+                                 <div class="col-md-12 text-center">
+                                    <div class="box-of-bharat">
+                                        <p>Swadeshi for Atmanirbhar Bharat</p>
+                                    </div>
+                                   
+                                </div>
+                            </div>
+                             <div class="row mt-3">
+                                    <div class="col-md-6">
+                                        <div class="hard">
+                                            <h3>57</h3>
+                                            <p>Hardware</p>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="soft">
+                                            <h3>176</h3>
+                                            <p>Software</p>
+                                        </div>
+                                    </div>
+                            </div>
+                           
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="statement-box">
+                    <div class="row">
+                        <div class="col-md-4 d-flex justify-content-center align-item-center">
+                            <div class="outer-total-statements">
+                                <h3>Total Problem Statements</h3>
+                                <!-- <p>As per available data</p> -->
+                            </div>
+                        </div>
+                        <div class="col-md-2 pt-5">
+                                <div class="hard" style="background-image:none;">
+                                    <h3 style="margin-bottom: 8px;">57</h3>
+                                    <p style="font-weight:700;font-size:25px">Hardware</p>
+                                </div>
+                            </div>
+                            <div class="col-md-2 pt-5">
+                                <div class="soft" style="background-image:none;">
+                                    <h3 style="margin-bottom: 8px;">176</h3>
+                                    <p style="font-weight:700;font-size:25px">Software</p>
+                                </div>
+                            </div>
+                                <div class="col-md-4 text-center">
+                                    <!-- <div class="box-of-bharat" style="visibility:hidden">
+                                        <p>Swadeshi for Atmanirbhar Bharat</p>
+                                    </div> -->
+                                    <div class="row">
+                                         <div class="col-md-6 pt-5">
+                                            <div class="hard">
+                                                <h3 style="margin-bottom: 8px;">17</h3>
+                                                <p style="font-weight:700;font-size:25px"><a href="https://www.sih.gov.in/#sihthemes">Hardware Themes</a></p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6 pt-5">
+                                            <div class="soft">
+                                                <h3 style="margin-bottom: 8px;">17</h3>
+                                                <p style="font-weight:700;font-size:25px"><a href="https://www.sih.gov.in/#sihthemes">Software Themes</a></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                
+                                </div>
+                           
+                           
+                        </div>
+                    </div>
+                 </div>
+            </div>
+    </div>
+
+		
+</section>
+
+
+<section class="prob-statement-panel">
+    <div class="container">
+        <!-- <div class="row">
+            <div class="col-md-12">
+                <a class="viewButton downloadViewButton" href="/letters/SIH_PS_2024.xlsx" download>Download Problem Statements</a>
+            </div>
+        </div> -->
+        
+   
+    
+    
+    <div class="container wrapper">
+                               
+   
+                              
+  
+  <div id="dataTablePS_wrapper" class="dataTables_wrapper dt-bootstrap4 no-footer"><div class="row"><div class="col-sm-12 col-md-6"><div class="dataTables_length" id="dataTablePS_length"><label>Show <select name="dataTablePS_length" aria-controls="dataTablePS" class="custom-select custom-select-sm form-control form-control-sm"><option value="10" selected="selected">10</option><option value="25">25</option><option value="50">50</option><option value="100">100</option></select> entries</label></div></div><div class="col-sm-12 col-md-6"><div id="dataTablePS_filter" class="dataTables_filter"><label>Search:<input type="search" class="form-control form-control-sm" placeholder="" aria-controls="dataTablePS"></label></div></div></div><div class="row"><div class="col-sm-12"><table id="dataTablePS" class="table table-striped table-bordered dataTable no-footer" style="width:100%" role="grid">
+    <thead>
+    <tr id="ps-2024" role="row"><th style="vertical-align: middle; width: 35.2px;" class="sorting_asc" tabindex="0" aria-controls="dataTablePS" rowspan="1" colspan="1" aria-sort="ascending" aria-label="S.No.: activate to sort column descending">S.No.</th><th style="vertical-align: middle; width: 141.2px;" class="sorting" tabindex="0" aria-controls="dataTablePS" rowspan="1" colspan="1" aria-label="Organization: activate to sort column ascending">Organization</th><th style="vertical-align: middle; width: 347.2px;" class="sorting" tabindex="0" aria-controls="dataTablePS" rowspan="1" colspan="1" aria-label="Problem Statement Title: activate to sort column ascending">Problem Statement Title</th><th style="vertical-align: middle; width: 66.2px;" class="sorting" tabindex="0" aria-controls="dataTablePS" rowspan="1" colspan="1" aria-label="Category: activate to sort column ascending">Category</th><th style="vertical-align: middle; width: 66.2px;" class="sorting" tabindex="0" aria-controls="dataTablePS" rowspan="1" colspan="1" aria-label="PS Number: activate to sort column ascending">PS Number</th><th style="vertical-align: middle; width: 79.2px;" class="sorting" tabindex="0" aria-controls="dataTablePS" rowspan="1" colspan="1" aria-label="Submitted Idea(s) Count: activate to sort column ascending">Submitted Idea(s) Count</th><th style="vertical-align: middle; width: 107.2px;" class="sorting" tabindex="0" aria-controls="dataTablePS" rowspan="1" colspan="1" aria-label="Theme: activate to sort column ascending">Theme</th><th style="vertical-align: middle; width: 88px;" class="sorting" tabindex="0" aria-controls="dataTablePS" rowspan="1" colspan="1" aria-label="Deadline for Idea Submission: activate to sort column ascending">Deadline for Idea Submission</th></tr>
+    </thead>
+    <tbody>
+
+
+
+        
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+
+
+        
+
+    
+    <tr role="row" class="odd">
+             <td class="colomn_border sorting_1">181</td>
+<!--<td></td>-->
+
+
+        <td class="colomn_border">Qualcomm Inc</td>
+        <td class="colomn_border"><a style="font-size:15px ;margin-bottom: 4px !important; cursor: pointer" data-toggle="modal" data-target="#ViewProblemStatement26181">A secure, AI-powered Personal Health Companion that delivers real-time, privacy-preserving health monitoring and early warning capabilities, helping individuals recognize health risks before they become emergencies. The solution should improve resilience during heat waves, floods, pollution events, and other disasters common in India while enabling continuous health support through on-device intelligence.</a>
+            <div id="ViewProblemStatement26181" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+
+                <!-- Modal content-->
+             <div class="modal-content">
+                <div class="modal-header">                    
+                    <button type="button" class="close PSclose" data-dismiss="modal">×</button>                    
+					<div class="row">
+						<div class="col-md-6">
+							<div class="psLogoModal">
+								<img class="navbar-brand" src="Problem_Statement_files/SIH-Logo_FGKP.png">
+							</div>
+						</div>
+						<div class="col-md-8">
+							<div class="psTitleModalTop">
+								<h6 class="modal-title"> Problem Statement Details  </h6>
+							</div>
+						</div>
+					</div>
+                </div>
+                <div class="modal-body">
+                   
+                    <table id="settings" class="table table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th style="vertical-align: top;">Problem Statement ID</th>
+                            <td>
+                                <div class="style-2" style="overflow-y: auto; min-height:20px; max-height: 200px; width:100%;"> 26181</div>
+                               </td>
+                            </tr>
+                        <tr>
+                            <th style="vertical-align: top;">Problem Statement Title</th>
+                            <td>
+                                <div class="style-2" style="overflow-y: auto; min-height:20px; max-height: 200px; width:100%;"> A secure, AI-powered Personal Health Companion that delivers real-time, privacy-preserving health monitoring and early warning capabilities, helping individuals recognize health risks before they become emergencies. The solution should improve resilience during heat waves, floods, pollution events, and other disasters common in India while enabling continuous health support through on-device intelligence.</div>
+                               </td>
+                            </tr>
+                            <tr>
+                            <th style="vertical-align: top;">Description</th>
+                            <td>
+                                <!-- <div class="style-2" style="overflow-y: auto; min-height:20px; max-height: 200px; width:100%;"> Background India faces recurring public health challenges during and after disasters such as heat waves, floods, cyclones, air pollution events, disease outbreaks, and extreme weather conditions. Heat stress, dehydration, respiratory illnesses, cardiovascular complications, and delayed access to healthcare are common during such events.&lt;br&gt;&lt;br&gt; Rural populations, elderly citizens, outdoor workers, and people with chronic medical conditions are particularly vulnerable. Climate-related hazards are increasing in frequency and intensity, creating a need for continuous, personalized health monitoring that can function even when connectivity and healthcare access are disrupted.&lt;br&gt;&lt;br&gt; Advances in edge AI now enable wearable devices and mobile phones to analyze health data locally, providing real-time insights while preserving user privacy and operating without constant cloud connectivity. Local AI processing can support health monitoring in remote and underserved areas where internet access may be limited.&lt;br&gt;&lt;br&gt; Description Develop a Personal Health Companion, a privacy-preserving wearable or mobile application that continuously monitors an individual&#039;s physiological and environmental data and uses on-device AI to detect potential health anomalies in real time.The solution should analyze data from sensors such as heart rate, blood oxygen (SpO?), body temperature, activity levels, sleep patterns, and environmental conditions. The system should identify early indicators of heat stress, dehydration, respiratory distress, abnormal vital signs, fatigue, falls, and other health risks that may be exacerbated during disasters and environmental emergencies.All sensitive health data should be processed locally on the device to maximize privacy, minimize latency, and ensure continuous operation even during network outages. The application should provide actionable alerts, wellness recommendations, and emergency notifications while allowing users to maintain control over their personal health information. Edge AI approaches provide faster responses, improved privacy, and offline functionality.&lt;br&gt;&lt;br&gt; Expected Solution The proposed solution should implement some or all of the following:&lt;br&gt;&lt;br&gt; 1. Continuous Health Monitoring&lt;br&gt;&lt;br&gt; &amp;#8226; Monitor heart rate, SpO?, body temperature, activity levels, and sleep quality.&lt;br&gt; &amp;#8226; Track changes in baseline health patterns.&lt;br&gt; &amp;#8226; Generate personalized wellness indicators.&lt;br&gt;&lt;br&gt; 2. AI-Based Health Anomaly Detection&lt;br&gt;&lt;br&gt; &amp;#8226; Detect abnormal heart rate patterns.&lt;br&gt; &amp;#8226; Identify indicators of heat stress, dehydration, fatigue, and respiratory issues.&lt;br&gt; &amp;#8226; Recognize sudden changes that may require medical attention.&lt;br&gt; &amp;#8226; Provide risk assessments using on-device AI inference.&lt;br&gt;&lt;br&gt; 3. Disaster-Specific Health Alerts&lt;br&gt;&lt;br&gt; &amp;#8226; Heat-wave exposure warnings.&lt;br&gt; &amp;#8226; Air-quality and respiratory-risk alerts.&lt;br&gt; &amp;#8226; Flood and cyclone-related health advisories.&lt;br&gt; &amp;#8226; High-risk notifications for vulnerable individuals during extreme weather events.&lt;br&gt;&lt;br&gt; 4. Environmental Awareness&lt;br&gt;&lt;br&gt; &amp;#8226; Integrate data from local temperature, humidity, and air-quality sensors.&lt;br&gt; &amp;#8226; Assess environmental conditions that may affect health.&lt;br&gt; &amp;#8226; Generate personalized recommendations based on local risks.&lt;br&gt;&lt;br&gt; 5. Privacy-Preserving Edge AI&lt;br&gt;&lt;br&gt; &amp;#8226; Perform all health analysis locally on the device.&lt;br&gt; &amp;#8226; Minimize transmission of sensitive personal information.&lt;br&gt; &amp;#8226; Operate effectively with intermittent or no internet connectivity.&lt;br&gt; &amp;#8226; Maintain user control over data sharing.&lt;br&gt;&lt;br&gt; 6. Emergency Assistance Features&lt;br&gt;&lt;br&gt; &amp;#8226; Automatic detection of falls or medical distress.&lt;br&gt; &amp;#8226; SOS alerts to caregivers or emergency contacts.&lt;br&gt; &amp;#8226; Location-enabled emergency assistance when permitted by the user.&lt;br&gt;&lt;br&gt; 7. Personal Wellness Dashboard&lt;br&gt;&lt;br&gt; &amp;#8226; Daily health summaries and trend analysis.&lt;br&gt; &amp;#8226; Risk scores for heat, respiratory, and cardiovascular stress.&lt;br&gt; &amp;#8226; Personalized recommendations for hydration, rest, activity, and medical consultation.&lt;br&gt;&lt;br&gt; 8. Scalable Deployment&lt;br&gt;&lt;br&gt; &amp;#8226; Support smartphones, smartwatches, fitness bands, and specialized healthcare wearables.&lt;br&gt; &amp;#8226; Suitable for individual consumers, healthcare providers, disaster-response agencies, and public health programs.&lt;br&gt;</div> -->
+                                 <div class="style-2" style="overflow-y: auto; min-height:20px; max-height: 200px; width:100%;"> Background India faces recurring public health challenges during and after disasters such as heat waves, floods, cyclones, air pollution events, disease outbreaks, and extreme weather conditions. Heat stress, dehydration, respiratory illnesses, cardiovascular complications, and delayed access to healthcare are common during such events.<br><br> Rural populations, elderly citizens, outdoor workers, and people with chronic medical conditions are particularly vulnerable. Climate-related hazards are increasing in frequency and intensity, creating a need for continuous, personalized health monitoring that can function even when connectivity and healthcare access are disrupted.<br><br> Advances in edge AI now enable wearable devices and mobile phones to analyze health data locally, providing real-time insights while preserving user privacy and operating without constant cloud connectivity. Local AI processing can support health monitoring in remote and underserved areas where internet access may be limited.<br><br> Description Develop a Personal Health Companion, a privacy-preserving wearable or mobile application that continuously monitors an individual's physiological and environmental data and uses on-device AI to detect potential health anomalies in real time.The solution should analyze data from sensors such as heart rate, blood oxygen (SpO?), body temperature, activity levels, sleep patterns, and environmental conditions. The system should identify early indicators of heat stress, dehydration, respiratory distress, abnormal vital signs, fatigue, falls, and other health risks that may be exacerbated during disasters and environmental emergencies.All sensitive health data should be processed locally on the device to maximize privacy, minimize latency, and ensure continuous operation even during network outages. The application should provide actionable alerts, wellness recommendations, and emergency notifications while allowing users to maintain control over their personal health information. Edge AI approaches provide faster responses, improved privacy, and offline functionality.<br><br> Expected Solution The proposed solution should implement some or all of the following:<br><br> 1. Continuous Health Monitoring<br><br> • Monitor heart rate, SpO?, body temperature, activity levels, and sleep quality.<br> • Track changes in baseline health patterns.<br> • Generate personalized wellness indicators.<br><br> 2. AI-Based Health Anomaly Detection<br><br> • Detect abnormal heart rate patterns.<br> • Identify indicators of heat stress, dehydration, fatigue, and respiratory issues.<br> • Recognize sudden changes that may require medical attention.<br> • Provide risk assessments using on-device AI inference.<br><br> 3. Disaster-Specific Health Alerts<br><br> • Heat-wave exposure warnings.<br> • Air-quality and respiratory-risk alerts.<br> • Flood and cyclone-related health advisories.<br> • High-risk notifications for vulnerable individuals during extreme weather events.<br><br> 4. Environmental Awareness<br><br> • Integrate data from local temperature, humidity, and air-quality sensors.<br> • Assess environmental conditions that may affect health.<br> • Generate personalized recommendations based on local risks.<br><br> 5. Privacy-Preserving Edge AI<br><br> • Perform all health analysis locally on the device.<br> • Minimize transmission of sensitive personal information.<br> • Operate effectively with intermittent or no internet connectivity.<br> • Maintain user control over data sharing.<br><br> 6. Emergency Assistance Features<br><br> • Automatic detection of falls or medical distress.<br> • SOS alerts to caregivers or emergency contacts.<br> • Location-enabled emergency assistance when permitted by the user.<br><br> 7. Personal Wellness Dashboard<br><br> • Daily health summaries and trend analysis.<br> • Risk scores for heat, respiratory, and cardiovascular stress.<br> • Personalized recommendations for hydration, rest, activity, and medical consultation.<br><br> 8. Scalable Deployment<br><br> • Support smartphones, smartwatches, fitness bands, and specialized healthcare wearables.<br> • Suitable for individual consumers, healthcare providers, disaster-response agencies, and public health programs.<br></div>
+                               </td>
+                            </tr>
+
+                            <tr>
+                                <th>Organization</th>
+                            <td>Qualcomm Inc </td>
+                                            
+                            </tr>  
+                            
+                            <tr>
+                                <th>Department</th>
+                            <td>
+                                Qualcomm Inc 
+                                <!-- echo $user_info->department;  -->
+                            </td>
+                                            
+                            </tr>  
+
+                            <tr>
+                            <th>Category</th>
+                            <td>Hardware</td>
+                            </tr>
+
+                            <tr>
+                            <th>Theme</th>
+                            <td>MedTech / BioTech / HealthTech</td>
+                            </tr>
+                            <tr>
+                              <th>Youtube Link</th>
+                              <td>
+                                    <a href="https://www.sih.gov.in/sih2026PS" target="_blank"> </a>
+                            </td>  
+                            </tr> 
+                          <!--                             <tr>
+                              <th>Dataset Link</th>
+                              <td>
+                                
+                                    <br>
+                                     <a href=""><br></a>
+                                 <a href="https://www.sih.gov.in/dataset/"><br></a>
+                                                                                          </td>  
+                            </tr> -->
+                                                                <tr>
+                                    <th>Dataset Link</th>
+                                    <td>
+                                                                            </td>
+                                    </tr>
+
+                            <tr>
+                              <th>Contact info</th>
+                              <td>
+                                    <a href="https://www.sih.gov.in/sih2026PS" target="_blank"> </a>
+                            </td>  
+                            </tr> 
+    
+                      </thead>
+                     </table> 
+                </div>
+
+                </div>
+
+                </div>
+                </div>
+            </td>
+            
+            <td>Hardware</td>
+            <td>SIH26181</td>
+            <td>1/500</td>
+           
+            <td>MedTech / BioTech / HealthTech</td>
+            <td>30 September 2026</td>
+
+            <!-- <td>30-09-2026</td> -->
+        </tr><tr role="row" class="even">
+             <td class="colomn_border sorting_1">182</td>
+<!--<td></td>-->
+
+
+        <td class="colomn_border">Ministry of Home Affairs</td>
+        <td class="colomn_border"><a style="font-size:15px ;margin-bottom: 4px !important; cursor: pointer" data-toggle="modal" data-target="#ViewProblemStatement26182">Automated Attribution of Unknown Cryptocurrency Wallets to Nearest Virtual Asset Service Providers (VASPs) through Blockchain Intelligence APIs</a>
+            <div id="ViewProblemStatement26182" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+
+                <!-- Modal content-->
+             <div class="modal-content">
+                <div class="modal-header">                    
+                    <button type="button" class="close PSclose" data-dismiss="modal">×</button>                    
+					<div class="row">
+						<div class="col-md-6">
+							<div class="psLogoModal">
+								<img class="navbar-brand" src="Problem_Statement_files/SIH-Logo_FGKP.png">
+							</div>
+						</div>
+						<div class="col-md-8">
+							<div class="psTitleModalTop">
+								<h6 class="modal-title"> Problem Statement Details  </h6>
+							</div>
+						</div>
+					</div>
+                </div>
+                <div class="modal-body">
+                   
+                    <table id="settings" class="table table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th style="vertical-align: top;">Problem Statement ID</th>
+                            <td>
+                                <div class="style-2" style="overflow-y: auto; min-height:20px; max-height: 200px; width:100%;"> 26182</div>
+                               </td>
+                            </tr>
+                        <tr>
+                            <th style="vertical-align: top;">Problem Statement Title</th>
+                            <td>
+                                <div class="style-2" style="overflow-y: auto; min-height:20px; max-height: 200px; width:100%;"> Automated Attribution of Unknown Cryptocurrency Wallets to Nearest Virtual Asset Service Providers (VASPs) through Blockchain Intelligence APIs</div>
+                               </td>
+                            </tr>
+                            <tr>
+                            <th style="vertical-align: top;">Description</th>
+                            <td>
+                                <!-- <div class="style-2" style="overflow-y: auto; min-height:20px; max-height: 200px; width:100%;"> &amp;#8226; Background The rapid adoption of Virtual Digital Assets (VDAs) and decentralized blockchain ecosystems has significantly increased the complexity of cybercrime investigations globally. Law Enforcement Agencies (LEAs) frequently encounter cryptocurrency wallet addresses linked to cyber frauds, ransomware, investment scams, darknet activities, and laundering of crime proceeds.&lt;br&gt;&lt;br&gt; Under the existing investigation workflow, LEAs raise lawful information disclosure requests through the SAHYOG Portal to Virtual Asset Service Providers (VASPs) such as crypto exchanges, custodial wallet providers, and trading platforms. However, in many cases, the suspect wallet identified during investigations belongs to an unhosted wallet or a wallet for which the associated VASP is unknown. This creates major delays in attribution, freezing of assets, and identification of the beneficial owner.&lt;br&gt;&lt;br&gt; Blockchain transactions generally pass through multiple intermediary wallets before reaching centralized exchanges. Identifying the &#039;nearest direct deposit accepting exchange&#039; manually through blockchain analysis is time-consuming and requires specialized expertise.&lt;br&gt;&lt;br&gt; &amp;#8226; Description The proposed system envisages development of an Automated Blockchain Intelligence &amp;amp; VASP Attribution Engine integrated with the SAHYOG Portal through APIs.&lt;br&gt;&lt;br&gt; &lt;b&gt;The system should:&lt;/b&gt;&lt;br&gt;&lt;br&gt; &amp;#8226; Automatically analyze suspect cryptocurrency wallet addresses reported during investigations on the Sahyog Platform&lt;br&gt; &amp;#8226; Automatically trace blockchain transaction paths to identify:&lt;br&gt;&lt;br&gt; o nearest centralized exchange, o custodial wallet service, o or VASP receiving direct deposits from the suspect wallet.&lt;br&gt;&lt;br&gt; &amp;#8226; Map blockchain of deposit addresses and transaction flows across multiple blockchain networks such as:&lt;br&gt;&lt;br&gt; o Bitcoin, o Ethereum, o Tron, o BNB Chain, o Solana, o Polygon o and other major chains.&lt;br&gt;&lt;br&gt; &amp;#8226; Support identification of:&lt;br&gt;&lt;br&gt; o exchange clusters, o hot wallets, o deposit wallets, o mixers/tumblers, o DeFi bridges, o and cross-chain swap services.&lt;br&gt;&lt;br&gt; &amp;#8226; Integrate Sahyog with blockchain intelligence APIs and graph analytics engines.&lt;br&gt; &amp;#8226; Provide automated tagging and confidence scoring for suspected VASPs.&lt;br&gt; &amp;#8226; Generate investigation-ready reports for LEAs.&lt;br&gt; &amp;#8226; Assist investigators in automatically routing lawful disclosure or freezing requests to the correct VASP through the SAHYOG Portal.&lt;br&gt;&lt;br&gt; &lt;b&gt;The system may additionally support:&lt;/b&gt;&lt;br&gt;&lt;br&gt; &amp;#8226; visualization of fund movement,&lt;br&gt; &amp;#8226; cross-chain transaction mapping,&lt;br&gt; &amp;#8226; risk scoring,&lt;br&gt; &amp;#8226; identification of laundering typologies,&lt;br&gt; &amp;#8226; and alerting for high-risk wallets linked to ransomware, darknet, terrorism financing, or fraud ecosystems.&lt;br&gt; &amp;#8226; Expected Solution A software-based blockchain intelligence platform integrated with the SAHYOG ecosystem capable of:&lt;br&gt; &amp;#8226; Automated identification of nearest VASP/exchange linked to unknown wallets.&lt;br&gt; &amp;#8226; API-driven blockchain tracing and attribution support.&lt;br&gt; &amp;#8226; Multi-chain transaction analysis and visualization.&lt;br&gt; &amp;#8226; Real-time generation of investigative intelligence.&lt;br&gt; &amp;#8226; Risk classification of wallets and transaction flows.&lt;br&gt; &amp;#8226; Dashboard for LEAs with case-based analytics and reporting.&lt;br&gt; &amp;#8226; Scalable architecture capable of handling large-volume blockchain transaction analysis.&lt;br&gt;&lt;br&gt; &lt;b&gt;The solution should aim to:&lt;/b&gt;&lt;br&gt;&lt;br&gt; &amp;#8226; reduce investigation time,&lt;br&gt; &amp;#8226; improve asset freezing efficiency,&lt;br&gt; &amp;#8226; enhance attribution capabilities,&lt;br&gt; &amp;#8226; and strengthen cross-border cybercrime investigations involving VDAs&lt;br&gt;</div> -->
+                                 <div class="style-2" style="overflow-y: auto; min-height:20px; max-height: 200px; width:100%;"> • Background The rapid adoption of Virtual Digital Assets (VDAs) and decentralized blockchain ecosystems has significantly increased the complexity of cybercrime investigations globally. Law Enforcement Agencies (LEAs) frequently encounter cryptocurrency wallet addresses linked to cyber frauds, ransomware, investment scams, darknet activities, and laundering of crime proceeds.<br><br> Under the existing investigation workflow, LEAs raise lawful information disclosure requests through the SAHYOG Portal to Virtual Asset Service Providers (VASPs) such as crypto exchanges, custodial wallet providers, and trading platforms. However, in many cases, the suspect wallet identified during investigations belongs to an unhosted wallet or a wallet for which the associated VASP is unknown. This creates major delays in attribution, freezing of assets, and identification of the beneficial owner.<br><br> Blockchain transactions generally pass through multiple intermediary wallets before reaching centralized exchanges. Identifying the 'nearest direct deposit accepting exchange' manually through blockchain analysis is time-consuming and requires specialized expertise.<br><br> • Description The proposed system envisages development of an Automated Blockchain Intelligence &amp; VASP Attribution Engine integrated with the SAHYOG Portal through APIs.<br><br> <b>The system should:</b><br><br> • Automatically analyze suspect cryptocurrency wallet addresses reported during investigations on the Sahyog Platform<br> • Automatically trace blockchain transaction paths to identify:<br><br> o nearest centralized exchange, o custodial wallet service, o or VASP receiving direct deposits from the suspect wallet.<br><br> • Map blockchain of deposit addresses and transaction flows across multiple blockchain networks such as:<br><br> o Bitcoin, o Ethereum, o Tron, o BNB Chain, o Solana, o Polygon o and other major chains.<br><br> • Support identification of:<br><br> o exchange clusters, o hot wallets, o deposit wallets, o mixers/tumblers, o DeFi bridges, o and cross-chain swap services.<br><br> • Integrate Sahyog with blockchain intelligence APIs and graph analytics engines.<br> • Provide automated tagging and confidence scoring for suspected VASPs.<br> • Generate investigation-ready reports for LEAs.<br> • Assist investigators in automatically routing lawful disclosure or freezing requests to the correct VASP through the SAHYOG Portal.<br><br> <b>The system may additionally support:</b><br><br> • visualization of fund movement,<br> • cross-chain transaction mapping,<br> • risk scoring,<br> • identification of laundering typologies,<br> • and alerting for high-risk wallets linked to ransomware, darknet, terrorism financing, or fraud ecosystems.<br> • Expected Solution A software-based blockchain intelligence platform integrated with the SAHYOG ecosystem capable of:<br> • Automated identification of nearest VASP/exchange linked to unknown wallets.<br> • API-driven blockchain tracing and attribution support.<br> • Multi-chain transaction analysis and visualization.<br> • Real-time generation of investigative intelligence.<br> • Risk classification of wallets and transaction flows.<br> • Dashboard for LEAs with case-based analytics and reporting.<br> • Scalable architecture capable of handling large-volume blockchain transaction analysis.<br><br> <b>The solution should aim to:</b><br><br> • reduce investigation time,<br> • improve asset freezing efficiency,<br> • enhance attribution capabilities,<br> • and strengthen cross-border cybercrime investigations involving VDAs<br></div>
+                               </td>
+                            </tr>
+
+                            <tr>
+                                <th>Organization</th>
+                            <td>Ministry of Home Affairs </td>
+                                            
+                            </tr>  
+                            
+                            <tr>
+                                <th>Department</th>
+                            <td>
+                                Indian Cyber Crime Coordination Centre (I4C),CIS Division 
+                                <!-- echo $user_info->department;  -->
+                            </td>
+                                            
+                            </tr>  
+
+                            <tr>
+                            <th>Category</th>
+                            <td>Software</td>
+                            </tr>
+
+                            <tr>
+                            <th>Theme</th>
+                            <td>Blockchain &amp; Cybersecurity</td>
+                            </tr>
+                            <tr>
+                              <th>Youtube Link</th>
+                              <td>
+                                    <a href="https://www.sih.gov.in/sih2026PS" target="_blank"> </a>
+                            </td>  
+                            </tr> 
+                          <!--                             <tr>
+                              <th>Dataset Link</th>
+                              <td>
+                                
+                                    <br>
+                                     <a href=""><br></a>
+                                 <a href="https://www.sih.gov.in/dataset/"><br></a>
+                                                                                          </td>  
+                            </tr> -->
+                                                                <tr>
+                                    <th>Dataset Link</th>
+                                    <td>
+                                                                            </td>
+                                    </tr>
+
+                            <tr>
+                              <th>Contact info</th>
+                              <td>
+                                    <a href="https://www.sih.gov.in/sih2026PS" target="_blank"> </a>
+                            </td>  
+                            </tr> 
+    
+                      </thead>
+                     </table> 
+                </div>
+
+                </div>
+
+                </div>
+                </div>
+            </td>
+            
+            <td>Software</td>
+            <td>SIH26182</td>
+            <td>0/500</td>
+           
+            <td>Blockchain &amp; Cybersecurity</td>
+            <td>30 September 2026</td>
+
+            <!-- <td>30-09-2026</td> -->
+        </tr><tr role="row" class="odd">
+             <td class="colomn_border sorting_1">183</td>
+<!--<td></td>-->
+
+
+        <td class="colomn_border">Ministry of Home Affairs</td>
+        <td class="colomn_border"><a style="font-size:15px ;margin-bottom: 4px !important; cursor: pointer" data-toggle="modal" data-target="#ViewProblemStatement26183">Real-Time Identification of Fraud-Linked Cryptocurrency Exchanges from Victim-Reported Suspect Wallet Addresses through Automated Blockchain Analytics</a>
+            <div id="ViewProblemStatement26183" class="modal fade" role="dialog" style="display: none;" aria-hidden="true">
+                <div class="modal-dialog">
+
+                <!-- Modal content-->
+             <div class="modal-content">
+                <div class="modal-header">                    
+                    <button type="button" class="close PSclose" data-dismiss="modal">×</button>                    
+					<div class="row">
+						<div class="col-md-6">
+							<div class="psLogoModal">
+								<img class="navbar-brand" src="Problem_Statement_files/SIH-Logo_FGKP.png">
+							</div>
+						</div>
+						<div class="col-md-8">
+							<div class="psTitleModalTop">
+								<h6 class="modal-title"> Problem Statement Details  </h6>
+							</div>
+						</div>
+					</div>
+                </div>
+                <div class="modal-body">
+                   
+                    <table id="settings" class="table table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th style="vertical-align: top;">Problem Statement ID</th>
+                            <td>
+                                <div class="style-2" style="overflow-y: auto; min-height:20px; max-height: 200px; width:100%;"> 26183</div>
+                               </td>
+                            </tr>
+                        <tr>
+                            <th style="vertical-align: top;">Problem Statement Title</th>
+                            <td>
+                                <div class="style-2" style="overflow-y: auto; min-height:20px; max-height: 200px; width:100%;"> Real-Time Identification of Fraud-Linked Cryptocurrency Exchanges from Victim-Reported Suspect Wallet Addresses through Automated Blockchain Analytics</div>
+                               </td>
+                            </tr>
+                            <tr>
+                            <th style="vertical-align: top;">Description</th>
+                            <td>
+                                <!-- <div class="style-2" style="overflow-y: auto; min-height:20px; max-height: 200px; width:100%;"> &amp;#8226; Background Cyber fraud victims increasingly report suspect cryptocurrency wallet addresses used by fraudsters for collection of funds in cases involving:&lt;br&gt; &amp;#8226; investment scams,&lt;br&gt; &amp;#8226; task-based frauds,&lt;br&gt; &amp;#8226; sextortion,&lt;br&gt; &amp;#8226; ransomware,&lt;br&gt; &amp;#8226; phishing,&lt;br&gt; &amp;#8226; darknet transactions,&lt;br&gt; &amp;#8226; and organized cyber-enabled financial crimes.&lt;br&gt;&lt;br&gt; &lt;b&gt;During investigations, the reported wallet addresses are often:&lt;/b&gt;&lt;br&gt;&lt;br&gt; &amp;#8226; non-custodial wallets,&lt;br&gt; &amp;#8226; temporary burner wallets,&lt;br&gt; &amp;#8226; or intermediary wallets used for layering and laundering.&lt;br&gt;&lt;br&gt; The inability to quickly identify the cryptocurrency exchange or VASP associated with these wallets delays:&lt;br&gt;&lt;br&gt; &amp;#8226; freezing of assets,&lt;br&gt; &amp;#8226; preservation of evidence,&lt;br&gt; &amp;#8226; tracing of fund flows,&lt;br&gt; &amp;#8226; and victim fund recovery.&lt;br&gt;&lt;br&gt; Manual blockchain tracing requires significant technical expertise and time, particularly in cases involving:&lt;br&gt;&lt;br&gt; &amp;#8226; multi-chain transfers,&lt;br&gt; &amp;#8226; DeFi protocols,&lt;br&gt; &amp;#8226; mixers/tumblers,&lt;br&gt; &amp;#8226; bridges,&lt;br&gt; &amp;#8226; and privacy-enhancing mechanisms.&lt;br&gt; &amp;#8226; Description The proposed solution envisages a Real-Time Crypto Fraud Attribution System capable of automatically analyzing victim-reported wallet addresses and identifying the nearest exchange or VASP receiving direct deposits.&lt;br&gt;&lt;br&gt; &lt;b&gt;The system should:&lt;/b&gt;&lt;br&gt;&lt;br&gt; &amp;#8226; ingest wallet addresses reported through cybercrime complaint systems,&lt;br&gt; &amp;#8226; automatically perform blockchain tracing,&lt;br&gt; &amp;#8226; identify associated exchanges or VASPs,&lt;br&gt; &amp;#8226; detect fund movement patterns,&lt;br&gt; &amp;#8226; and generate actionable intelligence for investigators.&lt;br&gt;&lt;br&gt; &lt;b&gt;Key features may include:&lt;/b&gt;&lt;br&gt;&lt;br&gt; &amp;#8226; blockchain transaction graph analysis,&lt;br&gt; &amp;#8226; clustering of exchange wallets,&lt;br&gt; &amp;#8226; detection of intermediary laundering wallets,&lt;br&gt; &amp;#8226; identification of cross-chain fund movement,&lt;br&gt; &amp;#8226; integration with SAHYOG and NCRP platforms,&lt;br&gt; &amp;#8226; automated alert generation,&lt;br&gt; &amp;#8226; and risk categorization of wallets.&lt;br&gt;&lt;br&gt; &lt;b&gt;The system should support multiple blockchain ecosystems and provide:&lt;/b&gt;&lt;br&gt;&lt;br&gt; &amp;#8226; real-time tracing capability,&lt;br&gt; &amp;#8226; automated investigative recommendations,&lt;br&gt; &amp;#8226; and analytics dashboards for law enforcement agencies&lt;br&gt; &amp;#8226; Expected Solution A software platform capable of:&lt;br&gt; &amp;#8226; real-time blockchain intelligence generation,&lt;br&gt; &amp;#8226; automated VASP identification,&lt;br&gt; &amp;#8226; tracing of suspect wallets,&lt;br&gt; &amp;#8226; cross-chain transaction analytics,&lt;br&gt; &amp;#8226; fund-flow visualization,&lt;br&gt; &amp;#8226; integration with LEA systems,&lt;br&gt; &amp;#8226; and generation of standardized investigation reports.&lt;br&gt;&lt;br&gt; &lt;b&gt;The system should:&lt;/b&gt;&lt;br&gt;&lt;br&gt; &amp;#8226; reduce response time in cyber fraud investigations,&lt;br&gt; &amp;#8226; improve freezing of proceeds of crime,&lt;br&gt; &amp;#8226; enhance coordination with VASPs,&lt;br&gt; &amp;#8226; and strengthen digital evidence collection capabilities.&lt;br&gt;&lt;br&gt; &lt;b&gt;The platform should further support:&lt;/b&gt;&lt;br&gt;&lt;br&gt; &amp;#8226; API integrations,&lt;br&gt; &amp;#8226; scalable blockchain indexing,&lt;br&gt; &amp;#8226; AI/ML-assisted risk detection,&lt;br&gt; &amp;#8226; and automated pattern recognition for fraud typologies.&lt;br&gt;</div> -->
+                                 <div class="style-2" style="overflow-y: auto; min-height:20px; max-height: 200px; width:100%;"> • Background Cyber fraud victims increasingly report suspect cryptocurrency wallet addresses used by fraudsters for collection of funds in cases involving:<br> • investment scams,<br> • task-based frauds,<br> • sextortion,<br> • ransomware,<br> • phishing,<br> • darknet transactions,<br> • and organized cyber-enabled financial crimes.<br><br> <b>During investigations, the reported wallet addresses are often:</b><br><br> • non-custodial wallets,<br> • temporary burner wallets,<br> • or intermediary wallets used for layering and laundering.<br><br> The inability to quickly identify the cryptocurrency exchange or VASP associated with these wallets delays:<br><br> • freezing of assets,<br> • preservation of evidence,<br> • tracing of fund flows,<br> • and victim fund recovery.<br><br> Manual blockchain tracing requires significant technical expertise and time, particularly in cases involving:<br><br> • multi-chain transfers,<br> • DeFi protocols,<br> • mixers/tumblers,<br> • bridges,<br> • and privacy-enhancing mechanisms.<br> • Description The proposed solution envisages a Real-Time Crypto Fraud Attribution System capable of automatically analyzing victim-reported wallet addresses and identifying the nearest exchange or VASP receiving direct deposits.<br><br> <b>The system should:</b><br><br> • ingest wallet addresses reported through cybercrime complaint systems,<br> • automatically perform blockchain tracing,<br> • identify associated exchanges or VASPs,<br> • detect fund movement patterns,<br> • and generate actionable intelligence for investigators.<br><br> <b>Key features may include:</b><br><br> • blockchain transaction graph analysis,<br> • clustering of exchange wallets,<br> • detection of intermediary laundering wallets,<br> • identification of cross-chain fund movement,<br> • integration with SAHYOG and NCRP platforms,<br> • automated alert generation,<br> • and risk categorization of wallets.<br><br> <b>The system should support multiple blockchain ecosystems and provide:</b><br><br> • real-time tracing capability,<br> • automated investigative recommendations,<br> • and analytics dashboards for law enforcement agencies<br> • Expected Solution A software platform capable of:<br> • real-time blockchain intelligence generation,<br> • automated VASP identification,<br> • tracing of suspect wallets,<br> • cross-chain transaction analytics,<br> • fund-flow visualization,<br> • integration with LEA systems,<br> • and generation of standardized investigation reports.<br><br> <b>The system should:</b><br><br> • reduce response time in cyber fraud investigations,<br> • improve freezing of proceeds of crime,<br> • enhance coordination with VASPs,<br> • and strengthen digital evidence collection capabilities.<br><br> <b>The platform should further support:</b><br><br> • API integrations,<br> • scalable blockchain indexing,<br> • AI/ML-assisted risk detection,<br> • and automated pattern recognition for fraud typologies.<br></div>
+                               </td>
+                            </tr>
+
+                            <tr>
+                                <th>Organization</th>
+                            <td>Ministry of Home Affairs </td>
+                                            
+                            </tr>  
+                            
+                            <tr>
+                                <th>Department</th>
+                            <td>
+                                Indian Cyber Crime Coordination Centre (I4C),CIS Division 
+                                <!-- echo $user_info->department;  -->
+                            </td>
+                                            
+                            </tr>  
+
+                            <tr>
+                            <th>Category</th>
+                            <td>Software</td>
+                            </tr>
+
+                            <tr>
+                            <th>Theme</th>
+                            <td>Blockchain &amp; Cybersecurity</td>
+                            </tr>
+                            <tr>
+                              <th>Youtube Link</th>
+                              <td>
+                                    <a href="https://www.sih.gov.in/sih2026PS" target="_blank"> </a>
+                            </td>  
+                            </tr> 
+                          <!--                             <tr>
+                              <th>Dataset Link</th>
+                              <td>
+                                
+                                    <br>
+                                     <a href=""><br></a>
+                                 <a href="https://www.sih.gov.in/dataset/"><br></a>
+                                                                                          </td>  
+                            </tr> -->
+                                                                <tr>
+                                    <th>Dataset Link</th>
+                                    <td>
+                                                                            </td>
+                                    </tr>
+
+                            <tr>
+                              <th>Contact info</th>
+                              <td>
+                                    <a href="https://www.sih.gov.in/sih2026PS" target="_blank"> </a>
+                            </td>  
+                            </tr> 
+    
+                      </thead>
+                     </table> 
+                </div>
+
+                </div>
+
+                </div>
+                </div>
+            </td>
+            
+            <td>Software</td>
+            <td>SIH26183</td>
+            <td>1/500</td>
+           
+            <td>Blockchain &amp; Cybersecurity</td>
+            <td>30 September 2026</td>
+
+            <!-- <td>30-09-2026</td> -->
+        </tr><tr role="row" class="even">
+             <td class="colomn_border sorting_1">184</td>
+<!--<td></td>-->
+
+
+        <td class="colomn_border">Ministry of Home Affairs</td>
+        <td class="colomn_border"><a style="font-size:15px ;margin-bottom: 4px !important; cursor: pointer" data-toggle="modal" data-target="#ViewProblemStatement26184">Development of a Predictive Analytics Framework for Cybercrime Complaints to Forecast Likely Cash Withdrawal Locations in Advance, Enabling Generation of Actionable Intelligence for Timely and Proactive Cybercrime Intervention.</a>
+            <div id="ViewProblemStatement26184" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+
+                <!-- Modal content-->
+             <div class="modal-content">
+                <div class="modal-header">                    
+                    <button type="button" class="close PSclose" data-dismiss="modal">×</button>                    
+					<div class="row">
+						<div class="col-md-6">
+							<div class="psLogoModal">
+								<img class="navbar-brand" src="Problem_Statement_files/SIH-Logo_FGKP.png">
+							</div>
+						</div>
+						<div class="col-md-8">
+							<div class="psTitleModalTop">
+								<h6 class="modal-title"> Problem Statement Details  </h6>
+							</div>
+						</div>
+					</div>
+                </div>
+                <div class="modal-body">
+                   
+                    <table id="settings" class="table table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th style="vertical-align: top;">Problem Statement ID</th>
+                            <td>
+                                <div class="style-2" style="overflow-y: auto; min-height:20px; max-height: 200px; width:100%;"> 26184</div>
+                               </td>
+                            </tr>
+                        <tr>
+                            <th style="vertical-align: top;">Problem Statement Title</th>
+                            <td>
+                                <div class="style-2" style="overflow-y: auto; min-height:20px; max-height: 200px; width:100%;"> Development of a Predictive Analytics Framework for Cybercrime Complaints to Forecast Likely Cash Withdrawal Locations in Advance, Enabling Generation of Actionable Intelligence for Timely and Proactive Cybercrime Intervention.</div>
+                               </td>
+                            </tr>
+                            <tr>
+                            <th style="vertical-align: top;">Description</th>
+                            <td>
+                                <!-- <div class="style-2" style="overflow-y: auto; min-height:20px; max-height: 200px; width:100%;"> &amp;#8226; Background The National Cybercrime Reporting Portal is the centralized Portal, which is serving the whole country. Currently, the Portal facilitates citizens in filing complaints, LEAs act on complaints, Banking/Financial Institutions for their actions along with reports/graphs being pulled on daily basis. Presently, the Portal is receiving approximately 8000 complaints on daily basis. The number of complaints has increased manifold during the past months, and this will continue to rise in future. To address the issue of increasing cybercrimes, the proactive approach shall be adopted.&lt;br&gt; &amp;#8226; Description This framework focuses on the mitigation of cybercrimes by adopting a proactive approach. The framework&#039;s output will enable the prediction of likely cash withdrawal locations, which, in turn, will allow law enforcement agencies (LEAs)&lt;br&gt;&lt;br&gt; at the state and local levels, coordinated by I4C, to implement proactive interventions. These interventions could include deploying special teams or alerting local banks and ATMs in high-risk areas. The intelligence generated would also help banks and financial institutions (FIs) through the Citizen Financial Cyber Fraud Reporting and Management System, enabling faster fund blocking and increasing the chances of recovery. By supporting real-time actionable intelligence sharing across jurisdictions, law enforcement agencies and Banks/FIs will be able to respond faster and more effectively to cyber threats. This approach goes beyond merely reacting to complaints and creates a powerful, data-driven defense against financial cyber frauds, strengthening India&#039;s overall cybersecurity posture.&lt;br&gt;&lt;br&gt; Enhancing coordination between law enforcement and financial entities will ensure better detection and prevention of financial crimes, creating a more unified and efficient approach to combating cybercrime.&lt;br&gt;&lt;br&gt; &amp;#8226; Key Deliverables Component:- Description a. Predictive Analytics Engine :-AI/ML-based system to analyse historical cybercrime and financial data to predict potential withdrawal hotspots. Features include pattern detection, geospatial risk modelling, and real-time alerts.&lt;br&gt;&lt;br&gt; b. Risk Heatmap Dashboard:-GIS-enabled dashboard visualizing real-time and potential risk zones with drill-down filters by time, location, and crime category etc.&lt;br&gt;&lt;br&gt; c. Law Enforcement Interface:-Secure interface for investigators to access alerts, intelligence reports, and evidence documentation.&lt;br&gt;&lt;br&gt; d. Alert &amp;amp; Notification System:-Real-time notifications to law enforcements, banks, and I4C officers via SMS,email, API, or dashboard triggers.</div> -->
+                                 <div class="style-2" style="overflow-y: auto; min-height:20px; max-height: 200px; width:100%;"> • Background The National Cybercrime Reporting Portal is the centralized Portal, which is serving the whole country. Currently, the Portal facilitates citizens in filing complaints, LEAs act on complaints, Banking/Financial Institutions for their actions along with reports/graphs being pulled on daily basis. Presently, the Portal is receiving approximately 8000 complaints on daily basis. The number of complaints has increased manifold during the past months, and this will continue to rise in future. To address the issue of increasing cybercrimes, the proactive approach shall be adopted.<br> • Description This framework focuses on the mitigation of cybercrimes by adopting a proactive approach. The framework's output will enable the prediction of likely cash withdrawal locations, which, in turn, will allow law enforcement agencies (LEAs)<br><br> at the state and local levels, coordinated by I4C, to implement proactive interventions. These interventions could include deploying special teams or alerting local banks and ATMs in high-risk areas. The intelligence generated would also help banks and financial institutions (FIs) through the Citizen Financial Cyber Fraud Reporting and Management System, enabling faster fund blocking and increasing the chances of recovery. By supporting real-time actionable intelligence sharing across jurisdictions, law enforcement agencies and Banks/FIs will be able to respond faster and more effectively to cyber threats. This approach goes beyond merely reacting to complaints and creates a powerful, data-driven defense against financial cyber frauds, strengthening India's overall cybersecurity posture.<br><br> Enhancing coordination between law enforcement and financial entities will ensure better detection and prevention of financial crimes, creating a more unified and efficient approach to combating cybercrime.<br><br> • Key Deliverables Component:- Description a. Predictive Analytics Engine :-AI/ML-based system to analyse historical cybercrime and financial data to predict potential withdrawal hotspots. Features include pattern detection, geospatial risk modelling, and real-time alerts.<br><br> b. Risk Heatmap Dashboard:-GIS-enabled dashboard visualizing real-time and potential risk zones with drill-down filters by time, location, and crime category etc.<br><br> c. Law Enforcement Interface:-Secure interface for investigators to access alerts, intelligence reports, and evidence documentation.<br><br> d. Alert &amp; Notification System:-Real-time notifications to law enforcements, banks, and I4C officers via SMS,email, API, or dashboard triggers.</div>
+                               </td>
+                            </tr>
+
+                            <tr>
+                                <th>Organization</th>
+                            <td>Ministry of Home Affairs </td>
+                                            
+                            </tr>  
+                            
+                            <tr>
+                                <th>Department</th>
+                            <td>
+                                Indian Cyber Crime Coordination Centre (I4C),CIS Division 
+                                <!-- echo $user_info->department;  -->
+                            </td>
+                                            
+                            </tr>  
+
+                            <tr>
+                            <th>Category</th>
+                            <td>Software</td>
+                            </tr>
+
+                            <tr>
+                            <th>Theme</th>
+                            <td>Blockchain &amp; Cybersecurity</td>
+                            </tr>
+                            <tr>
+                              <th>Youtube Link</th>
+                              <td>
+                                    <a href="https://www.sih.gov.in/sih2026PS" target="_blank"> </a>
+                            </td>  
+                            </tr> 
+                          <!--                             <tr>
+                              <th>Dataset Link</th>
+                              <td>
+                                
+                                    <br>
+                                     <a href=""><br></a>
+                                 <a href="https://www.sih.gov.in/dataset/"><br></a>
+                                                                                          </td>  
+                            </tr> -->
+                                                                <tr>
+                                    <th>Dataset Link</th>
+                                    <td>
+                                                                            </td>
+                                    </tr>
+
+                            <tr>
+                              <th>Contact info</th>
+                              <td>
+                                    <a href="https://www.sih.gov.in/sih2026PS" target="_blank"> </a>
+                            </td>  
+                            </tr> 
+    
+                      </thead>
+                     </table> 
+                </div>
+
+                </div>
+
+                </div>
+                </div>
+            </td>
+            
+            <td>Software</td>
+            <td>SIH26184</td>
+            <td>1/500</td>
+           
+            <td>Blockchain &amp; Cybersecurity</td>
+            <td>30 September 2026</td>
+
+            <!-- <td>30-09-2026</td> -->
+        </tr><tr role="row" class="odd">
+             <td class="colomn_border sorting_1">185</td>
+<!--<td></td>-->
+
+
+        <td class="colomn_border">Ministry of Home Affairs</td>
+        <td class="colomn_border"><a style="font-size:15px ;margin-bottom: 4px !important; cursor: pointer" data-toggle="modal" data-target="#ViewProblemStatement26185">Helmet mounted conformal antenna for tactical communications in urban CQB environments.</a>
+            <div id="ViewProblemStatement26185" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+
+                <!-- Modal content-->
+             <div class="modal-content">
+                <div class="modal-header">                    
+                    <button type="button" class="close PSclose" data-dismiss="modal">×</button>                    
+					<div class="row">
+						<div class="col-md-6">
+							<div class="psLogoModal">
+								<img class="navbar-brand" src="Problem_Statement_files/SIH-Logo_FGKP.png">
+							</div>
+						</div>
+						<div class="col-md-8">
+							<div class="psTitleModalTop">
+								<h6 class="modal-title"> Problem Statement Details  </h6>
+							</div>
+						</div>
+					</div>
+                </div>
+                <div class="modal-body">
+                   
+                    <table id="settings" class="table table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th style="vertical-align: top;">Problem Statement ID</th>
+                            <td>
+                                <div class="style-2" style="overflow-y: auto; min-height:20px; max-height: 200px; width:100%;"> 26185</div>
+                               </td>
+                            </tr>
+                        <tr>
+                            <th style="vertical-align: top;">Problem Statement Title</th>
+                            <td>
+                                <div class="style-2" style="overflow-y: auto; min-height:20px; max-height: 200px; width:100%;"> Helmet mounted conformal antenna for tactical communications in urban CQB environments.</div>
+                               </td>
+                            </tr>
+                            <tr>
+                            <th style="vertical-align: top;">Description</th>
+                            <td>
+                                <!-- <div class="style-2" style="overflow-y: auto; min-height:20px; max-height: 200px; width:100%;"> &amp;#8226; Background During high-intensity urban counter-terrorism (CT) and Close-Quarter Battle (CQB) operations, the National Security Guard (NSG) operates in highly restrictive indoor spaces like closed rooms, basement areas, narrow corridors and stairwells. For seamless communication, commandos rely on vest-mounted handheld tactical radios. These systems traditionally use rigid, protruding omnidirectional whip antennas mounted on top of the radio itself. In fast-paced operations in confined spaces, these external whip antennas not only restricts ranges but also present an obstruction or cause frequent snagging on obstacles like door frames, windows or loose and hanging objects which can damage the the radio interface or obstruct his tactical movement.&lt;br&gt; &amp;#8226; Description Traditional whip antennas pose significant operational limitations.&lt;br&gt;&lt;br&gt; When an assault team enters a reinforced concrete or steel/glass-framed building, the RF signals radiated from a vest-mounted antenna suffers from severe attenuation and fading as the signals are tend to be blocked by virtue of its low positioning. Additionally, omnidirectional radiation patterns make the team vulnerable to electronic eavesdropping or directional tracking by sophisticated adversaries. To address these challenges, the antenna system needs to be elevated to the highest physical point of the commando - the helmet - without adding bulk or altering ballistic integrity. There is an immediate requirement to develop a low-profile, flexible conformal antenna array that integrates seamlessly into or onto tactical ballistic helmets while maintaining high gain and minimal protruding hardware.&lt;br&gt;&lt;br&gt; &amp;#8226; Expected Solution A ruggedized, zero-profile wearable antenna system should be developed with the following parameters:- (a) Lightweight, ultra-thin and flexible microstrip patch antenna elements designed for integration with NSG ballistic helmets without degrading impact or ballistic protection ratings.&lt;br&gt;&lt;br&gt; (b) The conformal array must support UHF and L band frequencies to be able to operate with handheld radios and with the svl equipment like helmet mounted/ body worn cameras to transmit live video streams.&lt;br&gt;&lt;br&gt; (c) Advanced RF shielding layers built into the underside of the array to isolate the commandoâ€™s head from radiation while directing an optimized radiation pattern upward and outward.&lt;br&gt;&lt;br&gt; (d) A ruggedized coaxial interface cable routed cleanly along the helmet to connect directly into the NSG existing handheld radios and body-worn camera systems being procured.</div> -->
+                                 <div class="style-2" style="overflow-y: auto; min-height:20px; max-height: 200px; width:100%;"> • Background During high-intensity urban counter-terrorism (CT) and Close-Quarter Battle (CQB) operations, the National Security Guard (NSG) operates in highly restrictive indoor spaces like closed rooms, basement areas, narrow corridors and stairwells. For seamless communication, commandos rely on vest-mounted handheld tactical radios. These systems traditionally use rigid, protruding omnidirectional whip antennas mounted on top of the radio itself. In fast-paced operations in confined spaces, these external whip antennas not only restricts ranges but also present an obstruction or cause frequent snagging on obstacles like door frames, windows or loose and hanging objects which can damage the the radio interface or obstruct his tactical movement.<br> • Description Traditional whip antennas pose significant operational limitations.<br><br> When an assault team enters a reinforced concrete or steel/glass-framed building, the RF signals radiated from a vest-mounted antenna suffers from severe attenuation and fading as the signals are tend to be blocked by virtue of its low positioning. Additionally, omnidirectional radiation patterns make the team vulnerable to electronic eavesdropping or directional tracking by sophisticated adversaries. To address these challenges, the antenna system needs to be elevated to the highest physical point of the commando - the helmet - without adding bulk or altering ballistic integrity. There is an immediate requirement to develop a low-profile, flexible conformal antenna array that integrates seamlessly into or onto tactical ballistic helmets while maintaining high gain and minimal protruding hardware.<br><br> • Expected Solution A ruggedized, zero-profile wearable antenna system should be developed with the following parameters:- (a) Lightweight, ultra-thin and flexible microstrip patch antenna elements designed for integration with NSG ballistic helmets without degrading impact or ballistic protection ratings.<br><br> (b) The conformal array must support UHF and L band frequencies to be able to operate with handheld radios and with the svl equipment like helmet mounted/ body worn cameras to transmit live video streams.<br><br> (c) Advanced RF shielding layers built into the underside of the array to isolate the commandoâ€™s head from radiation while directing an optimized radiation pattern upward and outward.<br><br> (d) A ruggedized coaxial interface cable routed cleanly along the helmet to connect directly into the NSG existing handheld radios and body-worn camera systems being procured.</div>
+                               </td>
+                            </tr>
+
+                            <tr>
+                                <th>Organization</th>
+                            <td>Ministry of Home Affairs </td>
+                                            
+                            </tr>  
+                            
+                            <tr>
+                                <th>Department</th>
+                            <td>
+                                National Security Guard (NSG), Police II Division 
+                                <!-- echo $user_info->department;  -->
+                            </td>
+                                            
+                            </tr>  
+
+                            <tr>
+                            <th>Category</th>
+                            <td>Hardware</td>
+                            </tr>
+
+                            <tr>
+                            <th>Theme</th>
+                            <td>Robotics and Drones</td>
+                            </tr>
+                            <tr>
+                              <th>Youtube Link</th>
+                              <td>
+                                    <a href="https://www.sih.gov.in/sih2026PS" target="_blank"> </a>
+                            </td>  
+                            </tr> 
+                          <!--                             <tr>
+                              <th>Dataset Link</th>
+                              <td>
+                                
+                                    <br>
+                                     <a href=""><br></a>
+                                 <a href="https://www.sih.gov.in/dataset/"><br></a>
+                                                                                          </td>  
+                            </tr> -->
+                                                                <tr>
+                                    <th>Dataset Link</th>
+                                    <td>
+                                                                            </td>
+                                    </tr>
+
+                            <tr>
+                              <th>Contact info</th>
+                              <td>
+                                    <a href="https://www.sih.gov.in/sih2026PS" target="_blank"> </a>
+                            </td>  
+                            </tr> 
+    
+                      </thead>
+                     </table> 
+                </div>
+
+                </div>
+
+                </div>
+                </div>
+            </td>
+            
+            <td>Hardware</td>
+            <td>SIH26185</td>
+            <td>1/500</td>
+           
+            <td>Robotics and Drones</td>
+            <td>30 September 2026</td>
+
+            <!-- <td>30-09-2026</td> -->
+        </tr><tr role="row" class="even">
+             <td class="colomn_border sorting_1">186</td>
+<!--<td></td>-->
+
+
+        <td class="colomn_border">Ministry of Home Affairs</td>
+        <td class="colomn_border"><a style="font-size:15px ;margin-bottom: 4px !important; cursor: pointer" data-toggle="modal" data-target="#ViewProblemStatement26186">AI-Based Predictive Personnel Stress and Welfare Monitoring System for Uniformed Forces</a>
+            <div id="ViewProblemStatement26186" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+
+                <!-- Modal content-->
+             <div class="modal-content">
+                <div class="modal-header">                    
+                    <button type="button" class="close PSclose" data-dismiss="modal">×</button>                    
+					<div class="row">
+						<div class="col-md-6">
+							<div class="psLogoModal">
+								<img class="navbar-brand" src="Problem_Statement_files/SIH-Logo_FGKP.png">
+							</div>
+						</div>
+						<div class="col-md-8">
+							<div class="psTitleModalTop">
+								<h6 class="modal-title"> Problem Statement Details  </h6>
+							</div>
+						</div>
+					</div>
+                </div>
+                <div class="modal-body">
+                   
+                    <table id="settings" class="table table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th style="vertical-align: top;">Problem Statement ID</th>
+                            <td>
+                                <div class="style-2" style="overflow-y: auto; min-height:20px; max-height: 200px; width:100%;"> 26186</div>
+                               </td>
+                            </tr>
+                        <tr>
+                            <th style="vertical-align: top;">Problem Statement Title</th>
+                            <td>
+                                <div class="style-2" style="overflow-y: auto; min-height:20px; max-height: 200px; width:100%;"> AI-Based Predictive Personnel Stress and Welfare Monitoring System for Uniformed Forces</div>
+                               </td>
+                            </tr>
+                            <tr>
+                            <th style="vertical-align: top;">Description</th>
+                            <td>
+                                <!-- <div class="style-2" style="overflow-y: auto; min-height:20px; max-height: 200px; width:100%;"> &amp;#8226; Background Personnel serving in Central Armed Police Forces (CAPFs), Armed Forces, and other uniformed services operate under physically demanding, psychologically stressful, and often hazardous conditions.Extended deployments, operational pressures, separation from families,irregular working hours, and exposure to traumatic incidents can significantly impact mental well-being.Currently, stress identification largely depends on manual observation and self-reporting, which may delay timely intervention. There is a need for a proactive, technology-driven solution that can identify early indicators of stress, burnout, and psychological distress while maintaining privacy and organizational trust.&lt;br&gt; &amp;#8226; Description The proposed solution aims to develop an AI-powered Personnel Stress and Welfare Monitoring System capable of identifying potential indicators of stress, burnout, emotional fatigue, and welfare concerns through analysis of organizational and voluntarily provided wellness data.The system should:&lt;br&gt; &amp;#8226; Analyze HR-related indicators such as leave patterns,deployment history, duty schedules, transfer frequency, training commitments, and workload trends.&lt;br&gt; &amp;#8226; Support optional self-reporting and wellness assessments through a secure mobile application.&lt;br&gt; &amp;#8226; Incorporate voluntary biometric and wellness data, where authorized and legally permissible.&lt;br&gt; &amp;#8226; Detect behavioral patterns associated with elevated stress risk.&lt;br&gt; &amp;#8226; Generate risk assessments and welfare recommendations for authorized welfare officers and commanders.&lt;br&gt; &amp;#8226; Enable proactive counseling, welfare interventions, and workload balancing measures.&lt;br&gt;&lt;br&gt; The system must be designed with strong privacy safeguards and focus on welfare support rather than disciplinary actions.&lt;br&gt;&lt;br&gt; &amp;#8226; Expected Solution Develop an AI-driven predictive analytics platform comprising:&lt;br&gt; &amp;#8226; Personnel Wellness Monitoring Dashboard.&lt;br&gt; &amp;#8226; Mobile-based Wellness and Self-Assessment Application.&lt;br&gt; &amp;#8226; Predictive Behavioral Analytics Engine.&lt;br&gt; &amp;#8226; Stress and Burnout Risk Prediction Models.&lt;br&gt; &amp;#8226; Welfare Intervention Recommendation System.&lt;br&gt; &amp;#8226; Role-based Access Control and Privacy Management Framework.&lt;br&gt; &amp;#8226; Automated Alerts for authorized welfare personnel.&lt;br&gt; &amp;#8226; Data anonymization and secure storage mechanisms.&lt;br&gt;&lt;br&gt; The solution should identify trends and risk factors while ensuring that individual dignity, confidentiality, and data protection requirements are maintained.&lt;br&gt;&lt;br&gt; &amp;#8226; Expected Benefits 1. Early identification of personnel requiring welfare support.&lt;br&gt;&lt;br&gt; 2. Reduction in stress-related incidents and operational fatigue.&lt;br&gt;&lt;br&gt; 3. Improved mental well-being and workforce resilience.&lt;br&gt;&lt;br&gt; 4. Enhanced readiness and operational effectiveness.&lt;br&gt;&lt;br&gt; 5. Better workload distribution and personnel management.&lt;br&gt;&lt;br&gt; 6. Improved retention and job satisfaction.&lt;br&gt;&lt;br&gt; 7. Data-driven welfare planning and resource allocation.&lt;br&gt;&lt;br&gt; 8. Reduction in incidents arising from prolonged occupational stress.&lt;br&gt;&lt;br&gt; &amp;#8226; Preliminary Scope 1. Development of predictive behavioral analytics algorithms.&lt;br&gt;&lt;br&gt; 2. Mobile-based wellness self-reporting platform.&lt;br&gt;&lt;br&gt; 3. AI-driven stress and burnout risk assessment engine.&lt;br&gt;&lt;br&gt; 4. Commander and Welfare Officer dashboard.&lt;br&gt;&lt;br&gt; 5. Automated intervention recommendation system.&lt;br&gt;&lt;br&gt; 6. Secure integration with HRMS and personnel management systems.&lt;br&gt;&lt;br&gt; 7. Privacy-preserving analytics and role-based access controls.&lt;br&gt;&lt;br&gt; &amp;#8226; Key Technical Challenges 1. Ensuring privacy and confidentiality of sensitive personnel data.&lt;br&gt;&lt;br&gt; 2. Preventing stigmatization of personnel identified as potentially at risk.&lt;br&gt;&lt;br&gt; 3. Minimizing false positives and false negatives in risk prediction.&lt;br&gt;&lt;br&gt; 4. Ensuring ethical and transparent AI decision-making.&lt;br&gt;&lt;br&gt; 5. Securing highly sensitive psychological and welfare-related information against cyber threats.&lt;br&gt;&lt;br&gt; 6. Building trust among personnel regarding system usage and data protection.&lt;br&gt;&lt;br&gt; &amp;#8226; Strategic Importance&lt;br&gt; &amp;#8226; Enhances force readiness and personnel welfare.&lt;br&gt; &amp;#8226; Supports evidence-based welfare management.&lt;br&gt; &amp;#8226; Strengthens organizational resilience and operational effectiveness.&lt;br&gt; &amp;#8226; Promotes preventive mental health care rather than reactive interventions.&lt;br&gt; &amp;#8226; Creates an indigenous capability tailored to the unique operational and cultural environment of Indian CAPFs and Armed Forces.&lt;br&gt; &amp;#8226; Potential Market 1. Central Armed Police Forces (CAPFs).&lt;br&gt;&lt;br&gt; 2. Indian Armed Forces.&lt;br&gt;&lt;br&gt; 3. State Police Organizations.&lt;br&gt;&lt;br&gt; 4. Disaster Response and Emergency Services.&lt;br&gt;&lt;br&gt; 5. Government Organizations with high-stress workforces.&lt;br&gt;&lt;br&gt; 6. Corporate Human Resource and Employee Wellness Platforms.&lt;br&gt;&lt;br&gt; 7. International security and workforce welfare markets.&lt;br&gt;&lt;br&gt; &amp;#8226; Expected Impact The proposed AI-enabled Personnel Stress and Welfare Monitoring System will help transform welfare management from a reactive process to a proactive and preventive framework. By enabling early identification of stress indicators and facilitating timely interventions,the solution can improve personnel well-being, enhance operational effectiveness, and strengthen the long-term resilience of uniformed services while maintaining the highest standards of privacy, ethics, and data security.&lt;br&gt;</div> -->
+                                 <div class="style-2" style="overflow-y: auto; min-height:20px; max-height: 200px; width:100%;"> • Background Personnel serving in Central Armed Police Forces (CAPFs), Armed Forces, and other uniformed services operate under physically demanding, psychologically stressful, and often hazardous conditions.Extended deployments, operational pressures, separation from families,irregular working hours, and exposure to traumatic incidents can significantly impact mental well-being.Currently, stress identification largely depends on manual observation and self-reporting, which may delay timely intervention. There is a need for a proactive, technology-driven solution that can identify early indicators of stress, burnout, and psychological distress while maintaining privacy and organizational trust.<br> • Description The proposed solution aims to develop an AI-powered Personnel Stress and Welfare Monitoring System capable of identifying potential indicators of stress, burnout, emotional fatigue, and welfare concerns through analysis of organizational and voluntarily provided wellness data.The system should:<br> • Analyze HR-related indicators such as leave patterns,deployment history, duty schedules, transfer frequency, training commitments, and workload trends.<br> • Support optional self-reporting and wellness assessments through a secure mobile application.<br> • Incorporate voluntary biometric and wellness data, where authorized and legally permissible.<br> • Detect behavioral patterns associated with elevated stress risk.<br> • Generate risk assessments and welfare recommendations for authorized welfare officers and commanders.<br> • Enable proactive counseling, welfare interventions, and workload balancing measures.<br><br> The system must be designed with strong privacy safeguards and focus on welfare support rather than disciplinary actions.<br><br> • Expected Solution Develop an AI-driven predictive analytics platform comprising:<br> • Personnel Wellness Monitoring Dashboard.<br> • Mobile-based Wellness and Self-Assessment Application.<br> • Predictive Behavioral Analytics Engine.<br> • Stress and Burnout Risk Prediction Models.<br> • Welfare Intervention Recommendation System.<br> • Role-based Access Control and Privacy Management Framework.<br> • Automated Alerts for authorized welfare personnel.<br> • Data anonymization and secure storage mechanisms.<br><br> The solution should identify trends and risk factors while ensuring that individual dignity, confidentiality, and data protection requirements are maintained.<br><br> • Expected Benefits 1. Early identification of personnel requiring welfare support.<br><br> 2. Reduction in stress-related incidents and operational fatigue.<br><br> 3. Improved mental well-being and workforce resilience.<br><br> 4. Enhanced readiness and operational effectiveness.<br><br> 5. Better workload distribution and personnel management.<br><br> 6. Improved retention and job satisfaction.<br><br> 7. Data-driven welfare planning and resource allocation.<br><br> 8. Reduction in incidents arising from prolonged occupational stress.<br><br> • Preliminary Scope 1. Development of predictive behavioral analytics algorithms.<br><br> 2. Mobile-based wellness self-reporting platform.<br><br> 3. AI-driven stress and burnout risk assessment engine.<br><br> 4. Commander and Welfare Officer dashboard.<br><br> 5. Automated intervention recommendation system.<br><br> 6. Secure integration with HRMS and personnel management systems.<br><br> 7. Privacy-preserving analytics and role-based access controls.<br><br> • Key Technical Challenges 1. Ensuring privacy and confidentiality of sensitive personnel data.<br><br> 2. Preventing stigmatization of personnel identified as potentially at risk.<br><br> 3. Minimizing false positives and false negatives in risk prediction.<br><br> 4. Ensuring ethical and transparent AI decision-making.<br><br> 5. Securing highly sensitive psychological and welfare-related information against cyber threats.<br><br> 6. Building trust among personnel regarding system usage and data protection.<br><br> • Strategic Importance<br> • Enhances force readiness and personnel welfare.<br> • Supports evidence-based welfare management.<br> • Strengthens organizational resilience and operational effectiveness.<br> • Promotes preventive mental health care rather than reactive interventions.<br> • Creates an indigenous capability tailored to the unique operational and cultural environment of Indian CAPFs and Armed Forces.<br> • Potential Market 1. Central Armed Police Forces (CAPFs).<br><br> 2. Indian Armed Forces.<br><br> 3. State Police Organizations.<br><br> 4. Disaster Response and Emergency Services.<br><br> 5. Government Organizations with high-stress workforces.<br><br> 6. Corporate Human Resource and Employee Wellness Platforms.<br><br> 7. International security and workforce welfare markets.<br><br> • Expected Impact The proposed AI-enabled Personnel Stress and Welfare Monitoring System will help transform welfare management from a reactive process to a proactive and preventive framework. By enabling early identification of stress indicators and facilitating timely interventions,the solution can improve personnel well-being, enhance operational effectiveness, and strengthen the long-term resilience of uniformed services while maintaining the highest standards of privacy, ethics, and data security.<br></div>
+                               </td>
+                            </tr>
+
+                            <tr>
+                                <th>Organization</th>
+                            <td>Ministry of Home Affairs </td>
+                                            
+                            </tr>  
+                            
+                            <tr>
+                                <th>Department</th>
+                            <td>
+                                Central Reserve Police Force (CRPF), Police II Division 
+                                <!-- echo $user_info->department;  -->
+                            </td>
+                                            
+                            </tr>  
+
+                            <tr>
+                            <th>Category</th>
+                            <td>Software</td>
+                            </tr>
+
+                            <tr>
+                            <th>Theme</th>
+                            <td>MedTech / BioTech / HealthTech</td>
+                            </tr>
+                            <tr>
+                              <th>Youtube Link</th>
+                              <td>
+                                    <a href="https://www.sih.gov.in/sih2026PS" target="_blank"> </a>
+                            </td>  
+                            </tr> 
+                          <!--                             <tr>
+                              <th>Dataset Link</th>
+                              <td>
+                                
+                                    Anonymized HR datasets, deployment records, leave history, wellness
+survey data, workload data, and simulated behavioral datasets.<br>
+                                     <a href="Anonymized HR datasets, deployment records, leave history, wellness
+survey data, workload data, and simulated behavioral datasets.">Anonymized HR datasets, deployment records, leave history, wellness
+survey data, workload data, and simulated behavioral datasets.<br></a>
+                                 <a href="https://www.sih.gov.in/dataset/Anonymized HR datasets, deployment records, leave history, wellness
+survey data, workload data, and simulated behavioral datasets.">Anonymized HR datasets, deployment records, leave history, wellness
+survey data, workload data, and simulated behavioral datasets.<br></a>
+                                                                                          </td>  
+                            </tr> -->
+                                                                <tr>
+                                    <th>Dataset Link</th>
+                                    <td>
+                                                                                            Anonymized HR datasets, deployment records, leave history, wellness
+survey data, workload data, and simulated behavioral datasets.<br>
+                                                                                    </td>
+                                    </tr>
+
+                            <tr>
+                              <th>Contact info</th>
+                              <td>
+                                    <a href="https://www.sih.gov.in/sih2026PS" target="_blank"> </a>
+                            </td>  
+                            </tr> 
+    
+                      </thead>
+                     </table> 
+                </div>
+
+                </div>
+
+                </div>
+                </div>
+            </td>
+            
+            <td>Software</td>
+            <td>SIH26186</td>
+            <td>1/500</td>
+           
+            <td>MedTech / BioTech / HealthTech</td>
+            <td>30 September 2026</td>
+
+            <!-- <td>30-09-2026</td> -->
+        </tr><tr role="row" class="odd">
+             <td class="colomn_border sorting_1">187</td>
+<!--<td></td>-->
+
+
+        <td class="colomn_border">Ministry of Home Affairs</td>
+        <td class="colomn_border"><a style="font-size:15px ;margin-bottom: 4px !important; cursor: pointer" data-toggle="modal" data-target="#ViewProblemStatement26187">AI-Based Intelligent Video Analytics Platform for Border Surveillance using existing CCTV Infrastructure.</a>
+            <div id="ViewProblemStatement26187" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+
+                <!-- Modal content-->
+             <div class="modal-content">
+                <div class="modal-header">                    
+                    <button type="button" class="close PSclose" data-dismiss="modal">×</button>                    
+					<div class="row">
+						<div class="col-md-6">
+							<div class="psLogoModal">
+								<img class="navbar-brand" src="Problem_Statement_files/SIH-Logo_FGKP.png">
+							</div>
+						</div>
+						<div class="col-md-8">
+							<div class="psTitleModalTop">
+								<h6 class="modal-title"> Problem Statement Details  </h6>
+							</div>
+						</div>
+					</div>
+                </div>
+                <div class="modal-body">
+                   
+                    <table id="settings" class="table table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th style="vertical-align: top;">Problem Statement ID</th>
+                            <td>
+                                <div class="style-2" style="overflow-y: auto; min-height:20px; max-height: 200px; width:100%;"> 26187</div>
+                               </td>
+                            </tr>
+                        <tr>
+                            <th style="vertical-align: top;">Problem Statement Title</th>
+                            <td>
+                                <div class="style-2" style="overflow-y: auto; min-height:20px; max-height: 200px; width:100%;"> AI-Based Intelligent Video Analytics Platform for Border Surveillance using existing CCTV Infrastructure.</div>
+                               </td>
+                            </tr>
+                            <tr>
+                            <th style="vertical-align: top;">Description</th>
+                            <td>
+                                <!-- <div class="style-2" style="overflow-y: auto; min-height:20px; max-height: 200px; width:100%;"> &amp;#8226; Background Border security forces deploy CCTV cameras at Border Out Posts(BOPs), check posts, border roads, and other strategic locations for surveillance and monitoring. However, conventional CCTV systems primarily provide video recording and live monitoring capabilities,requiring continuous human observation. Advanced surveillance functionalities such as Facial Recognition Systems (FRS), Automatic Number Plate Recognition (ANPR), intrusion detection, and object tracking often require specialized hardware and proprietary solutions,making large-scale deployment costly and difficult, particularly in remote border areas.&lt;br&gt; &amp;#8226; Description The proposed solution aims to develop an AI-driven software platform capable of transforming existing CCTV infrastructure into an intelligent surveillance network without requiring dedicated FRS, ANPR, or smart-camera hardware. The platform shall ingest live video streams from standard IP-based CCTV cameras and perform real-time video analytics using Artificial Intelligence and Computer Vision techniques.&lt;br&gt;&lt;br&gt; &lt;b&gt;The solution should provide capabilities such as:&lt;/b&gt;&lt;br&gt;&lt;br&gt; &amp;#8226; Human detection and tracking&lt;br&gt; &amp;#8226; Vehicle detection and classification&lt;br&gt; &amp;#8226; Face detection&lt;br&gt; &amp;#8226; Automatic Number Plate Recognition (ANPR)&lt;br&gt; &amp;#8226; Virtual fence intrusion detection&lt;br&gt; &amp;#8226; Suspicious activity detection&lt;br&gt; &amp;#8226; Night-time movement detection&lt;br&gt; &amp;#8226; Real-time alert generation and event logging&lt;br&gt; &amp;#8226; Expected Solution The proposed system should leverage Artificial Intelligence, Machine Learning, Computer Vision, and Video Analytics to create a software-defined surveillance platform capable of extracting actionable intelligence from existing CCTV infrastructure.&lt;br&gt;&lt;br&gt; &lt;b&gt;The solution should:&lt;/b&gt;&lt;br&gt;&lt;br&gt; &amp;#8226; Eliminate dependence on expensive dedicated surveillance hardware.&lt;br&gt; &amp;#8226; Enable intelligent monitoring through AI-powered video analytics.&lt;br&gt; &amp;#8226; Provide real-time alerts for security incidents and border intrusions.&lt;br&gt; &amp;#8226; Support facial recognition, vehicle identification, and behavioral analytics through software.&lt;br&gt; &amp;#8226; Improve situational awareness and response time for border security forces.&lt;br&gt; &amp;#8226; Support integration with existing command and control systems.&lt;br&gt; &amp;#8226; The final solution should be cost-effective, scalable, and suitable for deployment across remote border locations and strategic installations.&lt;br&gt; &amp;#8226; Possible Project Name IBVAP â€“ Intelligent Border Video Analytics Platform&lt;br&gt;</div> -->
+                                 <div class="style-2" style="overflow-y: auto; min-height:20px; max-height: 200px; width:100%;"> • Background Border security forces deploy CCTV cameras at Border Out Posts(BOPs), check posts, border roads, and other strategic locations for surveillance and monitoring. However, conventional CCTV systems primarily provide video recording and live monitoring capabilities,requiring continuous human observation. Advanced surveillance functionalities such as Facial Recognition Systems (FRS), Automatic Number Plate Recognition (ANPR), intrusion detection, and object tracking often require specialized hardware and proprietary solutions,making large-scale deployment costly and difficult, particularly in remote border areas.<br> • Description The proposed solution aims to develop an AI-driven software platform capable of transforming existing CCTV infrastructure into an intelligent surveillance network without requiring dedicated FRS, ANPR, or smart-camera hardware. The platform shall ingest live video streams from standard IP-based CCTV cameras and perform real-time video analytics using Artificial Intelligence and Computer Vision techniques.<br><br> <b>The solution should provide capabilities such as:</b><br><br> • Human detection and tracking<br> • Vehicle detection and classification<br> • Face detection<br> • Automatic Number Plate Recognition (ANPR)<br> • Virtual fence intrusion detection<br> • Suspicious activity detection<br> • Night-time movement detection<br> • Real-time alert generation and event logging<br> • Expected Solution The proposed system should leverage Artificial Intelligence, Machine Learning, Computer Vision, and Video Analytics to create a software-defined surveillance platform capable of extracting actionable intelligence from existing CCTV infrastructure.<br><br> <b>The solution should:</b><br><br> • Eliminate dependence on expensive dedicated surveillance hardware.<br> • Enable intelligent monitoring through AI-powered video analytics.<br> • Provide real-time alerts for security incidents and border intrusions.<br> • Support facial recognition, vehicle identification, and behavioral analytics through software.<br> • Improve situational awareness and response time for border security forces.<br> • Support integration with existing command and control systems.<br> • The final solution should be cost-effective, scalable, and suitable for deployment across remote border locations and strategic installations.<br> • Possible Project Name IBVAP â€“ Intelligent Border Video Analytics Platform<br></div>
+                               </td>
+                            </tr>
+
+                            <tr>
+                                <th>Organization</th>
+                            <td>Ministry of Home Affairs </td>
+                                            
+                            </tr>  
+                            
+                            <tr>
+                                <th>Department</th>
+                            <td>
+                                Sashastra Seema Bal (SSB), Police II Division 
+                                <!-- echo $user_info->department;  -->
+                            </td>
+                                            
+                            </tr>  
+
+                            <tr>
+                            <th>Category</th>
+                            <td>Software</td>
+                            </tr>
+
+                            <tr>
+                            <th>Theme</th>
+                            <td>Blockchain &amp; Cybersecurity</td>
+                            </tr>
+                            <tr>
+                              <th>Youtube Link</th>
+                              <td>
+                                    <a href="https://www.sih.gov.in/sih2026PS" target="_blank"> </a>
+                            </td>  
+                            </tr> 
+                          <!--                             <tr>
+                              <th>Dataset Link</th>
+                              <td>
+                                
+                                    <br>
+                                     <a href=""><br></a>
+                                 <a href="https://www.sih.gov.in/dataset/"><br></a>
+                                                                                          </td>  
+                            </tr> -->
+                                                                <tr>
+                                    <th>Dataset Link</th>
+                                    <td>
+                                                                            </td>
+                                    </tr>
+
+                            <tr>
+                              <th>Contact info</th>
+                              <td>
+                                    <a href="https://www.sih.gov.in/sih2026PS" target="_blank"> </a>
+                            </td>  
+                            </tr> 
+    
+                      </thead>
+                     </table> 
+                </div>
+
+                </div>
+
+                </div>
+                </div>
+            </td>
+            
+            <td>Software</td>
+            <td>SIH26187</td>
+            <td>1/500</td>
+           
+            <td>Blockchain &amp; Cybersecurity</td>
+            <td>30 September 2026</td>
+
+            <!-- <td>30-09-2026</td> -->
+        </tr><tr role="row" class="even">
+             <td class="colomn_border sorting_1">188</td>
+<!--<td></td>-->
+
+
+        <td class="colomn_border">Ministry of Home Affairs</td>
+        <td class="colomn_border"><a style="font-size:15px ;margin-bottom: 4px !important; cursor: pointer" data-toggle="modal" data-target="#ViewProblemStatement26188">Al-Based Fake Identity &amp; Document Screening System</a>
+            <div id="ViewProblemStatement26188" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+
+                <!-- Modal content-->
+             <div class="modal-content">
+                <div class="modal-header">                    
+                    <button type="button" class="close PSclose" data-dismiss="modal">×</button>                    
+					<div class="row">
+						<div class="col-md-6">
+							<div class="psLogoModal">
+								<img class="navbar-brand" src="Problem_Statement_files/SIH-Logo_FGKP.png">
+							</div>
+						</div>
+						<div class="col-md-8">
+							<div class="psTitleModalTop">
+								<h6 class="modal-title"> Problem Statement Details  </h6>
+							</div>
+						</div>
+					</div>
+                </div>
+                <div class="modal-body">
+                   
+                    <table id="settings" class="table table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th style="vertical-align: top;">Problem Statement ID</th>
+                            <td>
+                                <div class="style-2" style="overflow-y: auto; min-height:20px; max-height: 200px; width:100%;"> 26188</div>
+                               </td>
+                            </tr>
+                        <tr>
+                            <th style="vertical-align: top;">Problem Statement Title</th>
+                            <td>
+                                <div class="style-2" style="overflow-y: auto; min-height:20px; max-height: 200px; width:100%;"> Al-Based Fake Identity &amp; Document Screening System</div>
+                               </td>
+                            </tr>
+                            <tr>
+                            <th style="vertical-align: top;">Description</th>
+                            <td>
+                                <!-- <div class="style-2" style="overflow-y: auto; min-height:20px; max-height: 200px; width:100%;"> &amp;#8226; Background Common challenges faced at border checkpoints:&lt;br&gt; &amp;#8226; Fake passports and visas&lt;br&gt; &amp;#8226; Altered photographs&lt;br&gt; &amp;#8226; Modified dates of birth&lt;br&gt; &amp;#8226; Tampered visa stamps&lt;br&gt; &amp;#8226; Identity impersonation&lt;br&gt; &amp;#8226; Multiple identities used by the same person Expired or blacklisted travel documents&lt;br&gt; &amp;#8226; High passenger volume causing delays Current verification methods rely heavily on human inspection and basic database lookups.&lt;br&gt; &amp;#8226; Detailed Description Border checkpoints process thousands of identity documents every day,including passports, visas, national identity cards, permits, and travel authorizations. Manual verification is time-consuming, prone to human error, and often unable to detect sophisticated forgeries, tampering, or identity fraud.Develop an Al-powered document screening platform that automatically analyzes identity and travel documents, detects signs of tampering or forgery, validates information against rules and databases,and generates a risk score to assist border security personnel in making faster and more accurate decisions.&lt;br&gt; &amp;#8226; Expected Solution&lt;br&gt; &amp;#8226; Module 1: OCR Extraction&lt;br&gt; &amp;#8226; Module 2: Document Validation&lt;br&gt; &amp;#8226; Module 3: Tampering Detection&lt;br&gt; &amp;#8226; Module 4: Face Detection Module 1: OCR Extraction Objective: Automatically extract all relevant information from identity documents.&lt;br&gt;&lt;br&gt; &lt;b&gt;Inputs:&lt;/b&gt;&lt;br&gt;&lt;br&gt; &amp;#8226; Passport image&lt;br&gt; &amp;#8226; Visa image&lt;br&gt; &amp;#8226; National ID image&lt;br&gt; &amp;#8226; Driving license&lt;br&gt; &amp;#8226; Permit documents Extracted Fields:&lt;br&gt;&lt;br&gt; Passport&lt;br&gt;&lt;br&gt; &amp;#8226; Name&lt;br&gt; &amp;#8226; Passport Number&lt;br&gt; &amp;#8226; Nationality&lt;br&gt; &amp;#8226; Date of birth&lt;br&gt; &amp;#8226; Date of expiry&lt;br&gt; &amp;#8226; Gender Visa&lt;br&gt; &amp;#8226; Visa Number&lt;br&gt; &amp;#8226; Visa Type&lt;br&gt; &amp;#8226; Entry Validation&lt;br&gt; &amp;#8226; Stay Duration Module 2: Document Validation Objective: Verify whether the extracted information follows official document standards.&lt;br&gt;&lt;br&gt; Module 3: Tampering Detection (Core AI Innovation)&lt;br&gt;&lt;br&gt; Objective: Detect digitally or physically altered documents.&lt;br&gt;&lt;br&gt; &lt;b&gt;Use Cases:&lt;/b&gt;&lt;br&gt;&lt;br&gt; &amp;#8226; Photo Replacement&lt;br&gt; &amp;#8226; Text Manipulation&lt;br&gt; &amp;#8226; Stamp Forgery Detection&lt;br&gt; &amp;#8226; Image Metadata Analysis Module 4: Face Verification Objective: Ensure document owner matches the presented individual.&lt;br&gt; &amp;#8226; Expected Impact&lt;br&gt; &amp;#8226; Reduce document verification time from several minutes to a few seconds.&lt;br&gt; &amp;#8226; Improve detection of forged and tampered documents.&lt;br&gt; &amp;#8226; Standardize screening decisions across checkpoints.&lt;br&gt; &amp;#8226; Enable data-driven risk assessment instead of purely manual inspection.&lt;br&gt; &amp;#8226; Create a digital trail for investigations and intelligence analysis.&lt;br&gt;&lt;br&gt; Possible Project Name Al-Based Fake Identity &amp;amp; Document Screening System.</div> -->
+                                 <div class="style-2" style="overflow-y: auto; min-height:20px; max-height: 200px; width:100%;"> • Background Common challenges faced at border checkpoints:<br> • Fake passports and visas<br> • Altered photographs<br> • Modified dates of birth<br> • Tampered visa stamps<br> • Identity impersonation<br> • Multiple identities used by the same person Expired or blacklisted travel documents<br> • High passenger volume causing delays Current verification methods rely heavily on human inspection and basic database lookups.<br> • Detailed Description Border checkpoints process thousands of identity documents every day,including passports, visas, national identity cards, permits, and travel authorizations. Manual verification is time-consuming, prone to human error, and often unable to detect sophisticated forgeries, tampering, or identity fraud.Develop an Al-powered document screening platform that automatically analyzes identity and travel documents, detects signs of tampering or forgery, validates information against rules and databases,and generates a risk score to assist border security personnel in making faster and more accurate decisions.<br> • Expected Solution<br> • Module 1: OCR Extraction<br> • Module 2: Document Validation<br> • Module 3: Tampering Detection<br> • Module 4: Face Detection Module 1: OCR Extraction Objective: Automatically extract all relevant information from identity documents.<br><br> <b>Inputs:</b><br><br> • Passport image<br> • Visa image<br> • National ID image<br> • Driving license<br> • Permit documents Extracted Fields:<br><br> Passport<br><br> • Name<br> • Passport Number<br> • Nationality<br> • Date of birth<br> • Date of expiry<br> • Gender Visa<br> • Visa Number<br> • Visa Type<br> • Entry Validation<br> • Stay Duration Module 2: Document Validation Objective: Verify whether the extracted information follows official document standards.<br><br> Module 3: Tampering Detection (Core AI Innovation)<br><br> Objective: Detect digitally or physically altered documents.<br><br> <b>Use Cases:</b><br><br> • Photo Replacement<br> • Text Manipulation<br> • Stamp Forgery Detection<br> • Image Metadata Analysis Module 4: Face Verification Objective: Ensure document owner matches the presented individual.<br> • Expected Impact<br> • Reduce document verification time from several minutes to a few seconds.<br> • Improve detection of forged and tampered documents.<br> • Standardize screening decisions across checkpoints.<br> • Enable data-driven risk assessment instead of purely manual inspection.<br> • Create a digital trail for investigations and intelligence analysis.<br><br> Possible Project Name Al-Based Fake Identity &amp; Document Screening System.</div>
+                               </td>
+                            </tr>
+
+                            <tr>
+                                <th>Organization</th>
+                            <td>Ministry of Home Affairs </td>
+                                            
+                            </tr>  
+                            
+                            <tr>
+                                <th>Department</th>
+                            <td>
+                                Sashastra Seema Bal (SSB), Police II Division 
+                                <!-- echo $user_info->department;  -->
+                            </td>
+                                            
+                            </tr>  
+
+                            <tr>
+                            <th>Category</th>
+                            <td>Software</td>
+                            </tr>
+
+                            <tr>
+                            <th>Theme</th>
+                            <td>Blockchain &amp; Cybersecurity</td>
+                            </tr>
+                            <tr>
+                              <th>Youtube Link</th>
+                              <td>
+                                    <a href="https://www.sih.gov.in/sih2026PS" target="_blank"> </a>
+                            </td>  
+                            </tr> 
+                          <!--                             <tr>
+                              <th>Dataset Link</th>
+                              <td>
+                                
+                                    <br>
+                                     <a href=""><br></a>
+                                 <a href="https://www.sih.gov.in/dataset/"><br></a>
+                                                                                          </td>  
+                            </tr> -->
+                                                                <tr>
+                                    <th>Dataset Link</th>
+                                    <td>
+                                                                            </td>
+                                    </tr>
+
+                            <tr>
+                              <th>Contact info</th>
+                              <td>
+                                    <a href="https://www.sih.gov.in/sih2026PS" target="_blank"> </a>
+                            </td>  
+                            </tr> 
+    
+                      </thead>
+                     </table> 
+                </div>
+
+                </div>
+
+                </div>
+                </div>
+            </td>
+            
+            <td>Software</td>
+            <td>SIH26188</td>
+            <td>3/500</td>
+           
+            <td>Blockchain &amp; Cybersecurity</td>
+            <td>30 September 2026</td>
+
+            <!-- <td>30-09-2026</td> -->
+        </tr><tr role="row" class="odd">
+             <td class="colomn_border sorting_1">189</td>
+<!--<td></td>-->
+
+
+        <td class="colomn_border">Ministry of Home Affairs</td>
+        <td class="colomn_border"><a style="font-size:15px ;margin-bottom: 4px !important; cursor: pointer" data-toggle="modal" data-target="#ViewProblemStatement26189">AI-Powered Criminal Network Analysis System</a>
+            <div id="ViewProblemStatement26189" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+
+                <!-- Modal content-->
+             <div class="modal-content">
+                <div class="modal-header">                    
+                    <button type="button" class="close PSclose" data-dismiss="modal">×</button>                    
+					<div class="row">
+						<div class="col-md-6">
+							<div class="psLogoModal">
+								<img class="navbar-brand" src="Problem_Statement_files/SIH-Logo_FGKP.png">
+							</div>
+						</div>
+						<div class="col-md-8">
+							<div class="psTitleModalTop">
+								<h6 class="modal-title"> Problem Statement Details  </h6>
+							</div>
+						</div>
+					</div>
+                </div>
+                <div class="modal-body">
+                   
+                    <table id="settings" class="table table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th style="vertical-align: top;">Problem Statement ID</th>
+                            <td>
+                                <div class="style-2" style="overflow-y: auto; min-height:20px; max-height: 200px; width:100%;"> 26189</div>
+                               </td>
+                            </tr>
+                        <tr>
+                            <th style="vertical-align: top;">Problem Statement Title</th>
+                            <td>
+                                <div class="style-2" style="overflow-y: auto; min-height:20px; max-height: 200px; width:100%;"> AI-Powered Criminal Network Analysis System</div>
+                               </td>
+                            </tr>
+                            <tr>
+                            <th style="vertical-align: top;">Description</th>
+                            <td>
+                                <!-- <div class="style-2" style="overflow-y: auto; min-height:20px; max-height: 200px; width:100%;"> &amp;#8226; Background Modern criminal activities are increasingly organized and interconnected. Criminals often operate through networks involving associates, intermediaries, financial channels, communication links,locations, and events. Law enforcement agencies collect large volumes of data from sources such as:&lt;br&gt; &amp;#8226; FIRs and police reports&lt;br&gt; &amp;#8226; Call Detail Records (CDRs)&lt;br&gt; &amp;#8226; Financial transaction records&lt;br&gt; &amp;#8226; Surveillance reports&lt;br&gt; &amp;#8226; Social media intelligence&lt;br&gt; &amp;#8226; Criminal history databases&lt;br&gt; &amp;#8226; Intelligence agency reports Despite having access to this information, investigators frequently face challenges in identifying hidden relationships among suspects because the data is fragmented, unstructured, and distributed across multiple systems. Manual analysis can be slow, labor-intensive, and prone to missing critical connections.With advances in Artificial Intelligence (AI), Machine Learning (ML),Natural Language Processing (NLP), and Graph Analytics, it is now possible to automatically discover relationships, detect patterns, and generate insights that can assist investigators in understanding criminal networks more effectively.&lt;br&gt; &amp;#8226; Description The objective is to develop an AI-powered system that can analyze large volumes of criminal and intelligence-related data to uncover hidden networks and relationships among individuals, organizations, locations,and events.&lt;br&gt;&lt;br&gt; &lt;b&gt;The system should:&lt;/b&gt;&lt;br&gt;&lt;br&gt; &amp;#8226; Collect and process data from multiple sources.&lt;br&gt; &amp;#8226; Extract important entities such as people, locations, vehicles, phone numbers, and organizations.&lt;br&gt; &amp;#8226; Build relationship maps showing how different entities are connected.&lt;br&gt; &amp;#8226; Identify key individuals who play influential roles within criminal networks.&lt;br&gt; &amp;#8226; Detect suspicious patterns and unusual activities.&lt;br&gt; &amp;#8226; Assist investigators by providing visual and analytical insights.&lt;br&gt; &amp;#8226; Expected Solution Develop an AI-powered system that automatically analyzes structured and unstructured crime-related data to uncover criminal networks,identify key influencers, detect suspicious patterns, and provide actionable intelligence for investigators.&lt;br&gt;</div> -->
+                                 <div class="style-2" style="overflow-y: auto; min-height:20px; max-height: 200px; width:100%;"> • Background Modern criminal activities are increasingly organized and interconnected. Criminals often operate through networks involving associates, intermediaries, financial channels, communication links,locations, and events. Law enforcement agencies collect large volumes of data from sources such as:<br> • FIRs and police reports<br> • Call Detail Records (CDRs)<br> • Financial transaction records<br> • Surveillance reports<br> • Social media intelligence<br> • Criminal history databases<br> • Intelligence agency reports Despite having access to this information, investigators frequently face challenges in identifying hidden relationships among suspects because the data is fragmented, unstructured, and distributed across multiple systems. Manual analysis can be slow, labor-intensive, and prone to missing critical connections.With advances in Artificial Intelligence (AI), Machine Learning (ML),Natural Language Processing (NLP), and Graph Analytics, it is now possible to automatically discover relationships, detect patterns, and generate insights that can assist investigators in understanding criminal networks more effectively.<br> • Description The objective is to develop an AI-powered system that can analyze large volumes of criminal and intelligence-related data to uncover hidden networks and relationships among individuals, organizations, locations,and events.<br><br> <b>The system should:</b><br><br> • Collect and process data from multiple sources.<br> • Extract important entities such as people, locations, vehicles, phone numbers, and organizations.<br> • Build relationship maps showing how different entities are connected.<br> • Identify key individuals who play influential roles within criminal networks.<br> • Detect suspicious patterns and unusual activities.<br> • Assist investigators by providing visual and analytical insights.<br> • Expected Solution Develop an AI-powered system that automatically analyzes structured and unstructured crime-related data to uncover criminal networks,identify key influencers, detect suspicious patterns, and provide actionable intelligence for investigators.<br></div>
+                               </td>
+                            </tr>
+
+                            <tr>
+                                <th>Organization</th>
+                            <td>Ministry of Home Affairs </td>
+                                            
+                            </tr>  
+                            
+                            <tr>
+                                <th>Department</th>
+                            <td>
+                                National Crime Records Bureau (NCRB), Women Safety Division 
+                                <!-- echo $user_info->department;  -->
+                            </td>
+                                            
+                            </tr>  
+
+                            <tr>
+                            <th>Category</th>
+                            <td>Software</td>
+                            </tr>
+
+                            <tr>
+                            <th>Theme</th>
+                            <td>Blockchain &amp; Cybersecurity</td>
+                            </tr>
+                            <tr>
+                              <th>Youtube Link</th>
+                              <td>
+                                    <a href="https://www.sih.gov.in/sih2026PS" target="_blank"> </a>
+                            </td>  
+                            </tr> 
+                          <!--                             <tr>
+                              <th>Dataset Link</th>
+                              <td>
+                                
+                                    <br>
+                                     <a href=""><br></a>
+                                 <a href="https://www.sih.gov.in/dataset/"><br></a>
+                                                                                          </td>  
+                            </tr> -->
+                                                                <tr>
+                                    <th>Dataset Link</th>
+                                    <td>
+                                                                            </td>
+                                    </tr>
+
+                            <tr>
+                              <th>Contact info</th>
+                              <td>
+                                    <a href="https://www.sih.gov.in/sih2026PS" target="_blank"> </a>
+                            </td>  
+                            </tr> 
+    
+                      </thead>
+                     </table> 
+                </div>
+
+                </div>
+
+                </div>
+                </div>
+            </td>
+            
+            <td>Software</td>
+            <td>SIH26189</td>
+            <td>2/500</td>
+           
+            <td>Blockchain &amp; Cybersecurity</td>
+            <td>30 September 2026</td>
+
+            <!-- <td>30-09-2026</td> -->
+        </tr><tr role="row" class="even">
+             <td class="colomn_border sorting_1">190</td>
+<!--<td></td>-->
+
+
+        <td class="colomn_border">Ministry of Home Affairs</td>
+        <td class="colomn_border"><a style="font-size:15px ;margin-bottom: 4px !important; cursor: pointer" data-toggle="modal" data-target="#ViewProblemStatement26190">Secure Digital Document Management System for Legal and Investigation Documents</a>
+            <div id="ViewProblemStatement26190" class="modal fade" role="dialog">
+                <div class="modal-dialog">
+
+                <!-- Modal content-->
+             <div class="modal-content">
+                <div class="modal-header">                    
+                    <button type="button" class="close PSclose" data-dismiss="modal">×</button>                    
+					<div class="row">
+						<div class="col-md-6">
+							<div class="psLogoModal">
+								<img class="navbar-brand" src="Problem_Statement_files/SIH-Logo_FGKP.png">
+							</div>
+						</div>
+						<div class="col-md-8">
+							<div class="psTitleModalTop">
+								<h6 class="modal-title"> Problem Statement Details  </h6>
+							</div>
+						</div>
+					</div>
+                </div>
+                <div class="modal-body">
+                   
+                    <table id="settings" class="table table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th style="vertical-align: top;">Problem Statement ID</th>
+                            <td>
+                                <div class="style-2" style="overflow-y: auto; min-height:20px; max-height: 200px; width:100%;"> 26190</div>
+                               </td>
+                            </tr>
+                        <tr>
+                            <th style="vertical-align: top;">Problem Statement Title</th>
+                            <td>
+                                <div class="style-2" style="overflow-y: auto; min-height:20px; max-height: 200px; width:100%;"> Secure Digital Document Management System for Legal and Investigation Documents</div>
+                               </td>
+                            </tr>
+                            <tr>
+                            <th style="vertical-align: top;">Description</th>
+                            <td>
+                                <!-- <div class="style-2" style="overflow-y: auto; min-height:20px; max-height: 200px; width:100%;"> &amp;#8226; Background Law enforcement agencies, courts, legal departments, and investigative organizations handle vast amounts of sensitive documents throughout the lifecycle of a case. These documents may include:&lt;br&gt; &amp;#8226; FIRs and police reports&lt;br&gt; &amp;#8226; Investigation records&lt;br&gt; &amp;#8226; Witness statements&lt;br&gt; &amp;#8226; Charge sheets&lt;br&gt; &amp;#8226; Court filings&lt;br&gt; &amp;#8226; Evidence records&lt;br&gt; &amp;#8226; Forensic reports&lt;br&gt; &amp;#8226; Legal notices and judgments Many organizations still rely on paper-based systems or fragmented digital storage solutions. This often leads to challenges such as:&lt;br&gt; &amp;#8226; Difficulty in locating documents quickly&lt;br&gt; &amp;#8226; Unauthorized access to confidential information&lt;br&gt; &amp;#8226; Document tampering risks&lt;br&gt; &amp;#8226; Lack of version control&lt;br&gt; &amp;#8226; Inefficient collaboration between departments&lt;br&gt; &amp;#8226; Delays in legal and investigative processes&lt;br&gt; &amp;#8226; Poor auditability and compliance tracking As the volume of legal and investigation-related data continues to grow,there is an increasing need for a secure, centralized, and intelligent document management system that ensures data integrity, accessibility,confidentiality, and efficient case management.Modern technologies such as Cloud Computing, Artificial Intelligence (AI), Blockchain, Digital Signatures, and Secure Access Control can significantly improve the management and security of legal and investigative documents.&lt;br&gt; &amp;#8226; Description The objective is to develop a Secure Digital Document Management System (DMS) that enables law enforcement agencies, legal institutions, and investigative departments to securely store, organize, manage,retrieve, and share sensitive legal and investigation documents.&lt;br&gt;&lt;br&gt; &lt;b&gt;The system should:&lt;/b&gt;&lt;br&gt;&lt;br&gt; &amp;#8226; Digitize and centralize document storage.&lt;br&gt; &amp;#8226; Ensure secure access and confidentiality.&lt;br&gt; &amp;#8226; Prevent unauthorized modifications.&lt;br&gt; &amp;#8226; Maintain a complete audit trail of document activities.&lt;br&gt; &amp;#8226; Enable efficient document search and retrieval.&lt;br&gt; &amp;#8226; Support collaboration among authorized stakeholders.&lt;br&gt; &amp;#8226; Ensure compliance with legal and regulatory requirements.&lt;br&gt;&lt;br&gt; The challenge is to create a secure, scalable, and intelligent platform that streamlines document handling while preserving legal validity and evidentiary integrity.&lt;br&gt;&lt;br&gt; &amp;#8226; Expected Solution Develop a system to monitor and manage police assets throughout their lifecycle.&lt;br&gt;</div> -->
+                                 <div class="style-2" style="overflow-y: auto; min-height:20px; max-height: 200px; width:100%;"> • Background Law enforcement agencies, courts, legal departments, and investigative organizations handle vast amounts of sensitive documents throughout the lifecycle of a case. These documents may include:<br> • FIRs and police reports<br> • Investigation records<br> • Witness statements<br> • Charge sheets<br> • Court filings<br> • Evidence records<br> • Forensic reports<br> • Legal notices and judgments Many organizations still rely on paper-based systems or fragmented digital storage solutions. This often leads to challenges such as:<br> • Difficulty in locating documents quickly<br> • Unauthorized access to confidential information<br> • Document tampering risks<br> • Lack of version control<br> • Inefficient collaboration between departments<br> • Delays in legal and investigative processes<br> • Poor auditability and compliance tracking As the volume of legal and investigation-related data continues to grow,there is an increasing need for a secure, centralized, and intelligent document management system that ensures data integrity, accessibility,confidentiality, and efficient case management.Modern technologies such as Cloud Computing, Artificial Intelligence (AI), Blockchain, Digital Signatures, and Secure Access Control can significantly improve the management and security of legal and investigative documents.<br> • Description The objective is to develop a Secure Digital Document Management System (DMS) that enables law enforcement agencies, legal institutions, and investigative departments to securely store, organize, manage,retrieve, and share sensitive legal and investigation documents.<br><br> <b>The system should:</b><br><br> • Digitize and centralize document storage.<br> • Ensure secure access and confidentiality.<br> • Prevent unauthorized modifications.<br> • Maintain a complete audit trail of document activities.<br> • Enable efficient document search and retrieval.<br> • Support collaboration among authorized stakeholders.<br> • Ensure compliance with legal and regulatory requirements.<br><br> The challenge is to create a secure, scalable, and intelligent platform that streamlines document handling while preserving legal validity and evidentiary integrity.<br><br> • Expected Solution Develop a system to monitor and manage police assets throughout their lifecycle.<br></div>
+                               </td>
+                            </tr>
+
+                            <tr>
+                                <th>Organization</th>
+                            <td>Ministry of Home Affairs </td>
+                                            
+                            </tr>  
+                            
+                            <tr>
+                                <th>Department</th>
+                            <td>
+                                National Crime Records Bureau (NCRB), Women Safety Division 
+                                <!-- echo $user_info->department;  -->
+                            </td>
+                                            
+                            </tr>  
+
+                            <tr>
+                            <th>Category</th>
+                            <td>Software</td>
+                            </tr>
+
+                            <tr>
+                            <th>Theme</th>
+                            <td>Blockchain &amp; Cybersecurity</td>
+                            </tr>
+                            <tr>
+                              <th>Youtube Link</th>
+                              <td>
+                                    <a href="https://www.sih.gov.in/sih2026PS" target="_blank"> </a>
+                            </td>  
+                            </tr> 
+                          <!--                             <tr>
+                              <th>Dataset Link</th>
+                              <td>
+                                
+                                    <br>
+                                     <a href=""><br></a>
+                                 <a href="https://www.sih.gov.in/dataset/"><br></a>
+                                                                                          </td>  
+                            </tr> -->
+                                                                <tr>
+                                    <th>Dataset Link</th>
+                                    <td>
+                                                                            </td>
+                                    </tr>
+
+                            <tr>
+                              <th>Contact info</th>
+                              <td>
+                                    <a href="https://www.sih.gov.in/sih2026PS" target="_blank"> </a>
+                            </td>  
+                            </tr> 
+    
+                      </thead>
+                     </table> 
+                </div>
+
+                </div>
+
+                </div>
+                </div>
+            </td>
+            
+            <td>Software</td>
+            <td>SIH26190</td>
+            <td>0/500</td>
+           
+            <td>Blockchain &amp; Cybersecurity</td>
+            <td>30 September 2026</td>
+
+            <!-- <td>30-09-2026</td> -->
+        </tr></tbody>
+    <!-- <tfoot>
+        <tr> 
+            <th class="sortingBottom">Logo</th>
+
+		<th class="sortingBottom">S.No.</th>
+         <th class="sortingBottom">Organization</th>
+		
+            <th class="sortingBottom">Problem Statement Title</th>
+            <th class="sortingBottom">Category</th>
+            <th class="sortingBottom">PS Number</th>
+            <th class="sortingBottom">Submitted Idea(s) Count</th>
+            <th class="sortingBottom">Theme</th>
+        </tr>
+    </tfoot> -->
+</table></div></div><div class="row"><div class="col-sm-12 col-md-5"></div><div class="col-sm-12 col-md-7"><div class="dataTables_paginate paging_simple_numbers" id="dataTablePS_paginate"><ul class="pagination"><li class="paginate_button page-item previous" id="dataTablePS_previous"><a href="#" aria-controls="dataTablePS" data-dt-idx="0" tabindex="0" class="page-link">Previous</a></li><li class="paginate_button page-item "><a href="#" aria-controls="dataTablePS" data-dt-idx="1" tabindex="0" class="page-link">1</a></li><li class="paginate_button page-item disabled" id="dataTablePS_ellipsis"><a href="#" aria-controls="dataTablePS" data-dt-idx="2" tabindex="0" class="page-link">…</a></li><li class="paginate_button page-item "><a href="#" aria-controls="dataTablePS" data-dt-idx="3" tabindex="0" class="page-link">18</a></li><li class="paginate_button page-item active"><a href="#" aria-controls="dataTablePS" data-dt-idx="4" tabindex="0" class="page-link">19</a></li><li class="paginate_button page-item "><a href="#" aria-controls="dataTablePS" data-dt-idx="5" tabindex="0" class="page-link">20</a></li><li class="paginate_button page-item disabled" id="dataTablePS_ellipsis"><a href="#" aria-controls="dataTablePS" data-dt-idx="6" tabindex="0" class="page-link">…</a></li><li class="paginate_button page-item "><a href="#" aria-controls="dataTablePS" data-dt-idx="7" tabindex="0" class="page-link">24</a></li><li class="paginate_button page-item next" id="dataTablePS_next"><a href="#" aria-controls="dataTablePS" data-dt-idx="8" tabindex="0" class="page-link">Next</a></li></ul></div></div></div></div>  
+
+</div>
+    
+</div></section>
+
+
+
+
+<script type="text/javascript" src="Problem_Statement_files/jquery-1.12.4.min_FGKP.js"></script>
+
+
+<script type="text/javascript">
+    $(document).ready(function() {
+    $('#dataTablePS').DataTable({
+		"bInfo" : false
+	});
+});
+</script>
+
+<script>  
+$(document).ready( function () {
+    $('#table_id').dataTable( {
+    "pageLength": 100,
+    "order": [[ 5, "asc" ]],
+            "paging": false
+    });
+});
+
+
+</script>
+
+
+    <footer style="padding-top:30px;">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+				      <div class="follow-box">
+                   <h3>Follow Us</h3>
+                   <ul class="follow-box-copyright">
+                       <li><a href="https://www.facebook.com/mhrdInnovation/" target="_blank"><i class="fa fa-facebook"></i></a></li>
+                       <li><a href="https://www.instagram.com/mhrd.innovationcell/" target="_blank"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+                       <li><a href="https://x.com/SIH2025" target="_blank"><i class="fa fa-twitter"></i></a></li>
+                       <li><a href="https://in.linkedin.com/company/moe-innovation-cell" target="_blank"><i class="fa fa fa-linkedin"></i></a></li>
+                   </ul>
+                <p style="margin-top: 15px;">© 2025-26 Smart India Hackathon. All rights reserved</p>
+               </div>				
+            </div>
+            <div class="col-md-6">
+                <div class="follow-box flo-box">
+                    <h3>Contact Us</h3>
+                    <ul class="follow-box-contact">
+                      <li>
+                          <i class="fa fa-envelope"></i> 
+                          For any queries write to: <a href="mailto:sih@aicte-india.org">sih@aicte-india.org </a>&nbsp;
+                          <!-- <a href="mailto:hackathon@aicte-india.org">hackathon@aicte-india.org</a> -->
+                        </li>
+                        <li>
+                          <i class="fa fa-phone" aria-hidden="true"></i>
+                           <a href="tel:+91  11 29581222">011 29581222, </a>&nbsp;
+                           <a href="tel:+91 11 29581223">011 29581223, </a>&nbsp;
+                           <a href="tel:+91 11 29581240">011 29581239, </a>&nbsp;
+                           <a href="tel:+91 11 29581240">011 29581240, </a>&nbsp;
+                          <a href="tel:+91 11 29581241">011 29581241, </a><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                          <a href="tel:+91 11 29581319">011 29581319. </a> 
+
+                          <!-- <a href="tel:+91 11 29581235">+91 11 29581235 </a> -->
+                        </li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</footer>
+<div class="modal fade" id="Registeration_type_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Select Registration Type</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="logo-modal">
+                    <img src="Problem_Statement_files/logo_FGKP.png" class="img-responsive" alt="Logo">
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="content-modal">
+
+		<div class="form-group">
+                        <input style="transform:scale(1.3);" type="radio" name="User_Register_Type" value="igottwo" onclick="SendUserToItsPage(2)">
+                        <span class="sign_up_type" style="color:#03132E">College Faculty SPOC</span>
+                    </div>
+
+		<div class="form-group">
+                        <input style="transform:scale(1.3);" type="radio" name="User_Register_Type" value="igottwo" onclick="SendUserToItsPage(6)">
+                        <span class="sign_up_type" style="color:#03132E">School Faculty SPOC</span>
+                    </div>
+
+
+                    <div class="form-group" style="display: none;">
+                        <input style="transform:scale(1.3);" type="radio" name="User_Register_Type" value="igottwo" onclick="SendUserToItsPage(2)">
+                        <span class="sign_up_type" style="color:#03132E">College Faculty SPOC</span>
+                    </div>
+                    <div id="div1" style="display: none;">
+                            <input style="transform:scale(1.3);" type="radio" value="2" name="User_Register_Type" onclick="SendUserToItsPage(2)">
+                            <span class="sign_up_type" style="color:orange;">Existing Users</span> &nbsp;
+                            <input style="transform:scale(1.3);" type="radio" value="2" name="User_Register_Type" onclick="SendUserToItsPage(2)">
+                            <span class="sign_up_type" style="color:orange;">New Users</span><br>
+                            <span class="" style="color:red; font-size: 12px;">(*Please check your mail for OTP Verification)</span>
+                        </div>
+                    <div class="form-group" style="display:none;">
+                        <input style="transform:scale(1.3);" type="radio" name="User_Register_Type" value="4" onclick="SendUserToItsPage(4)">
+                        <span class="sign_up_type" style="color:#03132E">Design Mentors</span>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="modClose" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<a id="button" class="show"></a>
+
+    <script type="text/javascript" src="Problem_Statement_files/jquery-1.12.4.min_002_FGKP.js"></script>
+    <script type="text/javascript" src="Problem_Statement_files/bootstrap_FGKP.js"></script>
+    <script type="text/javascript" src="Problem_Statement_files/bootnavbar_FGKP.js"></script>
+    <script type="text/javascript" src="Problem_Statement_files/slick.min_FGKP.js"></script>
+    <script type="text/javascript" src="Problem_Statement_files/bs_leftnavi_FGKP.js"></script>
+    <script type="text/javascript" src="Problem_Statement_files/script-mobile-menu_FGKP.js"></script>
+	
+
+    
+<script>
+        $(function () {
+            $('#main_navbar').bootnavbar();
+        })
+</script>
+
+<script type="text/javascript">
+
+function show2()
+{ 
+    $('#div1').css('display', 'block');
+}
+
+function SendUserToItsPage(input)
+{
+  switch (input) {
+    case 1:
+    window.open("https://www.sih.gov.in/signup","_self");
+    break;
+
+    case 2:
+    window.open("https://www.sih.gov.in/collegeRegistration","_self");
+    break;
+
+
+    case 3:
+    window.open("https://www.sih.gov.in/studentRegistration","_self");
+     break;
+
+    case 4:
+    window.open("https://www.sih.gov.in/designmregistration","_self");
+     break;
+     
+    case 5:
+    window.open("https://www.sih.gov.in/juryregistration","_self");
+     break;  
+
+	case 6:
+    window.location.href = "https://junior.sih.gov.in/";
+    //window.open("https://www.sih.gov.in/schoolRegistration","_self");
+    break; 
+  }
+}
+
+jQuery(document).ready(function($) {
+      $('.slider').slick({
+        dots: true,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 2000,
+        arrows: false,
+        responsive: [{
+          breakpoint: 600,
+          settings: {
+            slidesToShow: 2,
+            slidesToScroll: 1
+          }
+        },
+        {
+           breakpoint: 400,
+           settings: {
+              arrows: false,
+              slidesToShow: 1,
+              slidesToScroll: 1
+           }
+        }]
+    });
+});
+
+jQuery(document).ready(function($) {
+      $('.sliderIndex').slick({
+        dots: false,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 2000,
+        arrows: true,
+		prevArrow:"<button type='button' class='slick-prev pull-left'><i class='fa fa-long-arrow-left' aria-hidden='true'></i></button>",
+        nextArrow:"<button type='button' class='slick-next pull-right'><i class='fa fa-long-arrow-right' aria-hidden='true'></i></button>",
+        responsive: [{
+          breakpoint: 600,
+          settings: {
+            slidesToShow: 2,
+            slidesToScroll: 1
+          }
+        },
+        {
+           breakpoint: 400,
+           settings: {
+              arrows: false,
+              slidesToShow: 1,
+              slidesToScroll: 1
+           }
+        }]
+    });
+});
+
+jQuery(document).ready(function($) {
+      $('.ministryDetails').slick({
+        dots: false,
+        infinite: true,
+        speed: 200,
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 2000,
+        arrows: true,
+		prevArrow:"<button type='button' class='slick-prev pull-left'><i class='fa fa-long-arrow-left' aria-hidden='true'></i></button>",
+        nextArrow:"<button type='button' class='slick-next pull-right'><i class='fa fa-long-arrow-right' aria-hidden='true'></i></button>",
+        responsive: [{
+          breakpoint: 600,
+          settings: {
+            slidesToShow: 2,
+            slidesToScroll: 1
+          }
+        },
+        {
+           breakpoint: 400,
+           settings: {
+              arrows: false,
+              slidesToShow: 1,
+              slidesToScroll: 1
+           }
+        }]
+    });
+});
+
+jQuery(document).ready(function($) {
+      $('.slider1').slick({
+        dots: false,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 2000,
+        arrows: true,
+		prevArrow:"<button type='button' class='slick-prev pull-left'><i class='fa fa-long-arrow-left' aria-hidden='true'></i></button>",
+        nextArrow:"<button type='button' class='slick-next pull-right'><i class='fa fa-long-arrow-right' aria-hidden='true'></i></button>",
+        responsive: [{
+          breakpoint: 600,
+          settings: {
+            slidesToShow: 2,
+            slidesToScroll: 1
+          }
+        },
+        {
+           breakpoint: 400,
+           settings: {
+              arrows: false,
+              slidesToShow: 1,
+              slidesToScroll: 1
+           }
+        }]
+    });
+});
+
+jQuery(document).ready(function($) {
+      $('.slider2').slick({
+        dots: false,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 2000,
+        arrows: false,
+		prevArrow:"<button type='button' class='slick-prev pull-left'><i class='fa fa-long-arrow-left' aria-hidden='true'></i></button>",
+        nextArrow:"<button type='button' class='slick-next pull-right'><i class='fa fa-long-arrow-right' aria-hidden='true'></i></button>",
+        responsive: [{
+          breakpoint: 600,
+          settings: {
+            slidesToShow: 2,
+            slidesToScroll: 1
+          }
+        },
+        {
+           breakpoint: 400,
+           settings: {
+              arrows: false,
+              slidesToShow: 1,
+              slidesToScroll: 1
+           }
+        }]
+    });
+});
+
+jQuery(document).ready(function($) {
+      $('.videoPrototypesSlide').slick({
+        dots: true,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 2000,
+        arrows: false,
+		prevArrow:"<button type='button' class='slick-prev pull-left'><i class='fa fa-long-arrow-left' aria-hidden='true'></i></button>",
+        nextArrow:"<button type='button' class='slick-next pull-right'><i class='fa fa-long-arrow-right' aria-hidden='true'></i></button>",
+        responsive: [{
+          breakpoint: 600,
+          settings: {
+            slidesToShow: 2,
+            slidesToScroll: 1
+          }
+        },
+        {
+           breakpoint: 400,
+           settings: {
+              arrows: false,
+              slidesToShow: 1,
+              slidesToScroll: 1
+           }
+        }]
+    });
+});
+
+        $(document).on("scroll", function(){
+                if
+              ($(document).scrollTop() > 86){
+                  $("#banner").addClass("shrink");
+                }
+                else
+                {
+                    $("#banner").removeClass("shrink");
+                }
+            });
+			
+			/* stop header code start */
+			
+			$(window).scroll(function () {
+			  console.log($(window).scrollTop())
+			  if ($(window).scrollTop() > 63) {
+				$('.navbar').addClass('navbar-fixed');
+			  }
+			  if ($(window).scrollTop() < 64) {
+				$('.navbar').removeClass('navbar-fixed');
+			  }
+			});
+			
+			/* stop header code end */
+			
+			/* slider add class code start */
+			
+			$(window).scroll(function(){
+				if ($(this).scrollTop() > 50) {
+				   $('#demo').addClass('carouselPadding');
+           $('#scrollnav').css({display:'block'});
+           $('.sihlogo').css({display:'block'});
+				} else {
+				   $('#demo').removeClass('carouselPadding');
+           $('#scrollnav').css({display:'none'});
+           $('.sihlogo').css({display:'none'});
+				}
+			});
+			
+			/* slider add class code end */
+
+        var btn = $('#button');
+
+$(window).scroll(function() {
+  if ($(window).scrollTop() > 300) {
+    btn.addClass('show');
+  } else {
+    btn.removeClass('show');
+  }
+});
+
+btn.on('click', function(e) {
+  e.preventDefault();
+  $('html, body').animate({scrollTop:0}, '300');
+});
+
+jQuery(document).ready(function($) {
+      $('.twitterSlider').slick({
+        dots: false,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 3,
+        slidesToScroll: 1,
+        autoplay: true,
+        autoplaySpeed: 2000,
+        arrows: true,
+        prevArrow:"<button type='button' class='slick-prev pull-left'><i class='fa fa-long-arrow-left' aria-hidden='true'></i></button>",
+        nextArrow:"<button type='button' class='slick-next pull-right'><i class='fa fa-long-arrow-right' aria-hidden='true'></i></button>",
+        responsive: [{
+          breakpoint: 600,
+          settings: {
+            slidesToShow: 2,
+            slidesToScroll: 1
+          }
+        },
+        {
+           breakpoint: 400,
+           settings: {
+              arrows: false,
+              slidesToShow: 1,
+              slidesToScroll: 1
+           }
+        }]
+    });
+});
+
+$(function () {
+         $(".like").click(function () {
+             var input = $(this).find('.qty1');
+             input.val(parseInt(input.val())+ 1);
+    
+         });
+     $(".dislike").click(function () {
+         var input = $(this).find('.qty2');
+         input.val(input.val() - 1);
+     });
+  });
+  
+  $('.autoplay').slick({
+          slidesToShow: 3,
+          infinite: true,
+          slidesToScroll: 1,
+          autoplay: true,
+          autoplaySpeed: 2000,
+           responsive: [
+    {
+      breakpoint: 1024,
+      settings: {
+        slidesToShow: 3,
+        slidesToScroll: 3,
+        infinite: true,
+        dots: false
+      }
+    },
+    {
+      breakpoint: 600,
+      settings: {
+        slidesToShow: 2,
+        slidesToScroll: 2
+      }
+    },
+    {
+      breakpoint: 480,
+      settings: {
+        slidesToShow: 1,
+        slidesToScroll: 1
+      }
+    }
+    // You can unslick at a given breakpoint now by adding:
+    // settings: "unslick"
+    // instead of a settings object
+  ]
+        });
+		
+  $(document).ready(function() {
+    $(".testimonial-carousel").slick({
+      infinite: true,
+      slidesToShow: 1,
+      slidesToScroll: 1,
+      autoplay: true,
+      arrows: true,
+      prevArrow: $(".testimonial-carousel-controls .prev"),
+      nextArrow: $(".testimonial-carousel-controls .next")
+    });
+  });
+		
+</script>
+
+
+
+<script type="text/javascript" src="Problem_Statement_files/jquery.dataTables.min_FGKP.js"></script>
+<script type="text/javascript" src="Problem_Statement_files/dataTables.bootstrap4.min_FGKP.js"></script>
+<script>
+  var plat = window.navigator.platform;
+  var flag = '';
+  switch(plat) {
+    case 'Win32':
+                flag = "windows system 32";
+                break;
+        default:
+                flag = "default system";
+
+  }
+</script>
+
+
+</body></html>
