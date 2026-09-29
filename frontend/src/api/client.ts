@@ -20,7 +20,10 @@ export async function apiClient<T>(
     ...(customConfig.headers as Record<string, string> || {}),
   }
 
-  if (token) {
+  // Login must always be anonymous. A stale token from another backend
+  // instance would otherwise be rejected by Spring Security before the
+  // supplied username and password reach the login controller.
+  if (token && endpoint !== '/auth/login') {
     headers['Authorization'] = `Bearer ${token}`
   }
 
@@ -76,7 +79,7 @@ export async function apiClient<T>(
 
     if (response.status === 401) {
       localStorage.removeItem(AUTH_TOKEN_KEY)
-      if (endpoint !== '/auth/me') window.location.assign('/login')
+      if (endpoint !== '/auth/me' && endpoint !== '/auth/login') window.location.assign('/login')
     }
 
     throw new ApiRequestError(code, message)
