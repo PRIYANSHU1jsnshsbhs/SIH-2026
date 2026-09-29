@@ -5,13 +5,14 @@
 
 /* Public brand and looping hero highlights */
 .landing-brand-logo{display:block;width:112px;height:58px;object-fit:contain}
+.landing-footer-logo{display:block;width:148px;height:76px;object-fit:contain;filter:drop-shadow(0 7px 15px rgba(11,31,58,.1));transition:transform .3s ease,filter .3s ease}.landing-footer-brand .landing-brand:hover .landing-footer-logo{transform:translateY(-2px) scale(1.025);filter:drop-shadow(0 10px 20px rgba(11,31,58,.15))}
 .landing-proof-strip{display:block;width:min(680px,100%);max-width:100%;margin:34px auto 0;overflow:hidden;mask-image:linear-gradient(90deg,transparent 0,#000 7%,#000 93%,transparent 100%)}
 .landing-proof-track{display:flex;width:max-content;gap:14px;will-change:transform;animation:landing-proof-slide 12s linear infinite}
 .landing-proof-track>span{flex:none;padding:11px 18px;border:1px solid #e7ddc7;border-radius:999px;background:rgba(255,255,255,.78);box-shadow:0 7px 20px rgba(11,31,58,.045);font-size:13px;font-weight:700;color:#536079}
 .landing-proof-track>span b{width:20px;height:20px;margin-right:7px;font-size:11px}
 .landing-proof-strip:hover .landing-proof-track{animation-play-state:paused}
 @keyframes landing-proof-slide{from{transform:translateX(calc(-50% - 7px))}to{transform:translateX(0)}}
-@media(max-width:700px){.landing-brand-logo{width:84px;height:46px}.landing-proof-strip{width:min(350px,100%);margin-top:28px}.landing-proof-track{gap:10px;animation-duration:10s}.landing-proof-track>span{padding:10px 15px;font-size:12px}}
+@media(max-width:700px){.landing-brand-logo{width:84px;height:46px}.landing-footer-logo{width:126px;height:66px}.landing-proof-strip{width:min(350px,100%);margin-top:28px}.landing-proof-track{gap:10px;animation-duration:10s}.landing-proof-track>span{padding:10px 15px;font-size:12px}}
 @media(prefers-reduced-motion:reduce){.landing-proof-strip{width:max-content;max-width:100%;overflow:visible;mask-image:none}.landing-proof-track{width:auto;flex-wrap:wrap;justify-content:center;transform:none}.landing-proof-track>span[aria-hidden="true"]{display:none}}
 
 /* Enhanced landing-page motion and depth */
