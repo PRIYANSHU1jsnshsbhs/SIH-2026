@@ -12,7 +12,7 @@
 
 ### Automated Blockchain Tracing & VASP Intelligence for Law Enforcement
 
-**Problem Statement:** 26183  
+**Problem Statement:** 26182  
 **Domain:** Blockchain & Cybersecurity  
 **Category:** Software  
 **Team:** LogicX
@@ -407,7 +407,7 @@ Keep this slide visually simple, just like the 2025 deck.
 
 ### Primary / Official Sources
 
-- Smart India Hackathon — Problem Statement 26183
+- Smart India Hackathon — Problem Statement 26182
 - National Cyber Crime Reporting Portal (NCRP)
 - Ministry of Home Affairs / Cybercrime resources
 - Indian Cyber Crime Coordination Centre (I4C)

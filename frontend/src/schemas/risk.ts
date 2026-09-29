@@ -4,6 +4,9 @@ import { riskLevelSchema } from './wallets'
 export const riskReasonSchema = z.object({
   signal: z.string(),
   weight: z.number(),
+  feature: z.string().optional(),
+  value: z.string().optional(),
+  importance: z.number().optional(),
 })
 
 export const walletRiskInputSchema = z.object({
@@ -17,7 +20,7 @@ export const walletRiskResponseSchema = z.object({
   wallet: z.string(),
   risk_score: z.number(),
   risk_level: riskLevelSchema,
-  model_version: z.string(),
+  model_version: z.string().nullable(),
   reasons: z.array(riskReasonSchema),
 })
 export type WalletRiskResponse = z.infer<typeof walletRiskResponseSchema>

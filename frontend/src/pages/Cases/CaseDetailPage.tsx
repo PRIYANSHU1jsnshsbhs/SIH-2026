@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { useCase, useAddWallet } from '@/hooks/useCases'
 import { LoadingState } from '@/components/common/LoadingState'
+import { LoadingIcon } from '@/components/common/LoadingIcon'
 import { ErrorState } from '@/components/common/ErrorState'
 import { EmptyState } from '@/components/common/EmptyState'
 import { Modal } from '@/components/common/Modal'
@@ -9,22 +10,35 @@ import { Breadcrumbs } from '@/components/layout/Breadcrumbs'
 import { AddressDisplay } from '@/components/wallet/AddressDisplay'
 import { RiskBadge } from '@/components/risk/RiskBadge'
 import { useUiStore } from '@/stores/uiStore'
+import { addWalletInputSchema, isWalletAddressValid, walletAddressError } from '@/schemas/cases'
 import clsx from 'clsx'
 
 function AddWalletModal({ caseId, open, onClose }: { caseId: string; open: boolean; onClose: () => void }) {
-  const [chain, setChain] = useState('ethereum')
+  const [chain, setChain] = useState('')
   const [address, setAddress] = useState('')
   const [label, setLabel] = useState('')
   const addWallet = useAddWallet(caseId)
   const pushToast = useUiStore((s) => s.pushToast)
 
+  const [error, setError] = useState('')
+
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
-    await addWallet.mutateAsync({ chain, address, label: label || undefined, source: 'complaint' })
-    pushToast('Wallet added to case', 'success')
-    setAddress('')
-    setLabel('')
-    onClose()
+    setError('')
+    const result = addWalletInputSchema.safeParse({ chain, address, label: label || undefined, source: 'complaint' })
+    if (!result.success) {
+      setError(result.error.issues[0]?.message || 'Invalid wallet')
+      return
+    }
+    try {
+      await addWallet.mutateAsync(result.data)
+      pushToast('Wallet added to case', 'success')
+      setAddress('')
+      setLabel('')
+      onClose()
+    } catch (caught) {
+      setError(caught instanceof Error ? caught.message : 'Could not add wallet')
+    }
   }
 
   return (
@@ -37,8 +51,10 @@ function AddWalletModal({ caseId, open, onClose }: { caseId: string; open: boole
             onChange={(e) => setChain(e.target.value)}
             className="w-full rounded-md bg-surface-2 px-3 py-2 text-sm text-text-primary"
           >
+            <option value="" disabled>Select Chain...</option>
             <option value="ethereum">Ethereum</option>
             <option value="polygon">Polygon</option>
+            <option value="mock">Mock</option>
           </select>
         </div>
         <div>
@@ -60,12 +76,13 @@ function AddWalletModal({ caseId, open, onClose }: { caseId: string; open: boole
             placeholder="Suspect wallet from complaint"
           />
         </div>
+        {error && <p className="text-red text-sm font-medium">{error}</p>}
         <button
           type="submit"
-          disabled={addWallet.isPending}
-          className="rounded-md bg-btn-bg px-4 py-2 text-sm font-medium text-btn-fg hover:bg-accent-strong disabled:opacity-50"
+          disabled={addWallet.isPending || !chain || !address}
+          className="inline-flex items-center justify-center gap-2 rounded-md bg-btn-bg px-4 py-2 text-sm font-medium text-btn-fg hover:bg-accent-strong disabled:opacity-50"
         >
-          {addWallet.isPending ? 'Adding…' : 'Add Wallet'}
+          {addWallet.isPending ? <><LoadingIcon size="button" />Adding…</> : 'Add Wallet'}
         </button>
       </form>
     </Modal>
@@ -85,7 +102,9 @@ export function CaseDetailPage() {
   }, [caseId, setCurrentContext])
 
   if (query.isLoading) return <LoadingState />
-  if (query.isError || !query.data) return <ErrorState message="Could not load this case." />
+  if (query.isError || !query.data) {
+    return <ErrorState message={query.error instanceof Error ? query.error.message : 'Could not load this case.'} onRetry={() => query.refetch()} />
+  }
 
   const c = query.data
 
@@ -131,23 +150,34 @@ export function CaseDetailPage() {
           <EmptyState title="No wallets yet" description="Add the suspect wallet reported in the complaint to begin." />
         ) : (
           <div className="space-y-3">
-            {c.wallets.map((w) => (
+            {c.wallets.map((w) => {
+              const validAddress = isWalletAddressValid(w.chain, w.address)
+              return (
               <div key={w.wallet_id} className="flex items-center justify-between rounded-lg bg-surface-1 px-5 py-4 border border-border-c shadow-sm transition-colors hover:border-saffron">
                 <div className="flex items-center gap-4">
-                  <AddressDisplay chain={w.chain} address={w.address} />
+                  <div>
+                    <AddressDisplay chain={w.chain} address={w.address} />
+                    {!validAddress && (
+                      <p className="mt-1 text-xs font-medium text-red">Invalid saved wallet: {walletAddressError(w.chain)}</p>
+                    )}
+                  </div>
                   {w.label && <span className="text-xs font-semibold text-text-secondary bg-surface-2 px-2 py-1 rounded">{w.label}</span>}
                 </div>
                 <div className="flex items-center gap-4">
-                  <RiskBadge level={w.risk_level} />
+                  <span className="text-xs font-bold uppercase tracking-widest px-3 py-1.5 rounded-full bg-surface-2 text-text-secondary border border-border-c shadow-sm">
+                    {w.chain}
+                  </span>
                   <button
                     onClick={() => navigate(`/investigations/new?case_id=${c.case_id}&chain=${w.chain}&address=${w.address}`)}
-                    className="text-sm font-medium px-4 py-2 rounded-md bg-saffron text-white hover:bg-accent-strong transition-colors shadow-sm"
+                    disabled={!validAddress}
+                    className="text-sm font-medium px-4 py-2 rounded-md bg-saffron text-white hover:bg-accent-strong transition-colors shadow-sm disabled:cursor-not-allowed disabled:opacity-50"
                   >
                     Start Investigation
                   </button>
                 </div>
               </div>
-            ))}
+              )
+            })}
           </div>
         )}
       </section>

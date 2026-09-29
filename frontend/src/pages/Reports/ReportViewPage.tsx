@@ -1,31 +1,35 @@
 import { useParams } from 'react-router-dom'
-import { useReport, useReportContent } from '@/hooks/useReports'
-import { fetchReportHtml } from '@/api/reports'
+import { useReport } from '@/hooks/useReports'
+import { downloadReportPdf } from '@/api/reports'
 import { LoadingState } from '@/components/common/LoadingState'
 import { ErrorState } from '@/components/common/ErrorState'
 import { BackButton } from '@/components/common/BackButton'
 import { useUiStore } from '@/stores/uiStore'
+import { useState } from 'react'
+import { LoadingIcon } from '@/components/common/LoadingIcon'
 
 export function ReportViewPage() {
   const { reportId } = useParams<{ reportId: string }>()
   const report = useReport(reportId)
   const isComplete = report.data?.status === 'completed'
-  const content = useReportContent(reportId, isComplete)
   const pushToast = useUiStore((s) => s.pushToast)
+  const [isDownloading, setIsDownloading] = useState(false)
 
   async function handleDownload() {
     if (!reportId) return
+    setIsDownloading(true)
     try {
-      const html = await fetchReportHtml(reportId)
-      const blob = new Blob([html], { type: 'text/html' })
+      const blob = await downloadReportPdf(reportId)
       const url = URL.createObjectURL(blob)
       const a = document.createElement('a')
       a.href = url
-      a.download = `${reportId}.html`
+      a.download = `${reportId}.pdf`
       a.click()
       URL.revokeObjectURL(url)
-    } catch {
-      pushToast('Could not generate the report file', 'error')
+    } catch (caught) {
+      pushToast(caught instanceof Error ? caught.message : 'Could not download the PDF report', 'error')
+    } finally {
+      setIsDownloading(false)
     }
   }
 
@@ -42,15 +46,16 @@ export function ReportViewPage() {
           <div className="flex items-center gap-3 text-xs text-text-tertiary font-mono">
             <span className="bg-surface-2 px-2 py-1 rounded text-text-secondary">{report.data.report_id}</span>
             <span>Invest: {report.data.investigation_id}</span>
-            <span className="uppercase font-sans font-bold text-saffron tracking-wider">HTML Report</span>
+            <span className="uppercase font-sans font-bold text-saffron tracking-wider">PDF Report</span>
           </div>
         </div>
         {isComplete && (
           <button
             onClick={handleDownload}
-            className="shrink-0 text-sm font-medium px-4 py-2 rounded-md bg-saffron text-white hover:bg-accent-strong shadow-sm transition-colors"
+            disabled={isDownloading}
+            className="inline-flex shrink-0 items-center gap-2 rounded-md bg-saffron px-4 py-2 text-sm font-medium text-white shadow-sm transition-colors hover:bg-accent-strong"
           >
-            Download HTML
+            {isDownloading ? <><LoadingIcon size="button" />Downloading…</> : 'Download PDF'}
           </button>
         )}
       </div>
@@ -65,22 +70,20 @@ export function ReportViewPage() {
         </div>
       )}
 
-      {isComplete && content.isLoading && <LoadingState />}
-      {isComplete && content.isError && <ErrorState message="Could not load this report's content." />}
-      {isComplete && content.data && (
-        <div className="report-content rounded-lg bg-surface-1 p-8 md:p-12 border border-border-c shadow-sm print:shadow-none print:border-0">
-          <div className="mb-10 pb-6 border-b-2 border-navy-900 text-center">
-            <h1 className="text-3xl font-bold text-text-primary tracking-tight mb-2">INTELLIGENCE REPORT</h1>
-            <p className="text-sm font-bold uppercase tracking-widest text-text-secondary">Official Document</p>
-          </div>
-          <div className="space-y-8">
-            {content.data.sections.map((s, i) => (
-              <section key={i}>
-                <h2 className="text-lg font-bold text-text-primary uppercase tracking-wide border-b border-border-strong pb-2 mb-4">{s.heading}</h2>
-                <div dangerouslySetInnerHTML={{ __html: s.bodyHtml }} className="prose prose-sm prose-slate max-w-none text-text-primary" />
-              </section>
-            ))}
-          </div>
+      {isComplete && (
+        <div className="flex flex-col items-center justify-center rounded-lg bg-surface-1 p-12 text-center border border-border-c shadow-sm">
+          <div className="text-5xl mb-4">📄</div>
+          <h2 className="text-xl font-bold text-text-primary mb-2">PDF Report Ready</h2>
+          <p className="text-sm text-text-secondary max-w-md mb-8">
+            The backend has successfully generated a full production PDF report containing transaction history, graph evidence, and risk analysis for this investigation.
+          </p>
+          <button
+            onClick={handleDownload}
+            disabled={isDownloading}
+            className="inline-flex items-center gap-2 rounded-md bg-saffron px-6 py-3 text-sm font-medium text-white shadow-md transition-all hover:bg-accent-strong"
+          >
+            {isDownloading ? <><LoadingIcon size="button" />Downloading…</> : 'Download PDF Report'}
+          </button>
         </div>
       )}
     </div>

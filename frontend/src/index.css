@@ -209,6 +209,21 @@ textarea:focus-visible {
   box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 25%, transparent);
 }
 
+.chakra-loading-icon {
+  animation: chakra-loading-spin 1.35s linear infinite;
+  filter: drop-shadow(0 2px 5px rgba(11, 31, 58, 0.14));
+}
+
+@keyframes chakra-loading-spin {
+  to { transform: rotate(360deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chakra-loading-icon {
+    animation-duration: 3s;
+  }
+}
+
 /* Institutional Badge overrides */
 .badge-high {
   background: var(--badge-high-bg);
@@ -312,4 +327,381 @@ textarea:focus-visible {
 .report-content .risk-unknown {
   color: var(--text-tertiary);
   font-weight: 700;
+}
+
+/* Shared application atmosphere and motion */
+.app-shell {
+  isolation: isolate;
+  background: var(--bg-app);
+}
+
+.app-topbar,
+.app-footer {
+  background: color-mix(in srgb, var(--surface-1) 90%, transparent);
+  backdrop-filter: blur(16px) saturate(135%);
+}
+
+.app-topbar {
+  box-shadow: 0 8px 28px color-mix(in srgb, var(--navy-900) 7%, transparent);
+}
+
+.app-topbar::after {
+  content: "";
+  position: absolute;
+  right: 8%;
+  bottom: -1px;
+  width: 22%;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--accent), transparent);
+  opacity: 0.55;
+}
+
+.app-global-search {
+  transition: max-width 260ms cubic-bezier(.2,.75,.25,1), transform 260ms ease;
+}
+
+.app-global-search:focus-within {
+  max-width: 32rem;
+  transform: translateY(1px);
+}
+
+.app-global-search input {
+  box-shadow: inset 0 1px 0 color-mix(in srgb, var(--surface-1) 75%, transparent);
+  transition: border-color 180ms ease, box-shadow 180ms ease, background-color 180ms ease;
+}
+
+.app-global-search:focus-within input {
+  background: var(--surface-1);
+  box-shadow: 0 8px 26px color-mix(in srgb, var(--navy-900) 9%, transparent),
+    0 0 0 3px color-mix(in srgb, var(--accent) 13%, transparent);
+}
+
+.app-sidebar {
+  position: relative;
+  overflow: hidden;
+  box-shadow: 10px 0 30px rgba(1, 12, 28, 0.13);
+}
+
+.app-sidebar::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 15% 8%, rgba(245, 124, 0, 0.13), transparent 25%),
+    linear-gradient(160deg, transparent 40%, rgba(87, 148, 230, 0.06));
+}
+
+.app-sidebar nav {
+  position: relative;
+  z-index: 1;
+}
+
+.app-sidebar-link {
+  overflow: hidden;
+}
+
+.app-sidebar-link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(90deg, rgba(245, 124, 0, 0.10), transparent 72%);
+  opacity: 0;
+  transform: translateX(-35%);
+  transition: opacity 220ms ease, transform 300ms cubic-bezier(.2,.75,.25,1);
+}
+
+.app-sidebar-link:hover::after,
+.app-sidebar-link[aria-current="page"]::after {
+  opacity: 1;
+  transform: translateX(0);
+}
+
+.app-sidebar-link:hover {
+  transform: translateX(3px);
+}
+
+.app-sidebar-icon {
+  display: inline-grid;
+  min-width: 1rem;
+  place-items: center;
+  transition: transform 220ms ease, color 220ms ease;
+}
+
+.app-sidebar-link:hover .app-sidebar-icon,
+.app-sidebar-link[aria-current="page"] .app-sidebar-icon {
+  transform: scale(1.14) rotate(-4deg);
+}
+
+.app-main {
+  position: relative;
+  background:
+    radial-gradient(circle at 92% 7%, color-mix(in srgb, var(--accent) 8%, transparent), transparent 24rem),
+    radial-gradient(circle at 10% 92%, color-mix(in srgb, var(--blue) 5%, transparent), transparent 28rem),
+    var(--bg-app);
+}
+
+.app-main::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.35;
+  background-image:
+    linear-gradient(color-mix(in srgb, var(--border-c) 35%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in srgb, var(--border-c) 35%, transparent) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: radial-gradient(circle at 100% 0, black, transparent 42%);
+}
+
+.app-content,
+.app-page-stage {
+  position: relative;
+  z-index: 1;
+}
+
+.app-page-stage {
+  animation: app-page-enter 480ms cubic-bezier(.2,.75,.25,1) both;
+}
+
+.app-page-stage h1 {
+  letter-spacing: -0.025em;
+}
+
+.app-page-stage .shadow-sm {
+  box-shadow: 0 8px 26px color-mix(in srgb, var(--navy-900) 7%, transparent);
+  transition: border-color 220ms ease, box-shadow 220ms ease, transform 220ms ease;
+}
+
+.app-page-stage article.shadow-sm:hover,
+.app-page-stage a.shadow-sm:hover {
+  border-color: color-mix(in srgb, var(--accent) 35%, var(--border-c));
+  box-shadow: 0 15px 36px color-mix(in srgb, var(--navy-900) 11%, transparent);
+  transform: translateY(-2px);
+}
+
+.app-page-stage a,
+.app-page-stage button {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.app-page-stage button:active,
+.app-page-stage a[class*="bg-saffron"]:active {
+  transform: translateY(1px) scale(.985);
+}
+
+.app-page-stage table tbody tr {
+  transition: background-color 180ms ease, box-shadow 180ms ease;
+}
+
+.app-page-stage table tbody tr:hover {
+  box-shadow: inset 3px 0 0 var(--accent);
+}
+
+.app-page-heading {
+  position: relative;
+}
+
+.app-page-heading::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  width: 72px;
+  height: 2px;
+  border-radius: 99px;
+  background: linear-gradient(90deg, var(--accent), transparent);
+  animation: app-heading-line 650ms cubic-bezier(.2,.75,.25,1) both;
+}
+
+/* Investigation Explorer refinement */
+.explorer-toolbar {
+  position: relative;
+  overflow: hidden;
+}
+
+.explorer-toolbar::before {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 3px;
+  background: linear-gradient(180deg, var(--accent), color-mix(in srgb, var(--accent) 15%, transparent));
+}
+
+.explorer-workspace {
+  animation: app-content-rise 560ms 90ms cubic-bezier(.2,.75,.25,1) both;
+}
+
+.explorer-list,
+.explorer-preview {
+  border-radius: 14px;
+}
+
+.explorer-list-item {
+  position: relative;
+}
+
+.explorer-list-item::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(100deg, transparent 35%, color-mix(in srgb, var(--accent) 8%, transparent), transparent 70%);
+  transform: translateX(-100%);
+  transition: transform 520ms ease;
+}
+
+.explorer-list-item:hover {
+  padding-left: 1.45rem;
+}
+
+.explorer-list-item:hover::after {
+  transform: translateX(100%);
+}
+
+.explorer-preview {
+  background:
+    radial-gradient(circle at center, color-mix(in srgb, var(--blue) 5%, transparent), transparent 44%),
+    var(--surface-1);
+}
+
+.explorer-empty-preview {
+  position: relative;
+  isolation: isolate;
+}
+
+.explorer-empty-preview > :not(.explorer-radar) {
+  position: relative;
+  z-index: 2;
+  border-color: color-mix(in srgb, var(--accent) 22%, var(--border-c));
+  background: color-mix(in srgb, var(--surface-1) 78%, transparent);
+  backdrop-filter: blur(8px);
+}
+
+.explorer-radar {
+  position: absolute;
+  z-index: 0;
+  width: 390px;
+  height: 390px;
+  border: 1px solid color-mix(in srgb, var(--blue) 13%, transparent);
+  border-radius: 50%;
+  opacity: .9;
+}
+
+.explorer-radar::before,
+.explorer-radar::after,
+.explorer-radar i {
+  content: "";
+  position: absolute;
+  inset: 50%;
+  border: 1px solid color-mix(in srgb, var(--blue) 14%, transparent);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.explorer-radar::before { width: 72%; height: 72%; }
+.explorer-radar::after { width: 42%; height: 42%; }
+.explorer-radar i:first-child { width: 12px; height: 12px; border: 0; background: var(--accent); box-shadow: 0 0 0 7px color-mix(in srgb, var(--accent) 12%, transparent); }
+.explorer-radar i:nth-child(2) { width: 5px; height: 5px; border: 0; background: var(--green); transform: translate(92px, -76px); }
+.explorer-radar i:nth-child(3) { width: 7px; height: 7px; border: 0; background: var(--blue); transform: translate(-108px, 54px); }
+.explorer-radar span {
+  position: absolute;
+  inset: 50% 50% auto auto;
+  width: 46%;
+  height: 1px;
+  transform-origin: 100% 50%;
+  background: linear-gradient(90deg, color-mix(in srgb, var(--accent) 55%, transparent), transparent);
+  animation: explorer-radar-sweep 7s linear infinite;
+}
+
+@keyframes app-page-enter {
+  from { opacity: 0; transform: translateY(12px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes app-content-rise {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes app-heading-line {
+  from { width: 0; opacity: 0; }
+  to { width: 72px; opacity: 1; }
+}
+
+@keyframes explorer-radar-sweep {
+  to { transform: rotate(360deg); }
+}
+
+@media (max-width: 700px) {
+  .app-sidebar {
+    width: 4rem !important;
+  }
+
+  .app-sidebar-link > span:last-child {
+    display: none;
+  }
+
+  .app-content {
+    padding: 1rem;
+  }
+
+  .app-global-search,
+  .app-console-button,
+  .app-user-name {
+    display: none;
+  }
+
+  .app-topbar {
+    gap: .5rem;
+    padding-inline: .75rem;
+  }
+
+  .app-topbar-brand {
+    width: 82px;
+  }
+
+  .explorer-page {
+    height: auto;
+    min-height: calc(100vh - 8rem);
+  }
+
+  .explorer-workspace {
+    flex-direction: column;
+    overflow: visible;
+  }
+
+  .explorer-list {
+    width: 100%;
+    max-height: 22rem;
+  }
+
+  .explorer-preview {
+    min-height: 30rem;
+  }
+
+  .explorer-toolbar {
+    flex-direction: column;
+  }
+
+  .explorer-radar {
+    width: 260px;
+    height: 260px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .app-page-stage,
+  .explorer-workspace,
+  .app-page-heading::after,
+  .explorer-radar span {
+    animation: none !important;
+  }
+
+  .app-sidebar-link,
+  .app-page-stage .shadow-sm,
+  .explorer-list-item {
+    transition-duration: .01ms !important;
+  }
 }

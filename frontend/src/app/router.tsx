@@ -21,10 +21,12 @@ import { TerminalCommandsPage } from '@/pages/TerminalCommands/TerminalCommandsP
 import { AboutPage } from '@/pages/About/AboutPage'
 import { ContactPage } from '@/pages/Contact/ContactPage'
 import { InvestigationExplorerPage } from '@/pages/Explorer/InvestigationExplorerPage'
+import { HomePage } from '@/pages/Home/HomePage'
 
 export function AppRouter() {
   return (
     <Routes>
+      <Route path="/" element={<HomePage />} />
       <Route path="/login" element={<LoginPage />} />
 
       <Route
@@ -34,7 +36,6 @@ export function AppRouter() {
           </RouteGuard>
         }
       >
-        <Route path="/" element={<Navigate to="/dashboard" replace />} />
         <Route path="/dashboard" element={<DashboardPage />} />
 
         <Route path="/cases" element={<CasesPage />} />

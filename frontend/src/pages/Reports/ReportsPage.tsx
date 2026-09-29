@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom'
 import { useReports } from '@/hooks/useReports'
 import { LoadingState } from '@/components/common/LoadingState'
 import { EmptyState } from '@/components/common/EmptyState'
+import { ErrorState } from '@/components/common/ErrorState'
 import clsx from 'clsx'
 
 export function ReportsPage() {
@@ -17,6 +18,7 @@ export function ReportsPage() {
       </div>
 
       {reports.isLoading && <LoadingState />}
+      {reports.isError && <ErrorState message={reports.error instanceof Error ? reports.error.message : 'Could not load reports.'} onRetry={() => reports.refetch()} />}
       {reports.data && reports.data.reports.length === 0 && (
         <EmptyState title="No reports yet" description="Generate a report from a completed investigation's findings page." />
       )}
@@ -53,7 +55,7 @@ export function ReportsPage() {
                       {r.status}
                     </span>
                   </td>
-                  <td className="px-4 py-3 text-xs text-text-secondary">{new Date(r.created_at).toLocaleString()}</td>
+                  <td className="px-4 py-3 text-xs text-text-secondary">{r.created_at ? new Date(r.created_at).toLocaleString() : 'Not available'}</td>
                   <td className="px-4 py-3 text-right">
                     <Link to={`/reports/${r.report_id}`} className="text-sm font-medium text-saffron hover:underline underline-offset-2">
                       View →

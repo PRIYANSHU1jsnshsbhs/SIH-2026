@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import { createReportRequest, fetchReport, fetchReportContent, fetchReports } from '@/api/reports'
+import { createReportRequest, fetchReport, fetchReports } from '@/api/reports'
 import type { CreateReportInput } from '@/schemas/reports'
 
 export function useReports(enabled = true) {
@@ -15,20 +15,11 @@ export function useReport(reportId: string | undefined) {
   })
 }
 
-/** The full assembled content behind a completed report — only fetchable once
- * the report's status has reached "completed" (checked via useReport elsewhere). */
-export function useReportContent(reportId: string | undefined, enabled: boolean) {
-  return useQuery({
-    queryKey: ['reports', reportId, 'content'],
-    queryFn: () => fetchReportContent(reportId!),
-    enabled: !!reportId && enabled,
-  })
-}
-
 export function useCreateReport() {
   const queryClient = useQueryClient()
   return useMutation({
     mutationFn: (input: CreateReportInput) => createReportRequest(input),
+    retry: false,
     onSuccess: () => queryClient.invalidateQueries({ queryKey: ['reports'] }),
   })
 }

@@ -19,13 +19,13 @@ export const addressEntitySchema = z.object({
       name: z.string(),
       type: z.string(),
       jurisdiction: z.string().optional(),
-      confidence: z.number(),
+      confidence: z.number().nullable(),
     })
     .nullable(),
   evidence: z.array(
     z.object({
-      source: z.string(),
-      last_verified: z.string(),
+      source: z.string().nullable().optional(),
+      last_verified: z.string().nullable().optional(),
     }),
   ),
 })

@@ -4,6 +4,7 @@ import cytoscape, { type Core, type Css } from 'cytoscape'
 import coseBilkent from 'cytoscape-cose-bilkent'
 import type { GraphEdge, GraphNode } from '@/schemas/investigations'
 import { useUiStore } from '@/stores/uiStore'
+import { graphEntityIconDataUri } from './entityTypeIcons'
 
 cytoscape.use(coseBilkent)
 
@@ -11,25 +12,30 @@ const TYPE_SHAPE: Record<string, Css.NodeShape> = {
   wallet: 'ellipse',
   contract: 'round-rectangle',
   vasp: 'round-tag',
+  exchange: 'round-tag',
   bridge: 'diamond',
   mixer: 'hexagon',
 }
 
 /** Bigger = more investigatively important: the seed and the terminal entity stand out from the layering hops in between. */
 function baseSize(el: cytoscape.NodeSingular): number {
-  if (el.data('is_seed')) return 30
-  if (el.data('type') === 'vasp') return 27
-  if (el.data('type') === 'mixer' || el.data('type') === 'bridge') return 24
-  return 20
+  if (el.data('is_seed')) return 44
+  if (el.data('is_vasp') || el.data('type') === 'vasp' || el.data('type') === 'exchange') return 40
+  if (el.data('type') === 'mixer' || el.data('type') === 'bridge') return 36
+  return 30
 }
 
-function getGraphStyle(isDark: boolean): cytoscape.Stylesheet[] {
+function getGraphStyle(isDark: boolean, isFullGraph: boolean): cytoscape.StylesheetStyle[] {
   const graphBg = isDark ? '#091523' : '#F9FAFB'
   const textColor = isDark ? '#F3F5F7' : '#16233B'
   const unknownColor = isDark ? '#26384D' : '#102A4C'
   const seedBorderColor = isDark ? '#FF8A00' : '#F57C00'
   const normalBorderColor = isDark ? '#33485F' : '#E4E8EF'
-  const edgeColor = isDark ? '#7F8C9F' : '#7B8798'
+  
+  // attribution path colors
+  const edgeColor = isDark ? '#435165' : '#7B8798'
+  const attrEdgeColor = isDark ? '#D89A10' : '#FF8A00'
+  
   const selectedOutline = isDark ? '#F3F5F7' : '#102A4C'
   
   const RISK_COLOR_DYNAMIC: Record<string, string> = {
@@ -44,23 +50,33 @@ function getGraphStyle(isDark: boolean): cytoscape.Stylesheet[] {
       selector: 'node',
       style: {
         'background-color': (el: cytoscape.NodeSingular) => RISK_COLOR_DYNAMIC[el.data('risk_level')] ?? unknownColor,
+        'background-image': (el: cytoscape.NodeSingular) => graphEntityIconDataUri(el.data('type'), el.data('is_seed')),
+        'background-fit': 'none',
+        'background-width': '58%',
+        'background-height': '58%',
+        'background-opacity': 1,
         shape: (el: cytoscape.NodeSingular) => TYPE_SHAPE[el.data('type')] ?? 'ellipse',
-        label: 'data(label)',
+        label: (el: cytoscape.NodeSingular) => {
+          if (isFullGraph) {
+            return (el.data('is_seed') || el.data('is_vasp')) ? el.data('label') : ''
+          }
+          return el.data('label')
+        },
         color: textColor,
-        'font-size': 8,
-        'font-weight': 600,
+        'font-size': (el: cytoscape.NodeSingular) => (el.data('is_seed') || el.data('is_vasp')) ? 10 : 8,
+        'font-weight': (el: cytoscape.NodeSingular) => (el.data('is_seed') || el.data('is_vasp')) ? 700 : 600,
         'text-valign': 'bottom',
         'text-margin-y': 5,
-        'text-max-width': '70px',
-        'text-wrap': 'ellipsis',
+        'text-max-width': '100px',
+        'text-wrap': 'wrap',
         'text-background-color': graphBg,
         'text-background-opacity': 0.85,
         'text-background-shape': 'roundrectangle',
         'text-background-padding': '3px',
         width: baseSize,
         height: baseSize,
-        'border-width': (el: cytoscape.NodeSingular) => (el.data('is_seed') ? 3 : 1),
-        'border-color': (el: cytoscape.NodeSingular) => (el.data('is_seed') ? seedBorderColor : normalBorderColor),
+        'border-width': (el: cytoscape.NodeSingular) => (el.data('is_seed') ? 4 : el.data('is_vasp') ? 3 : 1),
+        'border-color': (el: cytoscape.NodeSingular) => (el.data('is_seed') ? seedBorderColor : el.data('is_vasp') ? attrEdgeColor : normalBorderColor),
         'transition-property': 'border-color, border-width, opacity',
         'transition-duration': 120,
         'transition-timing-function': 'ease-out',
@@ -69,20 +85,33 @@ function getGraphStyle(isDark: boolean): cytoscape.Stylesheet[] {
     {
       selector: 'edge',
       style: {
-        width: 1.5,
+        width: 1,
         'line-color': edgeColor,
         'target-arrow-color': edgeColor,
         'target-arrow-shape': 'triangle',
-        'arrow-scale': 0.9,
+        'arrow-scale': 0.8,
         'curve-style': 'bezier',
+        opacity: isFullGraph ? 0.3 : 0.6,
         'transition-property': 'width, line-color, target-arrow-color, opacity',
         'transition-duration': 120,
         'transition-timing-function': 'ease-out',
       },
     },
     {
+      selector: 'edge[?is_attribution_path]',
+      style: {
+        width: 2.5,
+        'line-color': attrEdgeColor,
+        'target-arrow-color': attrEdgeColor,
+        'target-arrow-shape': 'triangle',
+        'arrow-scale': 1.1,
+        opacity: 1,
+        'z-index': 10,
+      },
+    },
+    {
       selector: 'node:selected',
-      style: { 'border-width': 2, 'border-color': selectedOutline },
+      style: { 'border-width': 2, 'border-color': selectedOutline, label: 'data(label)' },
     },
     {
       selector: 'edge:selected',
@@ -98,11 +127,12 @@ function getGraphStyle(isDark: boolean): cytoscape.Stylesheet[] {
         'text-background-opacity': 0.85,
         'text-background-shape': 'roundrectangle',
         'text-background-padding': '2px',
+        opacity: 1,
       },
     },
     {
       selector: 'node.hovered',
-      style: { 'border-width': 2, 'border-color': selectedOutline },
+      style: { 'border-width': 2, 'border-color': selectedOutline, label: 'data(label)' },
     },
     {
       selector: 'edge.hovered',
@@ -118,6 +148,7 @@ function getGraphStyle(isDark: boolean): cytoscape.Stylesheet[] {
         'text-background-opacity': 0.85,
         'text-background-shape': 'roundrectangle',
         'text-background-padding': '2px',
+        opacity: 1,
       },
     },
   ]
@@ -126,11 +157,17 @@ function getGraphStyle(isDark: boolean): cytoscape.Stylesheet[] {
 export function GraphCanvas({
   nodes,
   edges,
+  isFullGraph = false,
+  focusNodeId,
+  fitRequest = 0,
   onNodeSelect,
   onEdgeSelect,
 }: {
   nodes: GraphNode[]
   edges: GraphEdge[]
+  isFullGraph?: boolean
+  focusNodeId?: string | null
+  fitRequest?: number
   onNodeSelect: (node: GraphNode) => void
   onEdgeSelect: (edge: GraphEdge) => void
 }) {
@@ -140,37 +177,100 @@ export function GraphCanvas({
 
   useEffect(() => {
     if (!cyRef.current) return
-    cyRef.current.style(getGraphStyle(theme === 'dark'))
-  }, [theme])
+    cyRef.current.style(getGraphStyle(theme === 'dark', isFullGraph))
+  }, [theme, isFullGraph])
+
+  useEffect(() => {
+    if (!cyRef.current || !focusNodeId) return
+    const cy = cyRef.current
+    const el = cy.getElementById(focusNodeId)
+    if (el && el.length > 0) {
+      cy.animate({
+        fit: {
+          eles: el,
+          padding: 100
+        },
+        duration: 300
+      })
+      el.select()
+    }
+  }, [focusNodeId])
+
+  useEffect(() => {
+    if (!cyRef.current || fitRequest === 0) return
+    cyRef.current.animate({ fit: { eles: cyRef.current.elements(), padding: 50 }, duration: 300 })
+  }, [fitRequest])
 
   useEffect(() => {
     if (!containerRef.current) return
 
+    const nodeIds = new Set<string>()
+    const validNodes = nodes.filter((node) => {
+      const id = node.id.trim()
+      if (!id || nodeIds.has(id)) {
+        if (import.meta.env.DEV) console.warn('Cytoscape node validation removed invalid/duplicate node:', node)
+        return false
+      }
+      nodeIds.add(id)
+      return true
+    })
+    const edgeIds = new Set<string>()
+    let orphanEdgeCount = 0
+    const validEdges = edges.filter((edge) => {
+      if (!edge.id.trim() || edgeIds.has(edge.id)) {
+        if (import.meta.env.DEV) console.warn('Cytoscape edge validation removed invalid/duplicate edge:', edge)
+        return false
+      }
+      edgeIds.add(edge.id)
+      const connected = nodeIds.has(edge.source) && nodeIds.has(edge.target)
+      if (!connected) {
+        orphanEdgeCount += 1
+        if (import.meta.env.DEV) console.warn('Cytoscape orphan edge removed:', edge)
+      }
+      return connected
+    })
+    if (import.meta.env.DEV) console.info(`Cytoscape validation: orphan edge count = ${orphanEdgeCount}`)
+
+    const nodeLabel = (node: GraphNode) => {
+      if (node.is_seed) return `START\n${node.address}`
+      if (node.is_nearest_vasp) {
+        const parts = [node.entity_name, node.type.toUpperCase(), node.address]
+        if (node.hop != null) parts.push(`Hop ${node.hop}`)
+        if (node.attribution_amount != null) {
+          parts.push(`${node.attribution_amount}${node.attribution_asset ? ` ${node.attribution_asset}` : ''}`)
+        }
+        return parts.filter(Boolean).join('\n')
+      }
+      return node.entity_name ? `${node.entity_name}\n${node.address}` : node.address
+    }
+
     const cy = cytoscape({
       container: containerRef.current,
       elements: [
-        ...nodes.map((n) => ({
+        ...validNodes.map((n) => ({
           data: {
             id: n.id,
-            label: n.entity_name ?? n.label,
+            label: nodeLabel(n),
             risk_level: n.risk_level,
             type: n.type,
             is_seed: n.is_seed ?? false,
+            is_vasp: n.is_vasp ?? false,
           },
         })),
-        ...edges.map((e) => ({
+        ...validEdges.map((e) => ({
           data: {
             id: e.id,
             source: e.source,
             target: e.target,
-            label: `${e.amount} ${e.asset}`,
+            label: e.amount != null ? `${e.amount}${e.asset ? ` ${e.asset}` : ''}` : 'Amount not available',
+            is_attribution_path: e.is_attribution_path ?? false,
           },
         })),
       ],
-      style: getGraphStyle(theme === 'dark'),
-      wheelSensitivity: 0.2,
-      minZoom: 0.3,
-      maxZoom: 1.6,
+      style: getGraphStyle(theme === 'dark', isFullGraph),
+
+      minZoom: 0.1,
+      maxZoom: 2.0,
     })
 
     cy.one('layoutstop', () => {
@@ -192,7 +292,13 @@ export function GraphCanvas({
         node.position({ x: originX + col * cellW + hexOffset, y: originY + row * cellH * 0.87 })
       })
 
-      cy.fit(undefined, 50)
+      const seed = cy.nodes().filter((n) => n.data('is_seed'))
+      if (seed.length > 0) {
+        const neighborhood = seed.neighborhood().add(seed)
+        cy.fit(neighborhood, 50)
+      } else {
+        cy.fit(undefined, 50)
+      }
     })
 
     cy.layout({
@@ -236,47 +342,21 @@ export function GraphCanvas({
 
     cy.on('tap', 'node', (evt) => {
       const id = evt.target.id()
-      const node = nodes.find((n) => n.id === id)
+      const node = validNodes.find((n) => n.id === id)
       if (node) onNodeSelect(node)
     })
 
     cy.on('tap', 'edge', (evt) => {
       const id = evt.target.id()
-      const edge = edges.find((e) => e.id === id)
+      const edge = validEdges.find((e) => e.id === id)
       if (edge) onEdgeSelect(edge)
     })
 
     cyRef.current = cy
     return () => {
       cy.destroy()
-      cyRef.current = null
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [nodes, edges, theme])
+  }, [nodes, edges, theme, isFullGraph, onNodeSelect, onEdgeSelect])
 
-  return (
-    <div className="relative h-full w-full">
-      <div ref={containerRef} className="h-full w-full bg-graph-bg" />
-      <div className="absolute bottom-3 right-3 flex gap-1">
-        <button
-          onClick={() => cyRef.current?.fit(undefined, 40)}
-          className="rounded-md bg-surface-1 border border-border-c shadow-sm px-2.5 py-1.5 text-xs text-text-primary font-medium hover:bg-surface-2 transition-colors"
-        >
-          Fit graph
-        </button>
-        <button
-          onClick={() => cyRef.current?.zoom(cyRef.current.zoom() * 1.2)}
-          className="rounded-md bg-surface-1 border border-border-c shadow-sm px-2.5 py-1.5 text-xs text-text-primary font-medium hover:bg-surface-2 transition-colors"
-        >
-          +
-        </button>
-        <button
-          onClick={() => cyRef.current?.zoom(cyRef.current.zoom() / 1.2)}
-          className="rounded-md bg-surface-1 border border-border-c shadow-sm px-2.5 py-1.5 text-xs text-text-primary font-medium hover:bg-surface-2 transition-colors"
-        >
-          −
-        </button>
-      </div>
-    </div>
-  )
+  return <div ref={containerRef} className="h-full w-full" />
 }

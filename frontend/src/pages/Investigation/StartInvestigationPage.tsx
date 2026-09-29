@@ -2,6 +2,9 @@ import { useState } from 'react'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { useStartInvestigation } from '@/hooks/useInvestigation'
 import { BackButton } from '@/components/common/BackButton'
+import { LoadingIcon } from '@/components/common/LoadingIcon'
+import { isWalletAddressValid, walletAddressError } from '@/schemas/cases'
+import { startInvestigationInputSchema } from '@/schemas/investigations'
 
 export function StartInvestigationPage() {
   const [params] = useSearchParams()
@@ -9,16 +12,24 @@ export function StartInvestigationPage() {
   const startInvestigation = useStartInvestigation()
 
   const [caseId] = useState(params.get('case_id') ?? '')
-  const [chain, setChain] = useState(params.get('chain') ?? 'ethereum')
+  const [chain, setChain] = useState(params.get('chain') ?? '')
   const [address, setAddress] = useState(params.get('address') ?? '')
   const [maxHops, setMaxHops] = useState(4)
   const [minValue, setMinValue] = useState(0)
   const [fromDate, setFromDate] = useState('')
   const [toDate, setToDate] = useState('')
+  const [errorMsg, setErrorMsg] = useState<string | null>(null)
+  
+  const [isSubmitting, setIsSubmitting] = useState(false)
+
+  const isValid = !chain || !address || isWalletAddressValid(chain, address)
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
-    const result = await startInvestigation.mutateAsync({
+    if (isSubmitting) return
+
+    setErrorMsg(null)
+    const parsed = startInvestigationInputSchema.safeParse({
       case_id: caseId,
       chain,
       start_address: address,
@@ -27,7 +38,25 @@ export function StartInvestigationPage() {
       from_date: fromDate || undefined,
       to_date: toDate || undefined,
     })
-    navigate(`/investigations/${result.investigation_id}/progress`)
+    if (!parsed.success) {
+      setErrorMsg(parsed.error.issues[0]?.message || 'Invalid investigation parameters')
+      return
+    }
+    setIsSubmitting(true)
+
+    try {
+      const result = await startInvestigation.mutateAsync(parsed.data)
+      // Only navigate on absolute success
+      navigate(`/investigations/${result.investigation_id}/progress`)
+    } catch (err: any) {
+      // Re-enable on failure
+      setIsSubmitting(false)
+      if (err.message?.toLowerCase().includes('already exists') || err.message?.includes('duplicate')) {
+        setErrorMsg('An investigation for this wallet is already running or completed in this case.')
+      } else {
+        setErrorMsg(err.message || 'Unable to start investigation. Please try again.')
+      }
+    }
   }
 
   return (
@@ -39,15 +68,33 @@ export function StartInvestigationPage() {
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-5 rounded-lg bg-surface-1 p-6 border border-border-c shadow-sm">
+        
+        {errorMsg && (
+          <div className="rounded-md bg-red/10 border border-red/20 p-4">
+            <h3 className="text-sm font-bold text-red">Unable to start investigation</h3>
+            <p className="mt-1 text-sm text-red/80">{errorMsg}</p>
+          </div>
+        )}
+
+        {!isValid && address && chain && (
+          <div className="rounded-md bg-red/10 border border-red/20 p-4">
+            <h3 className="text-sm font-bold text-red">Invalid wallet address</h3>
+            <p className="mt-1 text-sm text-red/80">{walletAddressError(chain)}</p>
+          </div>
+        )}
+
         <div>
           <label className="block text-[10px] font-bold uppercase tracking-widest text-text-secondary mb-1.5">Chain</label>
           <select
             value={chain}
             onChange={(e) => setChain(e.target.value)}
-            className="w-full rounded-md bg-bg-app border border-border-c px-3 py-2 text-sm text-text-primary focus:ring-1 focus:ring-saffron focus:border-saffron transition-colors"
+            disabled={!!params.get('chain')}
+            className="w-full rounded-md bg-bg-app border border-border-c px-3 py-2 text-sm text-text-primary focus:ring-1 focus:ring-saffron focus:border-saffron transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
+            <option value="" disabled>Select Chain...</option>
             <option value="ethereum">Ethereum (ETH)</option>
             <option value="polygon">Polygon (MATIC)</option>
+            <option value="mock">Mock (Dataset)</option>
           </select>
         </div>
         <div>
@@ -56,7 +103,8 @@ export function StartInvestigationPage() {
             required
             value={address}
             onChange={(e) => setAddress(e.target.value)}
-            className="w-full rounded-md bg-bg-app border border-border-c px-3 py-2 text-sm font-mono text-text-primary focus:ring-1 focus:ring-saffron focus:border-saffron transition-colors placeholder:text-text-tertiary"
+            disabled={!!params.get('address')}
+            className="w-full rounded-md bg-bg-app border border-border-c px-3 py-2 text-sm font-mono text-text-primary focus:ring-1 focus:ring-saffron focus:border-saffron transition-colors placeholder:text-text-tertiary disabled:opacity-50 disabled:cursor-not-allowed"
           />
         </div>
         <div>
@@ -66,7 +114,7 @@ export function StartInvestigationPage() {
           <input
             type="range"
             min={1}
-            max={8}
+            max={5}
             value={maxHops}
             onChange={(e) => setMaxHops(Number(e.target.value))}
             className="w-full accent-saffron"
@@ -107,10 +155,10 @@ export function StartInvestigationPage() {
         </div>
         <button
           type="submit"
-          disabled={startInvestigation.isPending || !caseId}
-          className="w-full rounded-md bg-saffron px-4 py-2.5 text-sm font-medium text-white hover:bg-accent-strong disabled:opacity-50 transition-colors shadow-sm mt-4"
+          disabled={isSubmitting || startInvestigation.isPending || !caseId || !chain || !isValid || !address}
+          className="mt-4 flex w-full items-center justify-center gap-2 rounded-md bg-saffron px-4 py-2.5 text-sm font-medium text-white hover:bg-accent-strong disabled:opacity-50 transition-colors shadow-sm"
         >
-          {startInvestigation.isPending ? 'Initializing trace…' : 'Start Investigation'}
+          {isSubmitting || startInvestigation.isPending ? <><LoadingIcon size="button" />Initializing trace…</> : 'Start Investigation'}
         </button>
         {!caseId && <p className="text-xs text-red font-medium mt-2">Missing case context — start this from a case's wallet list.</p>}
       </form>

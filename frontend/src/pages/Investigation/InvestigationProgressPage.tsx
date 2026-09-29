@@ -19,7 +19,9 @@ export function InvestigationProgressPage() {
   }, [status.data?.status, investigationId, navigate])
 
   if (status.isLoading) return <LoadingState label="Fetching investigation status…" />
-  if (status.isError || !status.data) return <ErrorState message="Could not load investigation status." />
+  if (status.isError || !status.data) {
+    return <ErrorState message={status.error instanceof Error ? status.error.message : 'Could not load investigation status.'} onRetry={() => status.refetch()} />
+  }
 
   return (
     <div className="max-w-xl space-y-6">

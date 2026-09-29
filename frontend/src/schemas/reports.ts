@@ -23,11 +23,11 @@ export type CreateReportInput = z.infer<typeof createReportInputSchema>
 export const reportSummarySchema = z.object({
   report_id: z.string(),
   investigation_id: z.string(),
-  case_id: z.string(),
+  case_id: z.string().nullable(),
   case_title: z.string(),
   format: z.enum(['pdf', 'docx']),
   status: reportStatusSchema,
-  created_at: z.string(),
+  created_at: z.string().nullable(),
 })
 export type ReportSummary = z.infer<typeof reportSummarySchema>
 
@@ -35,22 +35,3 @@ export const reportListResponseSchema = z.object({
   reports: z.array(reportSummarySchema),
 })
 
-export const reportSectionSchema = z.object({
-  heading: z.string(),
-  bodyHtml: z.string(),
-})
-
-export const reportContentSchema = z.object({
-  report_id: z.string(),
-  format: z.enum(['pdf', 'docx']),
-  generated_at: z.string(),
-  case_id: z.string(),
-  case_title: z.string(),
-  case_status: z.enum(['open', 'in_progress', 'closed']),
-  case_priority: z.enum(['low', 'medium', 'high']),
-  investigation_id: z.string(),
-  chain: z.string(),
-  start_address: z.string(),
-  sections: z.array(reportSectionSchema),
-})
-export type ReportContent = z.infer<typeof reportContentSchema>

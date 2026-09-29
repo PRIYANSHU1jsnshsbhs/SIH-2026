@@ -39,9 +39,9 @@ export function buildTransactionTable(edges: GraphEdge[]): string {
       (e) => `<tr>
         <td class="mono">${shortAddr(e.source)}</td>
         <td class="mono">${shortAddr(e.target)}</td>
-        <td>${escapeHtml(e.amount)} ${escapeHtml(e.asset)}</td>
+        <td>${escapeHtml(e.amount ?? 'Not available')} ${escapeHtml(e.asset ?? '')}</td>
         <td class="mono">${shortAddr(e.tx_hash)}</td>
-        <td>${new Date(e.timestamp).toLocaleString()}</td>
+        <td>${e.timestamp ? new Date(e.timestamp).toLocaleString() : 'Not available'}</td>
       </tr>`,
     )
     .join('')
@@ -60,14 +60,14 @@ export function buildGraphSummary(nodes: GraphNode[], edges: GraphEdge[]): strin
 
 export function buildRiskTable(nodes: GraphNode[]): string {
   if (nodes.length === 0) return '<p class="muted">No wallets were scored in this investigation.</p>'
-  const sorted = [...nodes].sort((a, b) => b.risk_score - a.risk_score)
+  const sorted = [...nodes].sort((a, b) => (b.risk_score ?? -1) - (a.risk_score ?? -1))
   const rows = sorted
     .map(
       (n) => `<tr>
         <td class="mono">${shortAddr(n.id)}</td>
         <td>${escapeHtml(n.label)}</td>
         <td class="risk-${n.risk_level}">${n.risk_level.toUpperCase()}</td>
-        <td>${n.risk_score}/100</td>
+        <td>${n.risk_score == null ? 'Not available' : `${n.risk_score}/100`}</td>
       </tr>`,
     )
     .join('')
@@ -95,8 +95,8 @@ export function buildFindingsList(findings: Finding[]): string {
     .map(
       (f) => `<div class="finding">
         <p class="finding-title"><span class="risk-${f.severity}">${f.severity.toUpperCase()}</span> ${escapeHtml(f.description)}</p>
-        <p class="muted">Wallet: <span class="mono">${shortAddr(f.wallet)}</span> · Confidence: ${Math.round(f.confidence * 100)}%</p>
-        <p class="muted">Evidence: ${escapeHtml(f.evidence)}</p>
+        <p class="muted">Wallet: <span class="mono">${f.wallet ? shortAddr(f.wallet) : 'Not available'}</span> · Confidence: ${f.confidence == null ? 'Not available' : `${Math.round(f.confidence * 100)}%`}</p>
+        <p class="muted">Evidence: ${f.evidence ? escapeHtml(f.evidence) : 'Not available'}</p>
       </div>`,
     )
     .join('')

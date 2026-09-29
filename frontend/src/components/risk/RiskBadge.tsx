@@ -15,7 +15,9 @@ const LABELS: Record<RiskLevel, string> = {
   unknown: 'UNKNOWN',
 }
 
-export function RiskBadge({ level, score }: { level: RiskLevel; score?: number }) {
+export function RiskBadge({ level, score }: { level: RiskLevel; score?: number | null }) {
+  const isRealScore = typeof score === 'number'
+
   return (
     <span
       className={clsx(
@@ -24,7 +26,11 @@ export function RiskBadge({ level, score }: { level: RiskLevel; score?: number }
       )}
     >
       {LABELS[level]}
-      {typeof score === 'number' && <span className="opacity-80 font-mono ml-0.5">{score}/100</span>}
+      {isRealScore ? (
+        <span className="opacity-80 font-mono ml-0.5">{score}/100</span>
+      ) : (
+        <span className="opacity-80 font-mono ml-0.5">Not available</span>
+      )}
     </span>
   )
 }

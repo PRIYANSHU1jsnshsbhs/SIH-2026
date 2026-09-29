@@ -18,7 +18,7 @@ export function useHydrateSession() {
       setHydrating(false)
       return
     }
-    getMe(token)
+    getMe()
       .then((user) => {
         if (!cancelled) setSession(token, user)
       })
@@ -45,7 +45,7 @@ export function useLogin() {
     // session (or one role) would render already-open for whoever logs in
     // next in the same tab, regardless of their role.
     onSuccess: (data) => {
-      setSession(data.access_token, data.user)
+      setSession(data.accessToken, data.user)
       setConsoleOpen(false)
     },
   })
@@ -67,7 +67,7 @@ export function useCurrentUser() {
   const user = useAuthStore((s) => s.user)
   const query = useQuery({
     queryKey: ['auth', 'me'],
-    queryFn: () => getMe(token!),
+    queryFn: () => getMe(),
     enabled: !!token && !user,
     retry: false,
   })

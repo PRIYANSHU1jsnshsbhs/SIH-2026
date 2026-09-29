@@ -4,6 +4,7 @@ import { useAuthStore } from '@/stores/authStore'
 import { useUiStore } from '@/stores/uiStore'
 import { useLogout } from '@/hooks/useAuth'
 import { useWalletSearch } from '@/hooks/useWallet'
+import { BrandLogo } from '@/components/common/BrandLogo'
 
 export function TopBar() {
   const user = useAuthStore((s) => s.user)
@@ -21,7 +22,7 @@ export function TopBar() {
   }
 
   return (
-    <header className="relative flex h-14 shrink-0 items-center gap-4 border-b border-border-c bg-surface-1 px-4 shadow-sm z-10">
+    <header className="app-topbar relative flex h-14 shrink-0 items-center gap-4 border-b border-border-c bg-surface-1 px-4 shadow-sm z-10">
       {/* Subtle Tricolor Accent */}
       <div className="absolute top-0 left-0 right-0 h-[3px] flex">
         <div className="flex-1 bg-[#FF9933]"></div>
@@ -33,19 +34,16 @@ export function TopBar() {
         <button onClick={toggleSidebar} className="text-text-secondary hover:text-saffron" aria-label="Toggle sidebar">
           ☰
         </button>
-        <div className="flex flex-col">
-          <Link
-            to="/login"
-            title="Back to the main page"
-            className="font-bold text-text-primary whitespace-nowrap hover:text-saffron leading-tight"
-          >
-            LAPSUS
-          </Link>
-          <span className="text-[9px] uppercase tracking-wider text-text-secondary font-medium">Financial Intelligence</span>
-        </div>
+        <Link
+          to="/login"
+          title="Back to the main page"
+          className="app-topbar-brand flex h-11 w-[106px] items-center transition-transform hover:scale-[1.02]"
+        >
+          <BrandLogo className="h-10 w-full" />
+        </Link>
       </div>
 
-      <div className="relative flex-1 max-w-md ml-4 pt-1">
+      <div className="app-global-search relative flex-1 max-w-md ml-4 pt-1">
         <input
           value={search}
           onChange={(e) => setSearch(e.target.value)}
@@ -68,7 +66,7 @@ export function TopBar() {
         )}
       </div>
 
-      <div className="ml-auto flex items-center gap-3 pt-1">
+      <div className="app-topbar-actions ml-auto flex items-center gap-3 pt-1">
         <div className="hidden md:flex items-center gap-2 mr-2 text-[10px] font-medium uppercase tracking-widest text-text-tertiary">
           Secure <span className="text-border-strong">•</span> Compliant <span className="text-border-strong">•</span> Safer India
         </div>
@@ -77,7 +75,7 @@ export function TopBar() {
           <button
             onClick={() => setConsoleOpen(true)}
             title="Open API console (Ctrl+`)"
-            className="rounded-md border border-border-strong bg-surface-1 px-2.5 py-1.5 text-xs font-mono text-text-secondary hover:bg-bg-app"
+            className="app-console-button rounded-md border border-border-strong bg-surface-1 px-2.5 py-1.5 text-xs font-mono text-text-secondary hover:bg-bg-app"
           >
             {'>_'} Console
           </button>
@@ -102,12 +100,12 @@ export function TopBar() {
         <div className="relative ml-2">
           <button
             onClick={() => setMenuOpen((v) => !v)}
-            className="flex items-center gap-2 rounded-md px-2 py-1.5 text-sm font-medium text-text-primary hover:bg-bg-app transition-colors"
+            className="app-user-menu-trigger flex items-center gap-2 rounded-md px-2 py-1.5 text-sm font-medium text-text-primary hover:bg-bg-app transition-colors"
           >
             <span className="h-7 w-7 rounded-full bg-navy-100 text-xs flex items-center justify-center text-text-primary border border-border-c font-bold bg-surface-2">
               {user?.name?.[0] ?? '?'}
             </span>
-            {user?.name}
+            <span className="app-user-name">{user?.name}</span>
           </button>
           {menuOpen && (
             <div className="absolute right-0 z-30 mt-1 w-44 rounded-md bg-surface-1 border border-border-c py-1 shadow-lg">

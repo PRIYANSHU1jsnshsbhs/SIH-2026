@@ -2,8 +2,13 @@ import { Link } from 'react-router-dom'
 import { useCases } from '@/hooks/useCases'
 import { useAllInvestigations, useHighRiskFindings, useHighRiskFindingsCount } from '@/hooks/useInvestigation'
 import { useAuthStore } from '@/stores/authStore'
+import { BrandLogo } from '@/components/common/BrandLogo'
 import { LoadingState } from '@/components/common/LoadingState'
 import { RiskBadge } from '@/components/risk/RiskBadge'
+import { PriorityBadge } from '@/components/cases/PriorityBadge'
+import { ErrorState } from '@/components/common/ErrorState'
+import { EmptyState } from '@/components/common/EmptyState'
+import { DashboardAnalytics } from '@/components/dashboard/DashboardAnalytics'
 import clsx from 'clsx'
 
 function StatCard({ label, value, tone }: { label: string; value: number | string; tone?: 'default' | 'risk' }) {
@@ -13,44 +18,6 @@ function StatCard({ label, value, tone }: { label: string; value: number | strin
       <p className={clsx('mt-2 text-3xl font-bold tabular-nums', tone === 'risk' ? 'text-red' : 'text-text-primary')}>
         {value}
       </p>
-    </div>
-  )
-}
-
-function StatusBreakdown({
-  title,
-  items,
-}: {
-  title: string
-  items: { label: string; count: number; color: string }[]
-}) {
-  const total = items.reduce((s, i) => s + i.count, 0)
-  return (
-    <div className="rounded-lg bg-surface-1 p-5 border border-border-c shadow-sm">
-      <p className="text-xs uppercase tracking-wider font-semibold text-text-secondary mb-4">{title}</p>
-      {total === 0 ? (
-        <p className="text-sm text-text-tertiary">No data yet.</p>
-      ) : (
-        <div className="space-y-3">
-          {items.map((item) => (
-            <div key={item.label}>
-              <div className="mb-1.5 flex items-center justify-between text-sm">
-                <span className="flex items-center gap-2 text-text-primary font-medium">
-                  <span className="h-2 w-2 shrink-0 rounded-full" style={{ backgroundColor: item.color }} aria-hidden />
-                  {item.label}
-                </span>
-                <span className="font-semibold tabular-nums text-text-primary">{item.count}</span>
-              </div>
-              <div className="h-1.5 w-full overflow-hidden rounded-full bg-surface-2">
-                <div
-                  className="h-full rounded-full"
-                  style={{ width: `${(item.count / total) * 100}%`, backgroundColor: item.color }}
-                />
-              </div>
-            </div>
-          ))}
-        </div>
-      )}
     </div>
   )
 }
@@ -81,23 +48,20 @@ export function DashboardPage() {
   const highRiskCount = useHighRiskFindingsCount()
   const allInvestigations = useAllInvestigations()
 
-  const openCases = cases.data?.cases.filter((c) => c.status !== 'closed').length ?? 0
-  const activeInvestigations = allInvestigations.data?.filter(inv => inv.status === 'queued' || inv.status === 'running').length ?? 0
-  const investigationsToday = allInvestigations.data?.filter(inv => new Date(inv.started_at).toDateString() === new Date().toDateString()).length ?? 0
+  const openCases = cases.data ? cases.data.cases.filter((c) => c.status !== 'closed').length : '—'
+  const activeInvestigations = allInvestigations.data ? allInvestigations.data.filter(inv => ['queued', 'pending', 'running', 'initializing'].includes(inv.status)).length : '—'
+  const investigationsToday = allInvestigations.data ? allInvestigations.data.filter(inv => new Date(inv.started_at).toDateString() === new Date().toDateString()).length : '—'
   const recentCases = cases.data?.cases.slice(0, RECENT_CASES_LIMIT) ?? []
-
-  const priorityCounts = { low: 0, medium: 0, high: 0 }
-  cases.data?.cases.forEach((c) => priorityCounts[c.priority]++)
-
-  const investigationStatusCounts = { queued: 0, running: 0, completed: 0, cancelled: 0, failed: 0 }
-  allInvestigations.data?.forEach((inv) => investigationStatusCounts[inv.status]++)
 
   return (
     <div className="space-y-8 pb-8">
       <div className="flex items-center justify-between border-b border-border-c pb-4">
         <div>
           <h1 className="text-2xl font-bold text-text-primary">Financial Intelligence Dashboard</h1>
-          <p className="text-sm text-text-secondary mt-1">Lapsus Blockchain Investigation & Risk Attribution</p>
+          <div className="mt-1 flex items-center gap-2 text-sm text-text-secondary">
+            <BrandLogo className="h-8 w-[76px]" />
+            <span>Blockchain Investigation &amp; Risk Attribution</span>
+          </div>
         </div>
         <div className="flex gap-3">
           <Link to="/reports/new" className="text-sm font-medium px-4 py-2 rounded-md bg-surface-1 text-text-primary border border-border-strong hover:bg-surface-2 transition-colors shadow-sm">
@@ -112,30 +76,22 @@ export function DashboardPage() {
       <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
         <StatCard label="Open cases" value={openCases} />
         <StatCard label="Active investigations" value={activeInvestigations} />
-        <StatCard label="High-risk findings" value={highRiskCount.data ?? 0} tone="risk" />
+        <StatCard label="High-risk findings" value={highRiskCount.data ?? '—'} tone="risk" />
         <StatCard label="Investigations today" value={investigationsToday} />
       </div>
 
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-        <StatusBreakdown
-          title="Cases by priority"
-          items={[
-            { label: 'High Priority', count: priorityCounts.high, color: '#D14343' },
-            { label: 'Medium Priority', count: priorityCounts.medium, color: '#D89A10' },
-            { label: 'Low Priority', count: priorityCounts.low, color: '#1F8A4D' },
-          ]}
-        />
-        <StatusBreakdown
-          title="Investigations by status"
-          items={[
-            { label: 'Queued', count: investigationStatusCounts.queued, color: '#D89A10' },
-            { label: 'Running', count: investigationStatusCounts.running, color: '#102A4C' },
-            { label: 'Completed', count: investigationStatusCounts.completed, color: '#1F8A4D' },
-            { label: 'Cancelled', count: investigationStatusCounts.cancelled, color: '#7B8798' },
-            { label: 'Failed', count: investigationStatusCounts.failed, color: '#D14343' },
-          ]}
-        />
-      </div>
+      {(cases.isLoading || allInvestigations.isLoading) && <LoadingState label="Loading dashboard counts…" />}
+      {(cases.isError || allInvestigations.isError || highRiskCount.isError) && (
+        <ErrorState message={
+          (cases.error instanceof Error && cases.error.message)
+          || (allInvestigations.error instanceof Error && allInvestigations.error.message)
+          || (highRiskCount.error instanceof Error && highRiskCount.error.message)
+          || 'Could not load dashboard counts.'
+        } />
+      )}
+      {cases.data && allInvestigations.data && (
+        <DashboardAnalytics cases={cases.data.cases} investigations={allInvestigations.data} />
+      )}
 
       {(role === 'admin' || role === 'devops') && (
         <section>
@@ -178,6 +134,8 @@ export function DashboardPage() {
         </div>
         {cases.isLoading ? (
           <LoadingState />
+        ) : cases.isError ? (
+          <ErrorState message={cases.error instanceof Error ? cases.error.message : 'Could not load cases.'} onRetry={() => cases.refetch()} />
         ) : (
           <div className="overflow-x-auto rounded-lg bg-surface-1 border border-border-c shadow-sm">
             <table className="w-full text-left text-sm">
@@ -187,6 +145,7 @@ export function DashboardPage() {
                   <th className="px-4 py-3 font-semibold">Priority</th>
                   <th className="px-4 py-3 font-semibold">Status</th>
                   <th className="px-4 py-3 font-semibold">Wallets</th>
+                  <th className="px-4 py-3 font-semibold">Investigations</th>
                   <th className="px-4 py-3 font-semibold">Updated</th>
                 </tr>
               </thead>
@@ -200,10 +159,11 @@ export function DashboardPage() {
                       <span className="ml-2 text-xs font-mono text-text-tertiary">{c.case_id}</span>
                     </td>
                     <td className="px-4 py-3">
-                      <RiskBadge level={c.priority} />
+                      <PriorityBadge level={c.priority} />
                     </td>
                     <td className="px-4 py-3 capitalize text-text-secondary font-medium">{c.status.replace('_', ' ')}</td>
                     <td className="px-4 py-3 text-text-primary font-medium">{c.wallets_count}</td>
+                    <td className="px-4 py-3 text-text-primary font-medium">{c.investigations_count}</td>
                     <td className="px-4 py-3 text-xs text-text-secondary">{new Date(c.updated_at).toLocaleDateString()}</td>
                   </tr>
                 ))}
@@ -217,6 +177,10 @@ export function DashboardPage() {
         <h2 className="text-base font-bold text-text-primary mb-4">High-Risk Findings</h2>
         {highRiskFindings.isLoading ? (
           <LoadingState />
+        ) : highRiskFindings.isError ? (
+          <ErrorState message={highRiskFindings.error instanceof Error ? highRiskFindings.error.message : 'Could not load findings.'} onRetry={() => highRiskFindings.refetch()} />
+        ) : highRiskFindings.data?.length === 0 ? (
+          <EmptyState title="No high-risk findings" description="Completed investigations have not produced high-risk rule matches." />
         ) : (
           <div className="space-y-3">
             {highRiskFindings.data?.map((f) => (

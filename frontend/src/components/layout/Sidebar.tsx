@@ -20,7 +20,7 @@ function NavItem({ to, label, icon, collapsed }: { to: string; label: string; ic
           // transition-none: bg/text/height snap instantly on hover or active
           // instead of fading in, per design — the underline indicator below
           // keeps its own transition since that's declared on itself, not here.
-          'relative flex items-center gap-3 rounded-md px-3 py-2 text-sm transition-none hover:py-2.5',
+          'app-sidebar-link relative flex items-center gap-3 rounded-md px-3 py-2 text-sm transition-all duration-200 hover:py-2.5',
           isActive
             ? 'bg-navy-800 text-saffron font-medium py-2.5'
             : 'text-text-secondary hover:bg-navy-800 hover:text-text-inverse',
@@ -36,7 +36,7 @@ function NavItem({ to, label, icon, collapsed }: { to: string; label: string; ic
             )}
             aria-hidden
           />
-          <span aria-hidden>{icon}</span>
+          <span className="app-sidebar-icon" aria-hidden>{icon}</span>
           {!collapsed && <span>{label}</span>}
         </>
       )}
@@ -53,7 +53,7 @@ export function Sidebar() {
   if (role === 'devops') navItems.push({ to: '/devops', label: 'DevOps', icon: '◆' })
 
   return (
-    <aside className={clsx('flex shrink-0 flex-col bg-navy-900 text-text-inverse transition-all border-r border-navy-800', collapsed ? 'w-16' : 'w-56')}>
+    <aside className={clsx('app-sidebar flex shrink-0 flex-col bg-navy-900 text-text-inverse transition-all border-r border-navy-800', collapsed ? 'w-16' : 'w-56')}>
       <nav className="flex flex-col gap-1 p-3">
         {navItems.map((item) => (
           <NavItem key={item.to} {...item} collapsed={collapsed} />

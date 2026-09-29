@@ -1,7 +1,9 @@
 import { create } from 'zustand'
 import type { Role, User } from '@/schemas/auth'
+import { AUTH_TOKEN_KEY } from '@/api/client'
 
-const TOKEN_STORAGE_KEY = 'crypto-fraud-platform.token'
+const LEGACY_TOKEN_KEY = 'crypto-fraud-platform.token'
+localStorage.removeItem(LEGACY_TOKEN_KEY)
 
 interface AuthState {
   token: string | null
@@ -14,15 +16,16 @@ interface AuthState {
 }
 
 export const useAuthStore = create<AuthState>((set, get) => ({
-  token: localStorage.getItem(TOKEN_STORAGE_KEY),
+  token: localStorage.getItem(AUTH_TOKEN_KEY),
   user: null,
   isHydrating: true,
   setSession: (token, user) => {
-    localStorage.setItem(TOKEN_STORAGE_KEY, token)
+    localStorage.setItem(AUTH_TOKEN_KEY, token)
     set({ token, user })
   },
   clearSession: () => {
-    localStorage.removeItem(TOKEN_STORAGE_KEY)
+    localStorage.removeItem(AUTH_TOKEN_KEY)
+    localStorage.removeItem(LEGACY_TOKEN_KEY)
     set({ token: null, user: null })
   },
   setHydrating: (value) => set({ isHydrating: value }),

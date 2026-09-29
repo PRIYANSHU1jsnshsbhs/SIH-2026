@@ -3,18 +3,26 @@ import { useNavigate } from 'react-router-dom'
 import { useCreateCase } from '@/hooks/useCases'
 import type { CasePriority } from '@/schemas/cases'
 import { BackButton } from '@/components/common/BackButton'
+import { LoadingIcon } from '@/components/common/LoadingIcon'
 
 export function CreateCasePage() {
+  const [caseNumber, setCaseNumber] = useState('')
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
   const [priority, setPriority] = useState<CasePriority>('medium')
   const createCase = useCreateCase()
   const navigate = useNavigate()
+  const [error, setError] = useState<string | null>(null)
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
-    const result = await createCase.mutateAsync({ title, description: description || undefined, priority })
-    navigate(`/cases/${result.case_id}`)
+    setError(null)
+    try {
+      const result = await createCase.mutateAsync({ caseNumber, title, description: description || undefined, priority })
+      navigate(`/cases/${result.case_id}`)
+    } catch (caught) {
+      setError(caught instanceof Error ? caught.message : 'Could not create case')
+    }
   }
 
   return (
@@ -26,6 +34,16 @@ export function CreateCasePage() {
       </div>
 
       <form onSubmit={handleSubmit} className="space-y-5 rounded-lg bg-surface-1 p-6 border border-border-c shadow-sm">
+        <div>
+          <label className="block text-[10px] font-bold uppercase tracking-widest text-text-secondary mb-1.5">Case Number</label>
+          <input
+            required
+            value={caseNumber}
+            onChange={(e) => setCaseNumber(e.target.value)}
+            className="w-full rounded-md bg-bg-app border border-border-c px-4 py-2 text-sm text-text-primary focus:ring-1 focus:ring-saffron focus:border-saffron transition-colors placeholder:text-text-tertiary"
+            placeholder="SIH-2026-001"
+          />
+        </div>
         <div>
           <label className="block text-[10px] font-bold uppercase tracking-widest text-text-secondary mb-1.5">Case Title</label>
           <input
@@ -59,12 +77,17 @@ export function CreateCasePage() {
           </select>
         </div>
         <div className="pt-2">
+          {error && (
+            <div role="alert" className="mb-4 rounded-md border border-red/20 bg-red/10 p-3 text-sm font-medium text-red">
+              {error}
+            </div>
+          )}
           <button
             type="submit"
             disabled={createCase.isPending}
-            className="w-full rounded-md bg-saffron px-4 py-2.5 text-sm font-medium text-white hover:bg-accent-strong disabled:opacity-50 transition-colors shadow-sm"
+            className="flex w-full items-center justify-center gap-2 rounded-md bg-saffron px-4 py-2.5 text-sm font-medium text-white hover:bg-accent-strong disabled:opacity-50 transition-colors shadow-sm"
           >
-            {createCase.isPending ? 'Initializing…' : 'Create Case'}
+            {createCase.isPending ? <><LoadingIcon size="button" />Initializing…</> : 'Create Case'}
           </button>
         </div>
       </form>

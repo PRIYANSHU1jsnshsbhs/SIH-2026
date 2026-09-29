@@ -6,7 +6,7 @@ import type { RiskLevel } from '@/schemas/wallets'
 const SEED = 20260912 // today's date per system context — stable across builds
 
 // ---------------------------------------------------------------------------
-// Reference data — fraud typologies straight from PS 26183's own description,
+// Reference data — fraud typologies straight from PS 26182's own description,
 // and clearly fictional VASP/mixer/bridge names (no real companies).
 // ---------------------------------------------------------------------------
 
@@ -313,8 +313,8 @@ export function generateDataset(): GeneratedDataset {
     let edgeSeq = 0
     const nextEdgeId = () => `EDGE-${caseId}-${String(++edgeSeq).padStart(3, '0')}`
 
-    nodes.push({ id: seedAddr, type: 'wallet', label: 'Suspect Wallet', risk_score: riskScoreFor('high', rng), risk_level: 'high', is_seed: true })
-    nodes.push({ id: muleAddr, type: 'wallet', label: 'Layering Mule', risk_score: riskScoreFor('high', rng), risk_level: 'high' })
+    nodes.push({ id: seedAddr, address: seedAddr, chain, type: 'wallet', label: 'Suspect Wallet', risk_score: riskScoreFor('high', rng), risk_level: 'high', is_seed: true })
+    nodes.push({ id: muleAddr, address: muleAddr, chain, type: 'wallet', label: 'Layering Mule', risk_score: riskScoreFor('high', rng), risk_level: 'high' })
 
     let t = startedAt
     const initialAmount = rng.float(0.8, 12, 4)
@@ -332,7 +332,7 @@ export function generateDataset(): GeneratedDataset {
     const perBurner = initialAmount / burners.length
     const burnerOutputs: { addr: string; amount: number }[] = []
     for (const burner of burners) {
-      nodes.push({ id: burner, type: 'wallet', label: walletMeta.get(burner.toLowerCase())!.label, risk_score: riskScoreFor('medium', rng), risk_level: 'medium' })
+      nodes.push({ id: burner, address: burner, chain, type: 'wallet', label: walletMeta.get(burner.toLowerCase())!.label, risk_score: riskScoreFor('medium', rng), risk_level: 'medium' })
       t = new Date(new Date(t).getTime() + rng.int(3, 30) * 1000).toISOString()
       const amount = perBurner * rng.float(0.9, 0.99, 4)
       edges.push({
@@ -348,13 +348,15 @@ export function generateDataset(): GeneratedDataset {
     }
 
     if (mixerAddr && mixer) {
-      nodes.push({ id: mixerAddr, type: 'mixer', label: mixer.name, risk_score: riskScoreFor('high', rng), risk_level: 'high' })
+      nodes.push({ id: mixerAddr, address: mixerAddr, chain, type: 'mixer', label: mixer.name, risk_score: riskScoreFor('high', rng), risk_level: 'high' })
     }
     if (bridgeAddr && bridge) {
-      nodes.push({ id: bridgeAddr, type: 'bridge', label: bridge.name, risk_score: riskScoreFor('medium', rng), risk_level: 'medium' })
+      nodes.push({ id: bridgeAddr, address: bridgeAddr, chain, type: 'bridge', label: bridge.name, risk_score: riskScoreFor('medium', rng), risk_level: 'medium' })
     }
     nodes.push({
       id: terminalAddr,
+      address: terminalAddr,
+      chain,
       type: 'vasp',
       label: `${terminalEntity.name} Deposit`,
       risk_score: riskScoreFor('low', rng),

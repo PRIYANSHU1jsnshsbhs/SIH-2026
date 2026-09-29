@@ -11,6 +11,7 @@ import {
   useRevertImportBatch,
 } from '@/hooks/useBackend'
 import { LoadingState } from '@/components/common/LoadingState'
+import { LoadingIcon } from '@/components/common/LoadingIcon'
 import { useUiStore } from '@/stores/uiStore'
 import { entityLinkImportRowSchema } from '@/schemas/backend'
 import { API_ENDPOINTS } from './backendEndpoints'
@@ -162,9 +163,9 @@ function LinkEntityForm() {
         <button
           type="submit"
           disabled={linkEntity.isPending || !address || !name}
-          className="rounded-md bg-btn-bg px-4 py-2 text-sm font-medium text-btn-fg hover:bg-accent-strong disabled:opacity-50"
+          className="inline-flex items-center justify-center gap-2 rounded-md bg-btn-bg px-4 py-2 text-sm font-medium text-btn-fg hover:bg-accent-strong disabled:opacity-50"
         >
-          {linkEntity.isPending ? 'Linking…' : 'Link address to entity'}
+          {linkEntity.isPending ? <><LoadingIcon size="button" />Linking…</> : 'Link address to entity'}
         </button>
       </div>
     </form>
@@ -261,9 +262,9 @@ function EntityLinksTable() {
           <button
             onClick={handleImportClick}
             disabled={bulkLink.isPending}
-            className="text-xs px-2.5 py-1.5 rounded-md bg-surface-2 text-text-primary hover:brightness-125 disabled:opacity-50"
+            className="inline-flex items-center gap-2 text-xs px-2.5 py-1.5 rounded-md bg-surface-2 text-text-primary hover:brightness-125 disabled:opacity-50"
           >
-            {bulkLink.isPending ? 'Importing…' : 'Import entity links (JSON)'}
+            {bulkLink.isPending ? <><LoadingIcon size="button" />Importing…</> : 'Import entity links (JSON)'}
           </button>
           <button
             onClick={handleExport}
@@ -363,9 +364,9 @@ function ImportBatchesTable() {
                     <button
                       onClick={() => handleRevert(b.batch_id)}
                       disabled={revertBatch.isPending}
-                      className="text-xs px-2.5 py-1 rounded-md bg-amber-950/50 text-amber-300 hover:bg-amber-900/60 disabled:opacity-50"
+                      className="inline-flex items-center gap-2 text-xs px-2.5 py-1 rounded-md bg-amber-950/50 text-amber-300 hover:bg-amber-900/60 disabled:opacity-50"
                     >
-                      Revert
+                      {revertBatch.isPending ? <><LoadingIcon size="button" />Reverting…</> : 'Revert'}
                     </button>
                   )}
                 </td>

@@ -1,10 +1,13 @@
 import { useState } from 'react'
-import { Link, useSearchParams } from 'react-router-dom'
-import { useCreateReport, useReport } from '@/hooks/useReports'
-import { fetchReportHtml } from '@/api/reports'
+import { useNavigate, useSearchParams } from 'react-router-dom'
+import { useCreateReport } from '@/hooks/useReports'
+import { useAllInvestigations } from '@/hooks/useInvestigation'
 import type { ReportInclude } from '@/schemas/reports'
-import { useUiStore } from '@/stores/uiStore'
 import { BackButton } from '@/components/common/BackButton'
+import { ErrorState } from '@/components/common/ErrorState'
+import { LoadingState } from '@/components/common/LoadingState'
+import { LoadingIcon } from '@/components/common/LoadingIcon'
+import { EmptyState } from '@/components/common/EmptyState'
 
 const SECTION_LABELS: Record<keyof ReportInclude, string> = {
   transactions: 'Transaction history',
@@ -27,57 +30,64 @@ export function GenerateReportPage() {
     cross_chain: false,
     fund_flow: false,
   })
-  const [createdReportId, setCreatedReportId] = useState<string | null>(null)
   const createReport = useCreateReport()
-  const reportStatus = useReport(createdReportId ?? undefined)
-  const pushToast = useUiStore((s) => s.pushToast)
+  const allInvestigations = useAllInvestigations()
+  const navigate = useNavigate()
+  const [error, setError] = useState<string | null>(null)
 
   async function handleSubmit(e: React.FormEvent) {
     e.preventDefault()
-    const result = await createReport.mutateAsync({ investigation_id: investigationId, format, include })
-    setCreatedReportId(result.report_id)
-  }
-
-  async function handleDownload() {
-    if (!createdReportId) return
+    setError(null)
     try {
-      const html = await fetchReportHtml(createdReportId)
-      const blob = new Blob([html], { type: 'text/html' })
-      const url = URL.createObjectURL(blob)
-      const a = document.createElement('a')
-      a.href = url
-      a.download = `${createdReportId}.html`
-      a.click()
-      URL.revokeObjectURL(url)
-    } catch {
-      pushToast('Could not generate the report file', 'error')
+      const result = await createReport.mutateAsync({ investigation_id: investigationId, format, include })
+      navigate(`/reports/${result.report_id}`)
+    } catch (caught) {
+      setError(caught instanceof Error ? caught.message : 'Could not generate report')
     }
   }
+
+  const completedInvs = allInvestigations.data?.filter(i => i.status === 'completed') || []
 
   return (
     <div className="max-w-2xl space-y-6">
       <div className="flex flex-col gap-1">
         <BackButton fallback="/reports" />
         <h1 className="text-2xl font-bold text-text-primary mt-2">Generate Report</h1>
-        <p className="text-sm text-text-secondary">Create an official HTML export for case evidence.</p>
+        <p className="text-sm text-text-secondary">Create an official PDF export for case evidence.</p>
       </div>
 
       <form onSubmit={handleSubmit} className="grid grid-cols-2 gap-6">
         <div className="space-y-5 rounded-lg bg-surface-1 p-6 border border-border-c shadow-sm">
           <div>
             <label className="block text-[10px] font-bold uppercase tracking-widest text-text-secondary mb-1.5">Investigation ID</label>
-            <input
+            <select
               required
               value={investigationId}
               onChange={(e) => setInvestigationId(e.target.value)}
-              className="w-full rounded-md bg-bg-app border border-border-c px-3 py-2 text-sm font-mono text-text-primary focus:ring-1 focus:ring-saffron focus:border-saffron transition-colors placeholder:text-text-tertiary"
-              placeholder="INV-001"
-            />
+              className="w-full rounded-md bg-bg-app border border-border-c px-3 py-2 text-sm text-text-primary focus:ring-1 focus:ring-saffron focus:border-saffron transition-colors"
+            >
+              <option value="" disabled>Select Investigation...</option>
+              {completedInvs.map(inv => (
+                <option key={inv.investigation_id} value={inv.investigation_id}>
+                  {inv.case_title} - {inv.start_address.slice(0, 8)}... ({inv.chain})
+                </option>
+              ))}
+            </select>
           </div>
+          {allInvestigations.isLoading && <LoadingState label="Loading completed investigations…" />}
+          {allInvestigations.isError && (
+            <ErrorState
+              message={allInvestigations.error instanceof Error ? allInvestigations.error.message : 'Could not load investigations.'}
+              onRetry={() => allInvestigations.refetch()}
+            />
+          )}
+          {!allInvestigations.isLoading && !allInvestigations.isError && completedInvs.length === 0 && (
+            <EmptyState title="No completed investigations" description="Complete an investigation before generating a PDF report." />
+          )}
           <div>
             <label className="block text-[10px] font-bold uppercase tracking-widest text-text-secondary mb-1.5">Format</label>
             <div className="w-full rounded-md bg-surface-2 border border-border-c px-3 py-2 text-sm text-text-tertiary cursor-not-allowed font-medium">
-              HTML Report
+              PDF Report
             </div>
           </div>
           <div className="space-y-3">
@@ -96,11 +106,12 @@ export function GenerateReportPage() {
           </div>
           <button
             type="submit"
-            disabled={createReport.isPending}
-            className="w-full rounded-md bg-saffron px-4 py-2 text-sm font-medium text-white hover:bg-accent-strong disabled:opacity-50 transition-colors shadow-sm mt-2"
+            disabled={createReport.isPending || !investigationId}
+            className="mt-2 flex w-full items-center justify-center gap-2 rounded-md bg-saffron px-4 py-2 text-sm font-medium text-white hover:bg-accent-strong disabled:opacity-50 transition-colors shadow-sm"
           >
-            {createReport.isPending ? 'Submitting…' : 'Generate Report'}
+            {createReport.isPending ? <><LoadingIcon size="button" />Submitting…</> : 'Generate Report'}
           </button>
+          {error && <p role="alert" className="text-sm font-medium text-red">{error}</p>}
         </div>
 
         <div className="rounded-lg bg-surface-1 p-6 border border-border-c shadow-sm">
@@ -117,29 +128,6 @@ export function GenerateReportPage() {
             <li>Evidence sources &amp; confidence values</li>
           </ul>
 
-          {createdReportId && reportStatus.data && (
-            <div className="mt-8 border-t border-border-c pt-5 bg-bg-app -mx-6 -mb-6 px-6 pb-6 rounded-b-lg">
-              <p className="text-xs text-text-tertiary font-mono mb-1">{reportStatus.data.report_id}</p>
-              <p className="text-sm text-text-primary font-bold capitalize mb-4">Status: <span className="text-saffron">{reportStatus.data.status}</span></p>
-              {reportStatus.data.status === 'completed' && (
-                <div className="mt-2 flex flex-col gap-2">
-                  <Link
-                    to={`/reports/${createdReportId}`}
-                    className="text-sm text-center px-4 py-2 rounded-md bg-navy-900 text-white hover:bg-navy-800 transition-colors shadow-sm font-medium"
-                  >
-                    View in browser
-                  </Link>
-                  <button
-                    onClick={handleDownload}
-                    type="button"
-                    className="text-sm text-center px-4 py-2 rounded-md bg-surface-1 border border-border-strong text-text-primary hover:bg-surface-2 transition-colors font-medium shadow-sm"
-                  >
-                    Download HTML
-                  </button>
-                </div>
-              )}
-            </div>
-          )}
         </div>
       </form>
     </div>

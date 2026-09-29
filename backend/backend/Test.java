@@ -1,0 +1,1 @@
+public class Test { public static void main(String[] args) { java.util.regex.Matcher m = java.util.regex.Pattern.compile("\\(([^)]+)\\)").matcher("node-114 -> (mocktx-19388) -> node-10"); while(m.find()) System.out.println(m.group(1)); } }

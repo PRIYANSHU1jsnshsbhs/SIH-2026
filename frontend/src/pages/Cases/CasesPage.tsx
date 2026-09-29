@@ -3,13 +3,8 @@ import { Link } from 'react-router-dom'
 import { useCases } from '@/hooks/useCases'
 import { LoadingState } from '@/components/common/LoadingState'
 import { EmptyState } from '@/components/common/EmptyState'
-import clsx from 'clsx'
-
-const PRIORITY_STYLE: Record<string, string> = {
-  high: 'text-red',
-  medium: 'text-saffron',
-  low: 'text-green',
-}
+import { ErrorState } from '@/components/common/ErrorState'
+import { PriorityBadge } from '@/components/cases/PriorityBadge'
 
 export function CasesPage() {
   const [search, setSearch] = useState('')
@@ -56,6 +51,7 @@ export function CasesPage() {
       </div>
 
       {cases.isLoading && <LoadingState />}
+      {cases.isError && <ErrorState message={cases.error instanceof Error ? cases.error.message : 'Could not load cases.'} onRetry={() => cases.refetch()} />}
       {cases.data && cases.data.cases.length === 0 && (
         <EmptyState title="No cases match these filters" description="Try clearing search or filters." />
       )}
@@ -69,6 +65,7 @@ export function CasesPage() {
                 <th className="px-4 py-3 font-semibold">Priority</th>
                 <th className="px-4 py-3 font-semibold">Status</th>
                 <th className="px-4 py-3 font-semibold">Wallets</th>
+                <th className="px-4 py-3 font-semibold">Investigations</th>
                 <th className="px-4 py-3 font-semibold">Last Activity</th>
                 <th className="px-4 py-3 font-semibold">Created</th>
               </tr>
@@ -83,12 +80,11 @@ export function CasesPage() {
                     </Link>
                   </td>
                   <td className="px-4 py-3">
-                    <span className={clsx('text-[10px] tracking-wider uppercase font-bold', PRIORITY_STYLE[c.priority])}>
-                      {c.priority}
-                    </span>
+                    <PriorityBadge level={c.priority} />
                   </td>
                   <td className="px-4 py-3 capitalize text-text-secondary font-medium">{c.status.replace('_', ' ')}</td>
                   <td className="px-4 py-3 text-text-primary font-medium">{c.wallets_count}</td>
+                  <td className="px-4 py-3 text-text-primary font-medium">{c.investigations_count}</td>
                   <td className="px-4 py-3 text-xs text-text-secondary">{new Date(c.updated_at).toLocaleDateString()}</td>
                   <td className="px-4 py-3 text-xs text-text-secondary">{new Date(c.created_at).toLocaleDateString()}</td>
                 </tr>

@@ -6,22 +6,22 @@ export type RiskLevel = z.infer<typeof riskLevelSchema>
 export const entityRefSchema = z.object({
   name: z.string(),
   type: z.string(),
-  confidence: z.number(),
+  confidence: z.number().nullable(),
 })
 export type EntityRef = z.infer<typeof entityRefSchema>
 
 export const walletSchema = z.object({
   chain: z.string(),
   address: z.string(),
-  first_seen: z.string(),
-  last_seen: z.string(),
+  first_seen: z.string().nullable(),
+  last_seen: z.string().nullable(),
   transaction_count: z.number(),
   total_received: z.string(),
-  total_sent: z.string(),
-  unique_counterparties: z.number(),
+  total_sent: z.string().nullable(),
+  unique_counterparties: z.number().nullable(),
   entity: entityRefSchema.nullable(),
   risk: z.object({
-    score: z.number(),
+    score: z.number().nullable(),
     level: riskLevelSchema,
   }),
 })

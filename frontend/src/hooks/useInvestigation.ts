@@ -14,8 +14,10 @@ export function useStartInvestigation() {
   const queryClient = useQueryClient()
   return useMutation({
     mutationFn: (input: StartInvestigationInput) => createInvestigation(input),
+    retry: false,
     onSuccess: (_data, variables) => {
       queryClient.invalidateQueries({ queryKey: ['cases', variables.case_id] })
+      queryClient.invalidateQueries({ queryKey: ['investigations', 'all'] })
     },
   })
 }
@@ -25,7 +27,11 @@ export function useInvestigationStatus(investigationId: string | undefined) {
     queryKey: ['investigations', investigationId, 'status'],
     queryFn: () => fetchInvestigationStatus(investigationId!),
     enabled: !!investigationId,
-    refetchInterval: (query) => (query.state.data?.status === 'completed' ? false : 800),
+    refetchInterval: (query) => {
+      const status = query.state.data?.status
+      if (status === 'completed' || status === 'failed' || status === 'cancelled') return false
+      return 2000
+    },
   })
 }
 

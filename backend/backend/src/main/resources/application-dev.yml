@@ -1,0 +1,48 @@
+spring:
+  datasource:
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/vaspdb}
+    username: ${SPRING_DATASOURCE_USERNAME:postgres}
+    password: ${SPRING_DATASOURCE_PASSWORD:postgres}
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+    show-sql: true
+    open-in-view: false
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: ${JWT_ISSUER_URI:http://localhost:8081}
+          secret: ${JWT_SECRET:supersecretkeythatisatleast32byteslongforhs256}
+server:
+  port: 8081
+
+
+vaspattribution:
+  cors:
+    allowed-origins: ${FRONTEND_ORIGIN:http://localhost:5173}
+  limits:
+    max-hops: ${MAX_HOPS:5}
+    max-nodes: ${MAX_NODES:5000}
+    investigation-timeout: ${INVESTIGATION_TIMEOUT:3600s}
+  blockchain:
+    ethereum:
+      api-key: ${ETHERSCAN_API_KEY:}
+      url: ${ETHERSCAN_URL:https://api.etherscan.io/api}
+
+logging:
+  level:
+    in.sih.vaspattribution: DEBUG
+    org.springframework.security: DEBUG

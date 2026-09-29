@@ -464,13 +464,15 @@ const investigationsDb = new Map<string, StoredInvestigation>()
 
 function buildLegacyGraph(): { nodes: GraphNode[]; edges: GraphEdge[] } {
   const nodes: GraphNode[] = [
-    { id: SEED_ADDRESSES.seed, type: 'wallet', label: 'Suspect Wallet', risk_score: 82, risk_level: 'high', is_seed: true },
-    { id: SEED_ADDRESSES.mule, type: 'wallet', label: 'Layering Mule', risk_score: 88, risk_level: 'high' },
-    { id: SEED_ADDRESSES.burnerA, type: 'wallet', label: 'Burner A', risk_score: 61, risk_level: 'medium' },
-    { id: SEED_ADDRESSES.burnerB, type: 'wallet', label: 'Burner B', risk_score: 58, risk_level: 'medium' },
-    { id: SEED_ADDRESSES.mixer, type: 'mixer', label: 'Mixer Service', risk_score: 90, risk_level: 'high' },
+    { id: SEED_ADDRESSES.seed, address: SEED_ADDRESSES.seed, chain: SEED_CHAIN, type: 'wallet', label: 'Suspect Wallet', risk_score: 82, risk_level: 'high', is_seed: true },
+    { id: SEED_ADDRESSES.mule, address: SEED_ADDRESSES.mule, chain: SEED_CHAIN, type: 'wallet', label: 'Layering Mule', risk_score: 88, risk_level: 'high' },
+    { id: SEED_ADDRESSES.burnerA, address: SEED_ADDRESSES.burnerA, chain: SEED_CHAIN, type: 'wallet', label: 'Burner A', risk_score: 61, risk_level: 'medium' },
+    { id: SEED_ADDRESSES.burnerB, address: SEED_ADDRESSES.burnerB, chain: SEED_CHAIN, type: 'wallet', label: 'Burner B', risk_score: 58, risk_level: 'medium' },
+    { id: SEED_ADDRESSES.mixer, address: SEED_ADDRESSES.mixer, chain: SEED_CHAIN, type: 'mixer', label: 'Mixer Service', risk_score: 90, risk_level: 'high' },
     {
       id: SEED_ADDRESSES.exchange,
+      address: SEED_ADDRESSES.exchange,
+      chain: SEED_CHAIN,
       type: 'vasp',
       label: 'Exchange X Deposit',
       risk_score: 12,

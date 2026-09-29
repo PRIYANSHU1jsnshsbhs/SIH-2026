@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { Outlet } from 'react-router-dom'
+import { Outlet, useLocation } from 'react-router-dom'
 import { Sidebar } from './Sidebar'
 import { TopBar } from './TopBar'
 import { Footer } from './Footer'
@@ -9,6 +9,7 @@ import { useUiStore } from '@/stores/uiStore'
 import { useAuthStore } from '@/stores/authStore'
 
 export function AppShell() {
+  const location = useLocation()
   const consoleOpen = useUiStore((s) => s.consoleOpen)
   const setConsoleOpen = useUiStore((s) => s.setConsoleOpen)
   const canUseConsole = useAuthStore((s) => s.user?.role !== 'investigator')
@@ -26,13 +27,15 @@ export function AppShell() {
   }, [canUseConsole, consoleOpen, setConsoleOpen])
 
   return (
-    <div className="flex h-screen flex-col bg-bg-app text-text-primary">
+    <div className="app-shell flex h-screen flex-col bg-bg-app text-text-primary">
       <TopBar />
       <div className="flex flex-1 overflow-hidden">
         <Sidebar />
-        <main className="flex-1 overflow-y-auto bg-bg-app">
-          <div className="mx-auto max-w-7xl p-6">
-            <Outlet />
+        <main className="app-main flex-1 overflow-y-auto bg-bg-app">
+          <div className="app-content mx-auto max-w-7xl p-6">
+            <div key={location.pathname} className="app-page-stage">
+              <Outlet />
+            </div>
           </div>
         </main>
       </div>

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { useAuditLog, useManagedUsers, useSetUserActive, useSystemStatus, useUpdateUserRole } from '@/hooks/useAdmin'
 import { useCases, useUpdateCase } from '@/hooks/useCases'
 import { LoadingState } from '@/components/common/LoadingState'
+import { LoadingIcon } from '@/components/common/LoadingIcon'
 import { ConfirmDialog } from '@/components/common/ConfirmDialog'
 import { useUiStore } from '@/stores/uiStore'
 import type { Role } from '@/schemas/auth'
@@ -54,21 +55,24 @@ function CaseOversightSection() {
                     <span className="ml-2 text-xs text-text-tertiary">{c.case_id}</span>
                   </td>
                   <td className="px-3 py-2">
-                    <select
-                      value={c.priority}
-                      disabled={updateCase.isPending}
-                      onChange={(e) => {
-                        updateCase.mutate(
-                          { caseId: c.case_id, input: { priority: e.target.value as CasePriority } },
-                          { onSuccess: () => pushToast(`Priority updated for ${c.case_id}`, 'success') },
-                        )
-                      }}
-                      className="rounded-md bg-surface-2 px-2 py-1 text-xs text-text-primary"
-                    >
-                      <option value="high">High</option>
-                      <option value="medium">Medium</option>
-                      <option value="low">Low</option>
-                    </select>
+                    <div className="inline-flex items-center gap-2">
+                      <select
+                        value={c.priority}
+                        disabled={updateCase.isPending}
+                        onChange={(e) => {
+                          updateCase.mutate(
+                            { caseId: c.case_id, input: { priority: e.target.value as CasePriority } },
+                            { onSuccess: () => pushToast(`Priority updated for ${c.case_id}`, 'success') },
+                          )
+                        }}
+                        className="rounded-md bg-surface-2 px-2 py-1 text-xs text-text-primary"
+                      >
+                        <option value="high">High</option>
+                        <option value="medium">Medium</option>
+                        <option value="low">Low</option>
+                      </select>
+                      {updateCase.isPending && <LoadingIcon size="button" />}
+                    </div>
                   </td>
                   <td className="px-3 py-2 capitalize text-text-secondary">{c.status.replace('_', ' ')}</td>
                   <td className="px-3 py-2">
@@ -139,21 +143,24 @@ function UserManagementSection() {
                   <td className="px-3 py-2 text-text-primary">{u.name}</td>
                   <td className="px-3 py-2 font-mono text-xs text-text-secondary">{u.username}</td>
                   <td className="px-3 py-2">
-                    <select
-                      value={u.role}
-                      disabled={updateUserRole.isPending}
-                      onChange={(e) => {
-                        updateUserRole.mutate(
-                          { userId: u.id, role: e.target.value as Role },
-                          { onSuccess: () => pushToast(`Role updated for ${u.username}`, 'success') },
-                        )
-                      }}
-                      className="rounded-md bg-surface-2 px-2 py-1 text-xs text-text-primary"
-                    >
-                      <option value="investigator">investigator</option>
-                      <option value="admin">admin</option>
-                      <option value="devops">devops</option>
-                    </select>
+                    <div className="inline-flex items-center gap-2">
+                      <select
+                        value={u.role}
+                        disabled={updateUserRole.isPending}
+                        onChange={(e) => {
+                          updateUserRole.mutate(
+                            { userId: u.id, role: e.target.value as Role },
+                            { onSuccess: () => pushToast(`Role updated for ${u.username}`, 'success') },
+                          )
+                        }}
+                        className="rounded-md bg-surface-2 px-2 py-1 text-xs text-text-primary"
+                      >
+                        <option value="investigator">investigator</option>
+                        <option value="admin">admin</option>
+                        <option value="devops">devops</option>
+                      </select>
+                      {updateUserRole.isPending && <LoadingIcon size="button" />}
+                    </div>
                   </td>
                   <td className="px-3 py-2">
                     <span className={clsx('text-xs font-semibold uppercase', u.active ? 'text-green-400' : 'text-text-tertiary')}>
@@ -176,9 +183,10 @@ function UserManagementSection() {
                             { onSuccess: () => pushToast(`${u.username} reactivated`, 'success') },
                           )
                         }
-                        className="text-xs px-2.5 py-1 rounded-md bg-surface-2 text-text-primary hover:brightness-125"
+                        disabled={setUserActive.isPending}
+                        className="inline-flex items-center gap-2 text-xs px-2.5 py-1 rounded-md bg-surface-2 text-text-primary hover:brightness-125 disabled:opacity-50"
                       >
-                        Activate
+                        {setUserActive.isPending ? <><LoadingIcon size="button" />Activating…</> : 'Activate'}
                       </button>
                     )}
                   </td>

@@ -2,7 +2,7 @@ export function AboutPage() {
   return (
     <div className="max-w-3xl space-y-8">
       <div>
-        <p className="text-xs uppercase tracking-widest text-text-tertiary">SIH 2026 · PS 26183</p>
+        <p className="text-xs uppercase tracking-widest text-text-tertiary">SIH 2026 · PS 26182</p>
         <h1 className="mt-1 text-lg font-semibold text-text-primary">About this platform</h1>
       </div>
 
