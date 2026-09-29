@@ -489,6 +489,403 @@ $env:SPRING_DATASOURCE_PASSWORD="your-password"
 
 Flyway applies migrations from `backend/backend/src/main/resources/db/migration/`.
 
+## Deployment guide
+
+The recommended deployment shape for this repository is:
+
+```text
+Internet
+   │
+   ▼
+HTTPS / Nginx
+   ├── /              → Vite static frontend
+   └── /api/*         → Spring Boot on 127.0.0.1:8081
+                              │
+                              ├── PostgreSQL
+                              └── crypto_mock_dataset.json
+```
+
+Using one public origin keeps browser routing and CORS straightforward. The frontend is built with `VITE_API_BASE_URL=/api/v1`, while Nginx forwards that path to the backend.
+
+The instructions below target an Ubuntu-style virtual machine. Package installation and service-management commands must be adapted for other operating systems.
+
+### Deployment status and security warning
+
+The repository currently has `local`, `test` and `dev` Spring profiles, but no hardened `prod` profile. The `dev` profile uses PostgreSQL and Flyway, but `DevDataSeeder` also creates known demonstration accounts.
+
+Therefore, the steps below are appropriate for:
+
+- an SIH demonstration server;
+- an internal staging environment;
+- a time-limited evaluator deployment;
+- a server protected by network restrictions or an additional access layer.
+
+Before unrestricted production use, create a dedicated production profile that does not run `DevDataSeeder`, remove or rotate every demo credential, store secrets in a managed secret service, configure persistent monitoring and backups, and complete a security review.
+
+### 1. Prepare DNS and the server
+
+Create a DNS record such as:
+
+```text
+lapus.example.com → <server-public-IP>
+```
+
+Install the required runtime packages:
+
+```bash
+sudo apt update
+sudo apt install -y openjdk-21-jre-headless nginx postgresql postgresql-contrib
+java -version
+```
+
+Install Node.js only if the frontend will be built on the server. A CI system can build the frontend and upload only `frontend/dist/` instead.
+
+Create a non-login operating-system account and deployment directories:
+
+```bash
+sudo useradd --system --home /opt/lapus --shell /usr/sbin/nologin lapus
+sudo install -d -o lapus -g lapus /opt/lapus/backend
+sudo install -d -o lapus -g lapus /opt/lapus/data
+sudo install -d -o root -g root /var/www/lapus
+sudo install -d -o root -g lapus /etc/lapus
+```
+
+If the `lapus` account already exists, skip the `useradd` command.
+
+### 2. Create the PostgreSQL database
+
+Open the PostgreSQL shell:
+
+```bash
+sudo -u postgres psql
+```
+
+Create a dedicated database and user. Replace the example password:
+
+```sql
+CREATE USER lapus_app WITH PASSWORD 'replace-with-a-long-random-password';
+CREATE DATABASE vaspdb OWNER lapus_app;
+\q
+```
+
+The development profile has Flyway enabled, so database migrations run when the backend starts.
+
+For a remote or managed PostgreSQL service, use the provider’s TLS connection requirements and firewall rules instead of exposing a local database port publicly.
+
+### 3. Build release artifacts
+
+Build and test the backend with Java 21:
+
+```bash
+cd backend/backend
+./mvnw clean test
+./mvnw clean package
+```
+
+The backend artifact is:
+
+```text
+backend/backend/target/vaspattribution-0.0.1-SNAPSHOT.jar
+```
+
+Build the frontend for same-origin API proxying:
+
+```bash
+cd ../../frontend
+npm ci
+VITE_API_BASE_URL=/api/v1 npm run build
+```
+
+The deployable frontend output is:
+
+```text
+frontend/dist/
+```
+
+`VITE_API_BASE_URL` is embedded at build time. Changing it after the build does not rewrite the generated JavaScript, so rebuild the frontend when the public API location changes.
+
+`npm run preview` is only for checking the built frontend locally; it is not the production web server.
+
+### 4. Upload the backend and dataset
+
+Copy the JAR and mock dataset to the server. The exact `scp` source paths depend on where the repository is stored locally:
+
+```bash
+scp backend/backend/target/vaspattribution-0.0.1-SNAPSHOT.jar deploy@SERVER:/tmp/lapus.jar
+scp crypto_mock_dataset.json deploy@SERVER:/tmp/crypto_mock_dataset.json
+```
+
+On the server:
+
+```bash
+sudo install -o lapus -g lapus -m 0750 /tmp/lapus.jar /opt/lapus/backend/lapus.jar
+sudo install -o lapus -g lapus -m 0640 /tmp/crypto_mock_dataset.json /opt/lapus/data/crypto_mock_dataset.json
+```
+
+The dataset is required by the dataset-backed blockchain provider. Deployment should use an explicit dataset path instead of relying on the repository-relative development default.
+
+### 5. Configure backend environment variables
+
+Generate a strong JWT secret:
+
+```bash
+openssl rand -base64 48
+```
+
+Create `/etc/lapus/backend.env` with values appropriate for the server:
+
+```dotenv
+SPRING_PROFILES_ACTIVE=dev
+SERVER_ADDRESS=127.0.0.1
+SERVER_PORT=8081
+
+SPRING_DATASOURCE_URL=jdbc:postgresql://127.0.0.1:5432/vaspdb
+SPRING_DATASOURCE_USERNAME=lapus_app
+SPRING_DATASOURCE_PASSWORD=replace-with-the-database-password
+
+JWT_SECRET=replace-with-the-generated-secret
+FRONTEND_ORIGIN=https://lapus.example.com
+
+VASPATTRIBUTION_DATASET_PATH=/opt/lapus/data/crypto_mock_dataset.json
+
+REDIS_HOST=127.0.0.1
+REDIS_PORT=6379
+```
+
+Protect the environment file:
+
+```bash
+sudo chown root:lapus /etc/lapus/backend.env
+sudo chmod 0640 /etc/lapus/backend.env
+```
+
+Notes:
+
+- Use an exact browser origin for `FRONTEND_ORIGIN`; do not include a trailing slash.
+- Keep the backend bound to `127.0.0.1` when Nginx runs on the same server.
+- Do not commit the production environment file.
+- Redis settings remain present in the architecture. If Redis-backed features are enabled, install Redis locally or point these variables to a managed instance.
+
+### 6. Run the backend as a systemd service
+
+Create `/etc/systemd/system/lapus.service`:
+
+```ini
+[Unit]
+Description=LAPUS Crypto Fraud Attribution Backend
+After=network-online.target postgresql.service
+Wants=network-online.target
+
+[Service]
+Type=exec
+User=lapus
+Group=lapus
+WorkingDirectory=/opt/lapus/backend
+EnvironmentFile=/etc/lapus/backend.env
+ExecStart=/usr/bin/java -jar /opt/lapus/backend/lapus.jar
+SuccessExitStatus=143
+Restart=on-failure
+RestartSec=5
+UMask=0027
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target
+```
+
+Enable and start it:
+
+```bash
+sudo systemctl daemon-reload
+sudo systemctl enable --now lapus.service
+sudo systemctl status lapus.service
+```
+
+Inspect logs:
+
+```bash
+sudo journalctl -u lapus.service -f
+```
+
+Verify the private backend before configuring Nginx:
+
+```bash
+curl --fail http://127.0.0.1:8081/actuator/health
+```
+
+Expected result includes an `UP` status.
+
+### 7. Upload the frontend
+
+Create the temporary upload directory, then upload the contents of `frontend/dist/`:
+
+```bash
+ssh deploy@SERVER 'mkdir -p /tmp/lapus-frontend'
+scp -r frontend/dist/* deploy@SERVER:/tmp/lapus-frontend/
+```
+
+On the server:
+
+```bash
+sudo rsync -a --delete /tmp/lapus-frontend/ /var/www/lapus/
+sudo chown -R root:root /var/www/lapus
+sudo find /var/www/lapus -type d -exec chmod 0755 {} \;
+sudo find /var/www/lapus -type f -exec chmod 0644 {} \;
+```
+
+The `--delete` option makes the server directory match the new `dist` output. Confirm `/tmp/lapus-frontend/` is the intended release directory before running it.
+
+### 8. Configure Nginx
+
+Create `/etc/nginx/sites-available/lapus`:
+
+```nginx
+server {
+    listen 80;
+    listen [::]:80;
+    server_name lapus.example.com;
+
+    root /var/www/lapus;
+    index index.html;
+
+    location / {
+        try_files $uri $uri/ /index.html;
+    }
+
+    location /api/ {
+        proxy_pass http://127.0.0.1:8081;
+        proxy_http_version 1.1;
+        proxy_set_header Host $host;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_set_header X-Forwarded-Proto $scheme;
+        proxy_connect_timeout 10s;
+        proxy_read_timeout 120s;
+    }
+
+    location = /actuator/health {
+        proxy_pass http://127.0.0.1:8081/actuator/health;
+        access_log off;
+    }
+
+    location ~* \.(?:css|js|png|jpg|jpeg|svg|webp|woff2?)$ {
+        expires 7d;
+        add_header Cache-Control "public, max-age=604800, immutable";
+        try_files $uri =404;
+    }
+}
+```
+
+The SPA fallback is important: routes such as `/dashboard`, `/cases/...` and `/reports/...` must return `index.html` when opened or refreshed directly.
+
+Enable the site and validate the configuration:
+
+```bash
+sudo ln -sfn /etc/nginx/sites-available/lapus /etc/nginx/sites-enabled/lapus
+sudo nginx -t
+sudo systemctl reload nginx
+```
+
+Remove or disable the default Nginx site if it conflicts with the selected domain.
+
+### 9. Enable HTTPS
+
+Use the organization’s load balancer, cloud certificate manager or an ACME client to obtain a trusted TLS certificate. Redirect HTTP to HTTPS and keep `FRONTEND_ORIGIN` set to the final `https://` origin.
+
+After enabling TLS:
+
+```bash
+curl --fail https://lapus.example.com/
+curl --fail https://lapus.example.com/actuator/health
+```
+
+Do not expose port `8081`, PostgreSQL or Redis to the public internet. Only ports `80` and `443` should normally be reachable externally.
+
+### 10. Seed staging data if required
+
+The PostgreSQL-backed `dev` profile automatically creates the local demo identities and known entity records because `DevDataSeeder` includes the `dev` profile.
+
+For a populated, access-controlled SIH staging environment, run the API population script from a trusted machine only after confirming it points to the intended deployment. The script currently defaults to `http://localhost:8081/api/v1`, so either run it on the application server against the loopback backend or update its base URL deliberately.
+
+Do not run `populate_100.py` against a real production database.
+
+### 11. Deployment verification checklist
+
+Verify the following after every release:
+
+- `GET /actuator/health` returns `UP`.
+- `/` loads the public homepage over HTTPS.
+- refreshing `/login` and `/dashboard` does not produce an Nginx 404.
+- `admin / admin123` works only in the intentionally seeded demo environment.
+- a hard refresh preserves a valid authenticated session.
+- stale authentication is cleared after a database reset.
+- a case can be created and appears in the dashboard count.
+- `node-114` can be added as a mock wallet.
+- an investigation reaches a terminal status without duplicate POSTs.
+- the graph renders with zero orphan edges.
+- nearest VASP attribution appears for the canonical dataset path.
+- a real PDF report can be generated and downloaded.
+- browser developer tools show no CORS or mixed-content failures.
+- backend logs contain no repeated authentication, database or dataset errors.
+
+### 12. Updating an existing deployment
+
+For each release:
+
+1. run frontend lint, TypeScript and build checks;
+2. run backend tests and package the JAR;
+3. back up PostgreSQL;
+4. retain the previous JAR and frontend `dist` directory;
+5. upload the new artifacts;
+6. restart `lapus.service`;
+7. reload Nginx only if its configuration changed;
+8. run the deployment verification checklist.
+
+Backend update example:
+
+```bash
+sudo cp /opt/lapus/backend/lapus.jar /opt/lapus/backend/lapus.previous.jar
+sudo install -o lapus -g lapus -m 0750 /tmp/lapus.jar /opt/lapus/backend/lapus.jar
+sudo systemctl restart lapus.service
+sudo systemctl status lapus.service
+```
+
+### 13. Rollback
+
+If the new backend fails health checks:
+
+```bash
+sudo systemctl stop lapus.service
+sudo mv /opt/lapus/backend/lapus.previous.jar /opt/lapus/backend/lapus.jar
+sudo systemctl start lapus.service
+curl --fail http://127.0.0.1:8081/actuator/health
+```
+
+Restore the previous frontend directory or artifact if the UI release is defective. If Flyway applied a database migration, do not blindly restore only the old JAR: confirm schema compatibility or restore the coordinated database backup.
+
+### 14. Production hardening checklist
+
+Before handling any non-simulated or sensitive data:
+
+- add a dedicated `prod` Spring profile;
+- ensure `DevDataSeeder` cannot run in production;
+- remove all known demo users and passwords;
+- use a managed secret store and rotate JWT/database secrets;
+- use a persistent, encrypted PostgreSQL service with tested backups;
+- restrict database and Redis access to private networks;
+- add rate limiting at the gateway;
+- configure structured logs, metrics, alerting and audit retention;
+- define retention and deletion policies for cases and reports;
+- review PDF storage and access controls;
+- configure dependency and container/image scanning if containers are introduced;
+- perform authentication, authorization and penetration testing;
+- verify legal and organizational requirements before connecting real blockchain or personal data.
+
+### Container and cloud-platform note
+
+This repository does not currently ship Dockerfiles, a Docker Compose file, Kubernetes manifests or provider-specific deployment configuration. Do not assume `docker compose up` is available. Those artifacts should be added and tested separately before documenting a container deployment as supported.
+
 ## Troubleshooting
 
 ### Java reports version 25 instead of 21
