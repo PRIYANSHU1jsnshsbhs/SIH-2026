@@ -882,9 +882,23 @@ Before handling any non-simulated or sensitive data:
 - perform authentication, authorization and penetration testing;
 - verify legal and organizational requirements before connecting real blockchain or personal data.
 
-### Container and cloud-platform note
+### Managed deployment: Vercel + Render
 
-This repository does not currently ship Dockerfiles, a Docker Compose file, Kubernetes manifests or provider-specific deployment configuration. Do not assume `docker compose up` is available. Those artifacts should be added and tested separately before documenting a container deployment as supported.
+The repository includes the configuration needed for the managed demo deployment:
+
+- `frontend/vercel.json` builds the Vite application and provides the React Router SPA fallback;
+- `Dockerfile.backend` builds and runs the backend with Java 21;
+- `.dockerignore` keeps the backend image context small and excludes local secrets/build output;
+- `render.yaml` creates the Render web service and PostgreSQL database, generates the JWT secret, wires database credentials, selects the Singapore region and configures the health check.
+
+Use this order to resolve the frontend/backend URL dependency:
+
+1. Import the repository into Vercel with `frontend` as the Root Directory. Temporarily set `VITE_API_BASE_URL` to `https://placeholder.invalid/api/v1`, deploy, and copy the assigned Vercel URL.
+2. In Render, create a **New Blueprint** from the same repository. Render reads `render.yaml`. When prompted for `FRONTEND_ORIGIN`, enter the exact Vercel origin, such as `https://your-project.vercel.app`, without a trailing slash.
+3. Wait for `lapus-postgres` and `lapus-api` to become available. Confirm `https://YOUR-RENDER-HOST/actuator/health` returns `{"status":"UP"}`.
+4. In Vercel, replace the temporary variable with `VITE_API_BASE_URL=https://YOUR-RENDER-HOST/api/v1` and redeploy the frontend.
+
+The Blueprint uses the `dev` Spring profile because that is the repository's current PostgreSQL-backed demo profile. It seeds the known demo users, including `admin / admin123`. Do not treat that credential or profile as a hardened public-production setup.
 
 ## Troubleshooting
 
