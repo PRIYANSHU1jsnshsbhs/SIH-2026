@@ -37,6 +37,7 @@ public class Finding {
 
     private String severity;
 
+    @Column(columnDefinition = "TEXT")
     private String evidence;
 
     @CreationTimestamp

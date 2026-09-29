@@ -35,6 +35,7 @@ public class RiskScore {
     @Column(name = "model_version", nullable = false)
     private String modelVersion;
 
+    @Column(columnDefinition = "TEXT")
     private String reasons;
 
     @CreationTimestamp
