@@ -35,6 +35,10 @@ services:
         value: INFO
       - key: LOGGING_LEVEL_ORG_SPRINGFRAMEWORK_SECURITY
         value: INFO
+      # Redis is not used by the current MVP. Keep it from making the
+      # application health endpoint fail when no managed Redis is provisioned.
+      - key: MANAGEMENT_HEALTH_REDIS_ENABLED
+        value: "false"
       - key: JAVA_OPTS
         value: -XX:MaxRAMPercentage=75.0
 
